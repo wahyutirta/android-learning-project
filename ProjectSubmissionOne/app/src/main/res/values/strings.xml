@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ProjectSubmissionOne</string>
+    <string name="wahyu_tirta">Wahyu Tirta</string>
+    <string name="wahyu_email">wahyutirta12345@gmail.com</string>
+    <string name="about">About</string>
+    <string name="tentang_saya">Tentang Saya</string>
+    <string name="detail_goods">Detail Barang</string>
+    <string name="sayur_mayur">Sayur-Mayur</string>
+</resources>

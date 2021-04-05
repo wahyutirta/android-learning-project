@@ -1,0 +1,38 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Theme.GithubSubmission1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_night</item>
+        <item name="colorPrimaryVariant">@color/primary_light_night</item>
+        <item name="colorOnPrimary">@color/primary_dark_night</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_light_night</item>
+        <item name="colorOnSecondary">@color/secondary_dark_night</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/grey</item>
+    </style>
+    <style name="companyIcon" >
+        <item name="android:src">@drawable/ic_company_night</item>
+    </style>
+    <style name="locationIcon" >
+        <item name="android:src">@drawable/ic_location_night</item>
+    </style>
+    <style name="repoIcon" >
+        <item name="android:src">@drawable/ic_book_night</item>
+    </style>
+
+    <style name="upTheme" >
+        <item name="android:background">@drawable/circularbordersolidnight</item>
+    </style>
+
+
+
+    <!-- Splash Screen Theme. Tidak menggunakan layout untuk splash screen -->
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
+</resources>

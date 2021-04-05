@@ -1,0 +1,46 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.GithubSubmission1" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primary_light</item>
+        <item name="colorOnPrimary">@color/primary_dark</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorSecondaryVariant">@color/secondary_light</item>
+        <item name="colorOnSecondary">@color/secondary_light_night</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <!-- Splash Screen Theme. Tidak menggunakan layout untuk splash screen -->
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_background</item>
+    </style>
+
+    <style name="companyIcon" >
+        <item name="android:src">@drawable/ic_company</item>
+    </style>
+    <style name="locationIcon" >
+        <item name="android:src">@drawable/ic_location</item>
+    </style>
+    <style name="repoIcon" >
+        <item name="android:src">@drawable/ic_repo</item>
+    </style>
+
+    <style name="upTheme" >
+        <item name="android:background">@drawable/circularbordersolid</item>
+    </style>
+
+    <style name="Theme.GithubSubmission1.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.GithubUsers.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.GithubUsers.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+</resources>

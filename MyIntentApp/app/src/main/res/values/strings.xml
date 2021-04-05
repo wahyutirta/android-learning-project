@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyIntentApp</string>
+    <string name="move_activity">Pindah Activity</string>
+    <string name="move_with_data">Pindah Activity dengan Data</string>
+    <string name="this_is_moveactivity">Ini MoveActivity</string>
+    <string name="data_received">data_received</string>
+    <string name="dial_number">dial_number</string>
+    <string name="move_with_object">move with object</string>
+    <string name="object_received">object_received</string>
+    <string name="choose_number">choose number</string>
+    <string name="_50">50</string>
+    <string name="_100">100</string>
+    <string name="_150">150</string>
+    <string name="_200">200</string>
+    <string name="choose">choose</string>
+    <string name="move_with_result">Move with result</string>
+    <string name="result_from_activity">result from activity</string>
+</resources>
