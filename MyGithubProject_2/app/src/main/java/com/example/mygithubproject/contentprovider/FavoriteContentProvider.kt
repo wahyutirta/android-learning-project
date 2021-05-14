@@ -5,14 +5,14 @@ import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
 import android.net.Uri
-import com.example.mygithubproject.modelandservice.data.DBUser
-import com.example.mygithubproject.modelandservice.data.FavoriteUserDao
+import com.example.mygithubproject.services.data.DBUser
+import com.example.mygithubproject.services.data.FavUsersDao
 
 class FavoriteContentProvider : ContentProvider() {
 
     companion object {
         private const val AUTHORITY = "com.example.mygithubproject"
-        private const val TABLE_NAME = "favorite_user"
+        private const val TABLE_NAME = "tb_favUsers"
         const val ID_FAVORITE = 1
         val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
@@ -21,33 +21,14 @@ class FavoriteContentProvider : ContentProvider() {
         }
     }
 
-    private lateinit var userDao: FavoriteUserDao
+    private lateinit var Dao: FavUsersDao
 
     override fun onCreate(): Boolean {
-        userDao = context?.let { ctx ->
-            DBUser.getDatabase(ctx)?.favoriteUserDao()
+        Dao = context?.let { ctx ->
+            DBUser.getDatabase(ctx)?.favoriteUsersDao()
         }!!
         return false
 
-    }
-
-    override fun query(
-            uri: Uri, projection: Array<String>?, selection: String?,
-            selectionArgs: Array<String>?, sortOrder: String?
-    ): Cursor? {
-        val cursor: Cursor?
-        when (uriMatcher.match(uri)) {
-            ID_FAVORITE -> {
-                cursor = userDao.findAllUser()
-                if (null != context) {
-                    cursor.setNotificationUri(context?.contentResolver, uri)
-                }
-            }
-            else -> {
-                cursor = null
-            }
-        }
-        return cursor
     }
 
     override fun getType(uri: Uri): String? {
@@ -70,5 +51,25 @@ class FavoriteContentProvider : ContentProvider() {
     ): Int {
         return 0
     }
+
+    override fun query(
+            uri: Uri, projection: Array<String>?, selection: String?,
+            selectionArgs: Array<String>?, sortOrder: String?
+    ): Cursor? {
+        val cursor: Cursor?
+        when (uriMatcher.match(uri)) {
+            ID_FAVORITE -> {
+                cursor = Dao.findAllUser()
+                if (null != context) {
+                    cursor.setNotificationUri(context?.contentResolver, uri)
+                }
+            }
+            else -> {
+                cursor = null
+            }
+        }
+        return cursor
+    }
+
 
 }

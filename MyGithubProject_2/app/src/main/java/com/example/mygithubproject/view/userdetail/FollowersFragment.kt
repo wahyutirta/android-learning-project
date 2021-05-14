@@ -13,17 +13,18 @@ import com.example.mygithubproject.viewmodel.ViewModelFollower
 
 class FollowersFragment : Fragment(R.layout.fragment_follow) {
 
-    private var _binding: FragmentFollowBinding? = null
-    private val binding get() = _binding!!
-    private lateinit var viewModel: ViewModelFollower
+    private lateinit var VMFollower: ViewModelFollower
     private lateinit var adapter: UserAdapter
     private lateinit var username: String
+    private var bindingFragment: FragmentFollowBinding? = null
+    private val binding get() = bindingFragment!!
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args = arguments
         username = args?.getString(UserDetailActivity.EXTRA_USERNAME).toString()
-        _binding = FragmentFollowBinding.bind(view)
+        bindingFragment = FragmentFollowBinding.bind(view)
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
 
@@ -34,13 +35,13 @@ class FollowersFragment : Fragment(R.layout.fragment_follow) {
         }
 
         showLoading(true)
-        viewModel = ViewModelProvider(
+        VMFollower = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(ViewModelFollower::class.java)
-        viewModel.setListFollowers(username)
+        VMFollower.setList(username)
 
-        viewModel.getListFollowers().observe(viewLifecycleOwner) {
+        VMFollower.getList().observe(viewLifecycleOwner) {
             adapter.setList(it)
             showLoading(false)
 
@@ -49,7 +50,7 @@ class FollowersFragment : Fragment(R.layout.fragment_follow) {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        bindingFragment = null
     }
 
     private fun showLoading(state: Boolean) {

@@ -11,7 +11,7 @@
         android:weightSum="10">
 
         <StackView
-            android:id="@+id/stack_view"
+            android:id="@+id/stackV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="9"
@@ -22,23 +22,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@color/magenta"
             android:layout_weight="1"
             android:padding="8dp"
-            android:background="@color/dark_blue"
-            android:text="@string/Favorite_user"
             android:textAlignment="center"
+            android:text="@string/Fav_user"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/empty_view"
+        android:id="@+id/emptyV"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:background="@color/blue"
-        android:text="@string/data_kosong"
+        android:background="@color/blue_violet"
+        android:text="@string/empty_data"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"

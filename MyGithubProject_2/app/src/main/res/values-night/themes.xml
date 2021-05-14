@@ -3,8 +3,8 @@
     <style name="Theme.GithubUsers" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/teal_200</item>
-        <item name="colorPrimaryVariant">@color/dark_color</item>
-        <item name="colorOnPrimary">@color/dark_color</item>
+        <item name="colorPrimaryVariant">@color/indigo</item>
+        <item name="colorOnPrimary">@color/indigo</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_200</item>
@@ -17,19 +17,19 @@
     </style>
 
     <style name="companyIcon">
-        <item name="android:src">@drawable/ic_company</item>
+        <item name="android:src">@drawable/ic_company_night</item>
     </style>
 
-    <style name="locationIcon">
-        <item name="android:src">@drawable/ic_location_night</item>
+    <style name="locIcon">
+        <item name="android:src">@drawable/ic_loc_night</item>
     </style>
 
     <style name="repoIcon">
-        <item name="android:src">@drawable/ic_book_night</item>
+        <item name="android:src">@drawable/ic_booked_night</item>
     </style>
 
     <style name="buttonTheme">
-        <item name="android:backgroundTint">@color/deep_purple</item>
+        <item name="android:backgroundTint">@color/purple</item>
     </style>
 
     <style name="appBarTheme">
@@ -56,8 +56,8 @@
     </style>
 
     <style name="ThemeOverlay.GithubUsers.AppWidgetContainer" parent="">
-        <item name="appWidgetBackgroundColor">@color/light_blue_900</item>
-        <item name="appWidgetTextColor">@color/light_blue_200</item>
+        <item name="appWidgetBackgroundColor">@color/dark_violet</item>
+        <item name="appWidgetTextColor">@color/magenta</item>
     </style>
 
 

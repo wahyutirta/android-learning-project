@@ -1,138 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Pengguna Github</string>
-    <string name="Follower">Pengikut</string>
-    <string name="Following">Mengikuti</string>
-    <string name="Repository">Repository</string>
-    <string name="Profile">Profil</string>
-    <string name="Location">Lokasi</string>
-    <string name="Company">Perusahaan</string>
-    <string name="username_github">Username Github</string>
-    <string name="look_profil">Lihat Profil</string>
-    <string name="username">Nama User</string>
-    <string name="search">Cari</string>
-    <string name="Setting">Pengaturan</string>
-    <string name="turn_on_dark_mode">Aktifkan Mode Gelap</string>
-    <string name="dark_mode">Mode Gelap</string>
-    <string name="change_language">Ubah Bahasa</string>
-    <string name="alert_message_title">Server Tidak Merespon !</string>
-    <string name="alert_message_body">Data Yang Anda Cari Tidak Dapat Di Temukan, Silahkan Coba Lagi Dengan Koneksi Internet !</string>
-    <string name="share_body1">hay, Aku mau merekomendasikan akun github untuk belajar, langsung klik</string>
-    <string name="share_body2">pemilik akun nya adalah</string>
-    <string name="share_body3">Selamat Belajar.</string>
-    <string name="share_title">Mau Share Kemana nih?</string>
-    <string name="menu_favorite">menuFav</string>
-    <string name="Favorite_user">User Favorit</string>
+    <string name="app_name">Penduduk Github</string>
+    <string name="follower">Pengikut</string>
+    <string name="following">Mengikuti</string>
+    <string name="repo">Repository</string>
+    <string name="profile">Profile</string>
+    <string name="location">Lokasi</string>
+    <string name="not_recorded">Tidak Tercatat</string>
+    <string name="company">Organisasi</string>
+    <string name="profile_link">Link Github</string>
+    <string name="profile_hiperlink">Lihat Profil...</string>
+    <string name="user_realname">Nama User</string>
+    <string name="search">Cari Pengguna</string>
+    <string name="app_settings">Pengaturan Apps</string>
+    <string name="turn_on_night_mode">Aktifkan Mode Malam</string>
+    <string name="night_mode">Mode Malam</string>
+    <string name="server_no_resp_message_title">Server Tidak Merespon!</string>
+    <string name="change_languages">Ubah Bahasa</string>
+    <string name="no_data_alert_message_body">Data Yang Anda Cari Tidak Dapat Di Temukan, Cek Koneksi Internet Anda!</string>
+    <string name="share_builder1">hai, Coba Cek User Github ini!</string>
+    <string name="share_builder2">pemilik akun nya adalah</string>
+    <string name="share_builder3">Selamat Belajar.</string>
+    <string name="share_title">Share Kemana nih?</string>
+    <string name="menu_fav">Menu Favorit</string>
+    <string name="Fav_user">User Favorit</string>
     <string name="reminder">Nyalakan Pengingat</string>
-    <string name="reminder_switch">Pengingat</string>
+    <string name="reminder_sw">Pengingat</string>
     <string name="notification_content">Ayo Cek Pengguna Github</string>
-    <string name="notification_toast">Notifikasi Dinyalakan</string>
-    <string name="notification_toast_cancel">Notifikasi Dimatikan</string>
-    <string name="data_kosong">Data Kosong</string>
+    <string name="notification_on">Notifikasi Dinyalakan</string>
+    <string name="notification_off">Notifikasi Dimatikan</string>
+    <string name="empty_data">Ups..... Data Kosong</string>
 
-    <!-- image Description -->
 
-    <string name="black_gradient_color_suppose_to_make_text_easy_to_read" translatable="false">black gradient color suppose to make text easy to read</string>
-    <string name="user_photo_in_the_stack_widget" translatable="false">user photo in the stack widget</string>
-    <string name="place_holder_that_will_bi_invisible_after_user_do_searching" translatable="false">place holder that will bi invisible after user do searching</string>
-    <string name="place_holder_that_will_be_visible_if_there_s_problem_with_internet_connection_or_bad_respon_from_server" translatable="false">place holder that will be visible if there\'s problem with internet connection or bad respon from server</string>
-    <string name="title_activity_favorite">FavoriteActivity</string>
-    <!--
-    This string is used for square devices and overridden by hello_world in
-    values-round/strings.xml for round devices.
-    -->
-    <string name="hello_world">Hello Square World!</string>
-    <string name="title_activity_setting">SettingActivity</string>
-    <string name="title_activity_splash">SplashActivity</string>
-    <string name="title_activity_user_detail">ScrollingActivity</string>
+
+    <string name="use_black_gradient_so_text_is_easier_to_read" >use_black_gradient_so_text_is_easier_to_read</string>
+    <string name="user_avatars_in_the_stack_widget_form" >user_avatars_in_the_stack_widget_form</string>
+    <string name="place_holder_that_will_be_gone_after_user_do_searching" >helper_text_and_will_be_gone_after_user_do_searching</string>
+    <string name="place_holder_as_helper_for_internet_connections_problem">place_holder_as_helper_that_will_be_visible_if_there_s_problem_with_internet_connection_or_bad_respon_from_server</string>
+
+    <string name="title_activity_user_detail">Scrolling Activity</string>
     <string name="large_text">
-        "Material is the metaphor.\n\n"
-
-        "A material metaphor is the unifying theory of a rationalized space and a system of motion."
-        "The material is grounded in tactile reality, inspired by the study of paper and ink, yet "
-        "technologically advanced and open to imagination and magic.\n"
-        "Surfaces and edges of the material provide visual cues that are grounded in reality. The "
-        "use of familiar tactile attributes helps users quickly understand affordances. Yet the "
-        "flexibility of the material creates new affordances that supercede those in the physical "
-        "world, without breaking the rules of physics.\n"
-        "The fundamentals of light, surface, and movement are key to conveying how objects move, "
-        "interact, and exist in space and in relation to each other. Realistic lighting shows "
-        "seams, divides space, and indicates moving parts.\n\n"
-
-        "Bold, graphic, intentional.\n\n"
-
-        "The foundational elements of print based design typography, grids, space, scale, color, "
-        "and use of imagery guide visual treatments. These elements do far more than please the "
-        "eye. They create hierarchy, meaning, and focus. Deliberate color choices, edge to edge "
-        "imagery, large scale typography, and intentional white space create a bold and graphic "
-        "interface that immerse the user in the experience.\n"
-        "An emphasis on user actions makes core functionality immediately apparent and provides "
-        "waypoints for the user.\n\n"
-
-        "Motion provides meaning.\n\n"
-
-        "Motion respects and reinforces the user as the prime mover. Primary user actions are "
-        "inflection points that initiate motion, transforming the whole design.\n"
-        "All action takes place in a single environment. Objects are presented to the user without "
-        "breaking the continuity of experience even as they transform and reorganize.\n"
-        "Motion is meaningful and appropriate, serving to focus attention and maintain continuity. "
-        "Feedback is subtle yet clear. Transitions are efﬁcient yet coherent.\n\n"
-
-        "3D world.\n\n"
-
-        "The material environment is a 3D space, which means all objects have x, y, and z "
-        "dimensions. The z-axis is perpendicularly aligned to the plane of the display, with the "
-        "positive z-axis extending towards the viewer. Every sheet of material occupies a single "
-        "position along the z-axis and has a standard 1dp thickness.\n"
-        "On the web, the z-axis is used for layering and not for perspective. The 3D world is "
-        "emulated by manipulating the y-axis.\n\n"
-
-        "Light and shadow.\n\n"
-
-        "Within the material environment, virtual lights illuminate the scene. Key lights create "
-        "directional shadows, while ambient light creates soft shadows from all angles.\n"
-        "Shadows in the material environment are cast by these two light sources. In Android "
-        "development, shadows occur when light sources are blocked by sheets of material at "
-        "various positions along the z-axis. On the web, shadows are depicted by manipulating the "
-        "y-axis only. The following example shows the card with a height of 6dp.\n\n"
-
-        "Resting elevation.\n\n"
-
-        "All material objects, regardless of size, have a resting elevation, or default elevation "
-        "that does not change. If an object changes elevation, it should return to its resting "
-        "elevation as soon as possible.\n\n"
-
-        "Component elevations.\n\n"
-
-        "The resting elevation for a component type is consistent across apps (e.g., FAB elevation "
-        "does not vary from 6dp in one app to 16dp in another app).\n"
-        "Components may have different resting elevations across platforms, depending on the depth "
-        "of the environment (e.g., TV has a greater depth than mobile or desktop).\n\n"
-
-        "Responsive elevation and dynamic elevation offsets.\n\n"
-
-        "Some component types have responsive elevation, meaning they change elevation in response "
-        "to user input (e.g., normal, focused, and pressed) or system events. These elevation "
-        "changes are consistently implemented using dynamic elevation offsets.\n"
-        "Dynamic elevation offsets are the goal elevation that a component moves towards, relative "
-        "to the component’s resting state. They ensure that elevation changes are consistent "
-        "across actions and component types. For example, all components that lift on press have "
-        "the same elevation change relative to their resting elevation.\n"
-        "Once the input event is completed or cancelled, the component will return to its resting "
-        "elevation.\n\n"
-
-        "Avoiding elevation interference.\n\n"
-
-        "Components with responsive elevations may encounter other components as they move between "
-        "their resting elevations and dynamic elevation offsets. Because material cannot pass "
-        "through other material, components avoid interfering with one another any number of ways, "
-        "whether on a per component basis or using the entire app layout.\n"
-        "On a component level, components can move or be removed before they cause interference. "
-        "For example, a floating action button (FAB) can disappear or move off screen before a "
-        "user picks up a card, or it can move if a snackbar appears.\n"
-        "On the layout level, design your app layout to minimize opportunities for interference. "
-        "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
-        "when a user tries to pick up one of cards.\n\n"
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices,
+        nulla facilisis interdum dapibus, tortor purus egestas risus, et vulputate mauris arcu vel elit.
+        Nam pulvinar felis tortor, quis tristique ante congue non. Donec risus orci, blandit id sapien vel,
+        fermentum malesuada risus. Nullam at porttitor diam, a feugiat libero. Integer ligula augue, convallis ullamcorper magna fringilla,
+        varius porttitor tellus. Praesent condimentum vitae sem sed vehicula. Donec scelerisque interdum tempus.
+        Phasellus rhoncus orci vel orci varius convallis. Nunc laoreet purus sed est ultricies ultrices. Ut feugiat eros eu dolor condimentum,
+        non pretium neque auctor. Sed in sagittis nulla.
     </string>
     <string name="action_settings">Settings</string>
 

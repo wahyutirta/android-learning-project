@@ -12,14 +12,14 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:srcCompat="@drawable/user1"
-        android:contentDescription="@string/user_photo_in_the_stack_widget" />
+        tools:srcCompat="@drawable/user_dummy"
+        android:contentDescription="@string/user_avatars_in_the_stack_widget_form" />
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_widget_user"
-        android:contentDescription="@string/black_gradient_color_suppose_to_make_text_easy_to_read" />
+        android:background="@drawable/background_widget_user"
+        android:contentDescription="@string/use_black_gradient_so_text_is_easier_to_read" />
 
     <LinearLayout
         android:layout_width="match_parent"

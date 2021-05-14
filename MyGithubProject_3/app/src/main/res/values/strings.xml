@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Penduduk Github</string>
+    <string name="alarm_message">Pengingat Github</string>
+    <string name="follower">Pengikut</string>
+    <string name="following">Mengikuti</string>
+    <string name="repo">Repository</string>
+    <string name="profile">Profile</string>
+    <string name="location">Lokasi</string>
+    <string name="not_recorded">Tidak Tercatat</string>
+    <string name="company">Organisasi</string>
+    <string name="profile_link">Link Github</string>
+    <string name="profile_hiperlink">Lihat Profil...</string>
+    <string name="search">Cari Pengguna</string>
+    <string name="app_settings">Pengaturan Apps</string>
+    <string name="turn_on_night_mode">Aktifkan Mode Malam</string>
+    <string name="night_mode">Mode Malam</string>
+    <string name="server_no_resp_message_title">Server Tidak Merespon!</string>
+    <string name="change_languages">Ubah Bahasa</string>
+    <string name="no_data_alert_message_body">Data Yang Anda Cari Tidak Dapat Di Temukan, Cek Koneksi Internet Anda!</string>
+    <string name="share_builder1">hai, Coba Cek User Github ini!</string>
+    <string name="share_builder2">pemilik akun nya adalah</string>
+    <string name="share_builder3">Selamat Belajar.</string>
+    <string name="share_title">Share Kemana nih?</string>
+    <string name="menu_fav">Menu Favorit</string>
+    <string name="Fav_user">User Favorit</string>
+    <string name="reminder">Nyalakan Pengingat</string>
+    <string name="reminder_sw">Pengingat</string>
+    <string name="notification_content">Ayo Cek Pengguna Github</string>
+    <string name="notification_on">Notifikasi Dinyalakan</string>
+    <string name="notification_off">Notifikasi Dimatikan</string>
+
+
+    <string name="place_holder_that_will_be_gone_after_user_do_searching" >helper_text_and_will_be_gone_after_user_do_searching</string>
+    <string name="place_holder_as_helper_for_internet_connections_problem">place_holder_as_helper_that_will_be_visible_if_there_s_problem_with_internet_connection_or_bad_respon_from_server</string>
+
+    <string name="title_activity_user_detail">Scrolling Activity</string>
+    <string name="languages">Bahasa</string>
+
+</resources>
+

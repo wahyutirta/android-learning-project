@@ -8,13 +8,13 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.mygithubproject.R
 
-class SectionPagerAdapter(private val context: Context, fm: FragmentManager, data: Bundle) :
-    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class SectionPagerAdapter(private val context: Context, fragmentMg: FragmentManager, data: Bundle) :
+    FragmentPagerAdapter(fragmentMg, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private var fragmentBundle: Bundle = data
 
     @StringRes
-    private val tabTitles = intArrayOf(R.string.Follower, R.string.Following)
+    private val tabTitles = intArrayOf(R.string.follower, R.string.following)
 
     override fun getCount(): Int = 2
 

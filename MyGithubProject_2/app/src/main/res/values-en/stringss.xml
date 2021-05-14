@@ -1,33 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Github Users</string>
-    <string name="Follower">Follower</string>
-    <string name="Following">Following</string>
-    <string name="Repository">Repository</string>
-    <string name="Profile">Profil</string>
-    <string name="Location">Location</string>
-    <string name="Company">Company</string>
-    <string name="username_github">Username Github</string>
-    <string name="look_profil">Look Profil</string>
-    <string name="username">User Name</string>
-    <string name="search">Search</string>
-    <string name="Setting">Setting</string>
-    <string name="turn_on_dark_mode">Turn On Dark Mode</string>
-    <string name="dark_mode">Dark Mode</string>
-    <string name="change_language">Change Language</string>
-    <string name="alert_message_title">Server Not Responding !</string>
-    <string name="alert_message_body">The data you are looking for cannot be found, please try again with an internet connection !</string>
-    <string name="share_body1">hi, I want to recommend a github account to learn, just click</string>
-    <string name="share_body2">the account owner is</string>
-    <string name="share_body3">Have a good study. </string>
-    <string name="share_title">Where do you want to share ?</string>
-    <string name="menu_favorite">menuFav</string>
-    <string name="Favorite_user">Favorite User</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+    <string name="repo">Repository</string>
+    <string name="profile">Profile</string>
+    <string name="location">Location</string>
+    <string name="not_recorded">Not Recorded</string>
+    <string name="company">Company</string>
+    <string name="profile_link">Github Profile</string>
+    <string name="profile_hiperlink">See Profile...</string>
+    <string name="user_realname">Full Name</string>
+    <string name="search">Search User</string>
+    <string name="app_settings">Apps Settings</string>
+    <string name="turn_on_night_mode">Turn On Night Mode</string>
+    <string name="night_mode">Night Mode</string>
+    <string name="change_languages">Change Current Language</string>
+    <string name="server_no_resp_message_title">Server Is Not Responding !</string>
+    <string name="no_data_alert_message_body">The data cannot be found, Kindly Check Your Connections</string>
+    <string name="share_builder1">Hi! I want to show someone in github! it is</string>
+    <string name="share_builder2">Its real name is</string>
+    <string name="share_builder3"> Take a look! </string>
+    <string name="share_title">Choose Apps</string>
+    <string name="menu_fav">Favorite Menu</string>
+    <string name="Fav_user">Favorite User</string>
     <string name="reminder">Turn On Reminder</string>
-    <string name="reminder_switch">Reminder</string>
-    <string name="notification_content">Lets Check Github Users</string>
-    <string name="notification_toast">Notification Turned On</string>
-    <string name="notification_toast_cancel">Notification Turned Off</string>
-    <string name="data_kosong">Ups..Data Empty</string>
+    <string name="reminder_sw">Reminder</string>
+    <string name="notification_content">Check Some Github Users</string>
+    <string name="notification_on">Notification Turned On</string>
+    <string name="notification_off">Notification Turned Off</string>
+    <string name="empty_data">Ups..... Data Not Found</string>
 
+    <string name="action_settings">Settings</string>
+    <string name="large_text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices,
+        nulla facilisis interdum dapibus, tortor purus egestas risus, et vulputate mauris arcu vel elit.
+        Nam pulvinar felis tortor, quis tristique ante congue non. Donec risus orci, blandit id sapien vel,
+        fermentum malesuada risus. Nullam at porttitor diam, a feugiat libero. Integer ligula augue, convallis ullamcorper magna fringilla,
+        varius porttitor tellus. Praesent condimentum vitae sem sed vehicula. Donec scelerisque interdum tempus.
+        Phasellus rhoncus orci vel orci varius convallis. Nunc laoreet purus sed est ultricies ultrices. Ut feugiat eros eu dolor condimentum,
+        non pretium neque auctor. Sed in sagittis nulla.
+    </string>
+    <string name="use_black_gradient_so_text_is_easier_to_read" >use_black_gradient_so_text_is_easier_to_read</string>
+    <string name="user_avatars_in_the_stack_widget_form" >user_avatars_in_the_stack_widget_form</string>
+    <string name="place_holder_that_will_be_gone_after_user_do_searching" >helper_text_and_will_be_gone_after_user_do_searching</string>
+    <string name="place_holder_as_helper_for_internet_connections_problem">place_holder_as_helper_that_will_be_visible_if_there_s_problem_with_internet_connection_or_bad_respon_from_server</string>
+
+    <string name="title_activity_user_detail">Scrolling Activity</string>
 </resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">githubユーザー</string>
+    <string name="alarm_message">Github リマインダー</string>
+    <string name="follower">フォロワー</string>
+    <string name="following">以下</string>
+    <string name="repo">リポジトリ名</string>
+    <string name="profile">プロファイル</string>
+    <string name="location">ロケーション</string>
+    <string name="not_recorded">記録されていません</string>
+    <string name="company">会社</string>
+    <string name="profile_link">プロフィールリンク</string>
+    <string name="profile_hiperlink">プロファイルにアクセス</string>
+    <string name="search">ユーザーを検索</string>
+    <string name="app_settings">アプリケーションの設定</string>
+    <string name="turn_on_night_mode">ナイトモードをオンにする</string>
+    <string name="night_mode">ナイトモード</string>
+    <string name="server_no_resp_message_title">サーバーがサーバー障害に応答しない</string>
+    <string name="change_languages">言語を変えてください</string>
+    <string name="no_data_alert_message_body">探しているデータが見つかりませんでした。接続を確認してください</string>
+    <string name="share_builder1">このgithubユーザーを見てください</string>
+    <string name="share_builder2">アカウントの所有者は</string>
+    <string name="share_builder3">幸せな学習</string>
+    <string name="share_title">どこで共有したいですか</string>
+    <string name="menu_fav">お気に入りのメニュー</string>
+    <string name="Fav_user">ユーザーのお気に入り</string>
+    <string name="reminder">リマインダーをオンにする</string>
+    <string name="reminder_sw">リマインダー</string>
+    <string name="notification_content">Ayo Cek Pengguna Github</string>
+    <string name="notification_on">通知がオンになりました</string>
+    <string name="notification_off">通知がオフになりました</string>
+
+
+    <string name="place_holder_that_will_be_gone_after_user_do_searching" >ユーザーが検索した後に非表示になるプレースホルダー</string>
+    <string name="place_holder_as_helper_for_internet_connections_problem">インターネット接続に問題がある場合やサーバーからの応答が悪い場合に表示されるヘルパーとしてのプレースホルダー</string>
+
+    <string name="title_activity_user_detail">スクロールアクティビティ</string>
+    <string name="languages">言語</string>
+
+</resources>
+

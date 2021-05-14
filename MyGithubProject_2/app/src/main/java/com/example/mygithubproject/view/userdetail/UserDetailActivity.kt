@@ -6,16 +6,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
-import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import com.example.mygithubproject.R
 import com.example.mygithubproject.databinding.ActivityUserDetailBinding
-import com.example.mygithubproject.viewmodel.UserDetailViewModel
+import com.example.mygithubproject.viewmodel.ViewModelUserDetail
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +27,7 @@ class UserDetailActivity : AppCompatActivity() {
         const val EXTRA_URL = "extra_url"
     }
 
-    private lateinit var viewModel: UserDetailViewModel
+    private lateinit var VMUserDetail: ViewModelUserDetail
     private lateinit var binding: ActivityUserDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,27 +41,27 @@ class UserDetailActivity : AppCompatActivity() {
         val bundle = Bundle()
         bundle.putString(EXTRA_USERNAME, userNameExtra)
 
-        viewModel = ViewModelProvider(
+        VMUserDetail = ViewModelProvider(
             this
-        ).get(UserDetailViewModel::class.java)
+        ).get(ViewModelUserDetail::class.java)
 
         if (null != userNameExtra) {
             showLoading(true)
-            viewModel.setUserDetail(userNameExtra)
+            VMUserDetail.setDetail(userNameExtra)
         }
-        val textLink = "https://github.com/"
+        val link = "https://github.com/"
 
         val tabs = findViewById<TabLayout>(R.id.tabs)
-        val viewPager = findViewById<ViewPager>(R.id.view_pager)
+        val viewPager = findViewById<ViewPager>(R.id.viewPager)
 
-        viewModel.status.observe(this, fun(status: Boolean?) {
+        VMUserDetail.status.observe(this, fun(status: Boolean?) {
             status?.let {
                 when (status) {
                     false -> {
                         alertError()
                         binding.progressDetail.visibility = View.GONE
-                        binding.layoutdetail.visibility = View.INVISIBLE
-                        binding.ondataerror.visibility = View.VISIBLE
+                        binding.detailLayout.visibility = View.INVISIBLE
+                        binding.onErrorData.visibility = View.VISIBLE
                         binding.tabs.visibility = View.INVISIBLE
                         binding.viewPager.visibility = View.INVISIBLE
                     }
@@ -72,31 +69,35 @@ class UserDetailActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.getUserDetail().observe(this, {
+        VMUserDetail.getDetail().observe(this, {
 
             if (null != it) {
+
                 binding.apply {
-                    name.text = StringBuilder(textLink).append("${it.login}")
+                    name.text = StringBuilder(link).append("${it.login}")
                     username.text = it.name
                     follower.text =
-                        StringBuilder(resources.getString(R.string.Follower)).append(" ${it.followers}")
+                        StringBuilder(resources.getString(R.string.follower)).append(" ${it.followers}")
                     following.text =
-                        StringBuilder(resources.getString(R.string.Following)).append(" ${it.following}")
-                    company.text =
-                        StringBuilder(resources.getString(R.string.Company)).append(" ${it.company}")
-                    location.text =
-                        StringBuilder(resources.getString(R.string.Location)).append(" ${it.location}")
+                        StringBuilder(resources.getString(R.string.following)).append(" ${it.following}")
+                    when ("${it.company}" == "null"){
+                        true -> company.text = StringBuilder(resources.getString(R.string.company)).append(" ",StringBuilder(resources.getString(R.string.not_recorded)))
+                        false -> company.text = StringBuilder(resources.getString(R.string.company)).append(" ${it.company}")
+                    }
+                    when ("${it.location}" == "null"){
+                        true -> location.text = StringBuilder(resources.getString(R.string.location)).append(" ",StringBuilder(resources.getString(R.string.not_recorded)))
+                        false -> location.text = StringBuilder(resources.getString(R.string.location)).append(" ${it.location}")
+                    }
                     repository.text =
-                        StringBuilder(resources.getString(R.string.Repository)).append(" ${it.public_repos}")
+                        StringBuilder(resources.getString(R.string.repo)).append(" ${it.repos_url}")
                     profil.text =
-                        StringBuilder(resources.getString(R.string.Profile)).append(" ${it.name}")
+                        StringBuilder(resources.getString(R.string.profile)).append(" ${it.name}")
 
                     Glide.with(this@UserDetailActivity)
                         .load(it.avatar_url)
                         .placeholder(R.drawable.ic_default)
-                        .error(R.drawable.ic_connect_error)
+                        .error(R.drawable.ic_connection_error)
                         .into(avatar)
-
                     showLoading(false)
                 }
             }
@@ -111,7 +112,7 @@ class UserDetailActivity : AppCompatActivity() {
 
         var isFavorite = false
         CoroutineScope(Dispatchers.IO).launch {
-            val count = viewModel.checkUser(id)
+            val count = VMUserDetail.checkUser(id)
             withContext(Dispatchers.Main) {
                 when {
                     null != count -> if (count > 0) {
@@ -128,9 +129,9 @@ class UserDetailActivity : AppCompatActivity() {
         binding.toggleFavorite.setOnClickListener {
             isFavorite = !isFavorite
             if (isFavorite) {
-                userNameExtra?.let { it1 -> viewModel.addToFav(it1, id, avatarUrl!!) }
+                userNameExtra?.let { it1 -> VMUserDetail.addToFav(it1, id, avatarUrl!!) }
             } else {
-                viewModel.userRemoveFromFav(id)
+                VMUserDetail.userRemoveFromFav(id)
             }
             binding.toggleFavorite.isChecked = isFavorite
         }
@@ -145,11 +146,11 @@ class UserDetailActivity : AppCompatActivity() {
         binding.fabShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             val shareBody =
-                "${resources.getString(R.string.share_body1)} ${
+                "${resources.getString(R.string.share_builder1)} ${
                     binding.name.text
-                }, ${resources.getString(R.string.share_body2)} ${binding.username.text}, ${
+                }, ${resources.getString(R.string.share_builder2)} ${binding.username.text}, ${
                     resources.getString(
-                        R.string.share_body3
+                        R.string.share_builder3
                     )
                 }"
             intent.type = "text/plain"
@@ -161,8 +162,8 @@ class UserDetailActivity : AppCompatActivity() {
 
     private fun alertError() {
         val builder = AlertDialog.Builder(this)
-        builder.setTitle(resources.getString(R.string.alert_message_title))
-        builder.setMessage(resources.getString(R.string.alert_message_body))
+        builder.setTitle(resources.getString(R.string.server_no_resp_message_title))
+        builder.setMessage(resources.getString(R.string.no_data_alert_message_body))
         builder.setNegativeButton("OK") { dialog, _ -> // Do nothing
             dialog.dismiss()
         }

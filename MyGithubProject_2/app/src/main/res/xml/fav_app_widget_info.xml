@@ -4,6 +4,6 @@
     android:initialLayout="@layout/fav_app_widget"
     android:minHeight="110dp"
     android:minWidth="250dp"
-    android:previewImage="@drawable/ic_gitsplash"
+    android:previewImage="@drawable/ic_github_logo"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen" />

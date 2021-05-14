@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <!-- light theme -->
+    <color name="violet">#EE82EE</color>
+    <color name="magenta">#FF00FF</color>
+    <color name="blue_violet">#8A2BE2</color>
+    <color name="dark_orchid">#9932CC</color>
+
+    <color name="purple">#800080</color>
+</resources>

@@ -20,11 +20,11 @@
 
 
     <ImageView
-        android:id="@+id/ondataerror"
+        android:id="@+id/onErrorData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/alert_message_body"
-        android:src="@drawable/ic_dataerror"
+        android:contentDescription="@string/no_data_alert_message_body"
+        android:src="@drawable/ic_data_error"
         android:visibility="gone" />
 
 
@@ -41,7 +41,7 @@
 
 
             <LinearLayout
-                android:id="@+id/layoutdetail"
+                android:id="@+id/detailLayout"
                 style="@style/appBarTheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -65,7 +65,7 @@
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_marginEnd="20dp"
-                        android:background="@drawable/favorite_yes_no"
+                        android:background="@drawable/favorite_neutral"
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:textOff=""
@@ -75,7 +75,7 @@
                         android:id="@+id/avatar"
                         android:layout_width="100dp"
                         android:layout_height="110dp"
-                        tools:src="@drawable/user1" />
+                        tools:src="@drawable/user_dummy" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -87,20 +87,21 @@
 
 
                         <TextView
+                            android:text="@string/user_realname"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="3dp"
-                            android:text="@string/username"
-                            android:textColor="?attr/colorAccent"
-                            android:textSize="20sp" />
+                            tools:text="nama"
+                             />
 
                         <TextView
                             android:id="@+id/username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            tools:text="namaUser" />
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="3dp"
+                            android:textColor="?attr/colorAccent"
+                            android:textSize="20sp"/>
 
 
                     </LinearLayout>
@@ -137,7 +138,7 @@
                     android:layout_marginTop="4dp"
                     android:layout_marginBottom="3dp"
                     android:gravity="center"
-                    android:text="@string/username_github"
+                    android:text="@string/profile_link"
                     android:textColor="?attr/colorAccent"
                     android:textSize="20sp" />
 
@@ -158,7 +159,7 @@
                         android:id="@+id/profil"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/Profile"
+                        android:text="@string/profile"
                         android:textSize="17sp"
                         android:textStyle="bold" />
 
@@ -168,7 +169,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="20dp"
                         android:gravity="start"
-                        android:text="@string/look_profil"
+                        android:text="@string/profile_hiperlink"
                         android:textColor="?attr/colorAccent"
                         android:textStyle="bold" />
 
@@ -190,7 +191,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:contentDescription="@string/Company"
+                            android:contentDescription="@string/company"
                             android:src="@drawable/ic_company" />
 
                         <TextView
@@ -199,7 +200,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:textSize="15sp"
-                            tools:text="Thorin Creative Studio" />
+                            tools:text=" Creative Softears Studio" />
 
 
                     </LinearLayout>
@@ -212,10 +213,10 @@
                         tools:ignore="UseCompoundDrawables">
 
                         <ImageView
-                            style="@style/locationIcon"
+                            style="@style/locIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:contentDescription="@string/Location" />
+                            android:contentDescription="@string/location" />
 
                         <TextView
                             android:id="@+id/location"
@@ -223,7 +224,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:textSize="15sp"
-                            tools:text="Bandung, Indonesia" />
+                            tools:text="Badung, Indonesia" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -237,7 +238,7 @@
                             style="@style/repoIcon"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:contentDescription="@string/Repository" />
+                            android:contentDescription="@string/repo" />
 
                         <TextView
                             android:id="@+id/repository"
@@ -266,7 +267,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <androidx.viewpager.widget.ViewPager
-                android:id="@+id/view_pager"
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -278,7 +279,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
             android:layout_margin="20dp"
-            android:contentDescription="@string/share_body1"
+            android:contentDescription="@string/share_builder1"
             android:src="@drawable/ic_share" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </LinearLayout>

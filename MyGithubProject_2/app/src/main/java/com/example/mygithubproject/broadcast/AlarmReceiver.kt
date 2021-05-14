@@ -34,9 +34,9 @@ class AlarmReceiver : BroadcastReceiver() {
     }
 
     private fun sendNotification(context: Context) {
-        val intent = context.packageManager.getLaunchIntentForPackage("com.thorin.dicoding")
+        val intent = context.packageManager.getLaunchIntentForPackage(" com.example")
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-        val notificationManager =
+        val notifManager =
                 context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setContentIntent(pendingIntent)
@@ -54,15 +54,15 @@ class AlarmReceiver : BroadcastReceiver() {
             )
 
             builder.setChannelId(CHANNEL_ID)
-            notificationManager.createNotificationChannel(channel)
+            notifManager.createNotificationChannel(channel)
         }
 
         val notification = builder.build()
-        notificationManager.notify(NOTIFICATION_ID, notification)
+        notifManager.notify(NOTIFICATION_ID, notification)
     }
 
-    fun setRepeatingAlarm(context: Context, type: String, time: String, message: String) {
-        if (TIME_FORMAT.isDateInvalid(time)) return
+    fun setRepeating(context: Context, type: String, time: String, message: String) {
+        if (TIME_FORMAT.checkDateFormat(time)) return
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
 
         val intent = Intent(context, AlarmReceiver::class.java)
@@ -80,28 +80,12 @@ class AlarmReceiver : BroadcastReceiver() {
         )
         Toast.makeText(
                 context,
-                context.resources.getString(R.string.notification_toast),
+                context.resources.getString(R.string.notification_on),
                 Toast.LENGTH_SHORT
         ).show()
 
     }
-
-    private fun String.isDateInvalid(time: String): Boolean {
-        return try {
-
-            val df = SimpleDateFormat(this, Locale.getDefault())
-            df.isLenient = false
-            df.parse(time)
-            false
-
-        } catch (
-                e: ParseException
-        ) {
-            true
-        }
-    }
-
-    fun cancelAlarm(context: Context) {
+    fun cancel(context: Context) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmReceiver::class.java)
         val requestNotifyCode = ID_REPEATING
@@ -109,10 +93,25 @@ class AlarmReceiver : BroadcastReceiver() {
         pendingIntent.cancel()
         alarmManager.cancel(pendingIntent)
         Toast.makeText(
-                context,
-                context.resources.getString(R.string.notification_toast_cancel),
-                Toast.LENGTH_SHORT
+            context,
+            context.resources.getString(R.string.notification_off),
+            Toast.LENGTH_SHORT
         ).show()
+    }
+
+    private fun String.checkDateFormat(time: String): Boolean {
+        return try {
+
+            val dateFormat = SimpleDateFormat(this, Locale.getDefault())
+            dateFormat.isLenient = false
+            dateFormat.parse(time)
+            false
+
+        } catch (
+                e: ParseException
+        ) {
+            true
+        }
     }
 
 }
