@@ -9,8 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyNetflix" >
-        <activity android:name=".splashscreen.SplashActivity" >
+        <activity android:name=".splashscreen.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
+
         <activity
             android:name=".ui.detail.DetailMovieActivity"
             android:label="@string/title_activity_detail_movie"
@@ -19,13 +25,7 @@
             android:name=".ui.detail.DetailTvShowActivity"
             android:label="@string/title_activity_detail_tv_show"
             android:theme="@style/Theme.MyNetflix.NoActionBar" />
-        <activity android:name=".ui.main.HomeActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.main.HomeActivity" />
     </application>
 
 </manifest>

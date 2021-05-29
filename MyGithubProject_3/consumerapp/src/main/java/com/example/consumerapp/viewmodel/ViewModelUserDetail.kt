@@ -26,11 +26,9 @@ class ViewModelUserDetail(application: Application) : AndroidViewModel(applicati
                     call: Call<ModelUserDetailsResponse>,
                     response: Response<ModelUserDetailsResponse>
                 ) {
-                    when (response.isSuccessful) {
-                        true -> {
-                            user.postValue(response.body())
-                            status.value = true
-                        }
+                    if (response.isSuccessful) {
+                        user.postValue(response.body())
+                        status.value = true
                     }
                 }
 

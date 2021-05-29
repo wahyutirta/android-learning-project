@@ -3,6 +3,7 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nsv_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -20,7 +21,7 @@
 
 
         <TextView
-            android:id="@+id/tvShowRelease_detail"
+            android:id="@+id/tvShowDetail_release"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
@@ -30,44 +31,44 @@
             tools:text="tvShowRelease" />
 
         <TextView
-            android:id="@+id/tvShowRate_detail"
+            android:id="@+id/tvShowDetail_ratings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="start"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShowRelease_detail"
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDetail_release"
             tools:text="tvShowRate" />
 
         <TextView
-            android:id="@+id/tvShowName"
+            android:id="@+id/tvShow_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:textSize="28sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvShowRate_detail"
-            app:layout_constraintTop_toBottomOf="@+id/tvShowRate_detail"
+            app:layout_constraintStart_toStartOf="@+id/tvShowDetail_ratings"
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDetail_ratings"
             tools:text="tvShowName" />
 
 
         <TextView
-            android:id="@+id/text_desc"
+            android:id="@+id/text_tvshow_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/deskripsi_tv_show"
-            android:textColor="@color/teal_700"
+            android:text="@string/tvShow_deskripsi"
+
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShowName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvShow_title" />
 
         <TextView
-            android:id="@+id/tvShowDescDetail"
+            android:id="@+id/tvShowDetail_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -75,25 +76,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_desc"
-            tools:text="@string/deskripsi_tv_show" />
+            app:layout_constraintTop_toBottomOf="@+id/text_tvshow_desc"
+            tools:text="@string/tvShow_deskripsi" />
 
         <TextView
-            android:id="@+id/text_genre"
+            android:id="@+id/text_tvshow_genre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/genre_tv_show"
-            android:textColor="@color/teal_700"
+            android:text="@string/tvShow_genre"
+
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShowDescDetail" />
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDetail_desc" />
 
         <TextView
-            android:id="@+id/tvShowGenreDetail"
+            android:id="@+id/tvShowDetail_genre"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -101,25 +102,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_genre"
-            tools:text="@string/genre_tv_show" />
+            app:layout_constraintTop_toBottomOf="@+id/text_tvshow_genre"
+            tools:text="@string/tvShow_genre" />
 
         <TextView
-            android:id="@+id/text_location_movie"
+            android:id="@+id/text_movie_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/lokasi_shooting_tv_show"
-            android:textColor="@color/teal_700"
+            android:text="@string/tvShow_lang"
+
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShowGenreDetail" />
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDetail_genre" />
 
         <TextView
-            android:id="@+id/tvShowLocationDetail"
+            android:id="@+id/tvShowDetail_lang"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -127,25 +128,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_location_movie"
-            tools:text="@string/lokasi_shooting_film" />
+            app:layout_constraintTop_toBottomOf="@+id/text_movie_language"
+            tools:text="@string/movie_lang" />
 
         <TextView
-            android:id="@+id/text_total_episode"
+            android:id="@+id/text_tvshow_numepisodes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="@string/total_episode"
-            android:textColor="@color/teal_700"
+            android:text="@string/tvShow_numEpisode"
+
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvShowLocationDetail" />
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDetail_lang" />
 
         <TextView
-            android:id="@+id/tvShowTotalEpisodeDetail"
+            android:id="@+id/tvShowDetail_numepisodes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -153,8 +154,88 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_total_episode"
-            tools:text="@string/lokasi_shooting_film" />
+            app:layout_constraintTop_toBottomOf="@+id/text_tvshow_numepisodes"
+            tools:text="@string/tvShow_numEpisode" />
+
+        <TextView
+            android:id="@+id/text_tvshow_numseason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/tvShow_numseason"
+
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDetail_numepisodes" />
+
+        <TextView
+            android:id="@+id/tvShowDetail_numseason"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.005"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_tvshow_numseason" />
+
+        <TextView
+            android:id="@+id/text_tvshow_runtime"
+            android:text="@string/tvShow_runtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDetail_numseason" />
+
+        <TextView
+            android:id="@+id/tvShowDetail_runtime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_tvshow_runtime" />
+
+        <TextView
+            android:id="@+id/text_tvshow_creators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="@string/tvShow_creators"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvShowDetail_runtime" />
+
+        <TextView
+            android:id="@+id/tvShowDetail_creators"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:text="TextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_tvshow_creators" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

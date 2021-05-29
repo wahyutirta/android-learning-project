@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github Users</string>
+    <string name="alarm_message">Github Reminder</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+    <string name="repo">Repository</string>
+    <string name="profile">Profile</string>
+    <string name="location">Location</string>
+    <string name="not_recorded">Not Recorded</string>
+    <string name="company">Company</string>
+    <string name="profile_link">Github Profile</string>
+    <string name="profile_hiperlink">See Profile...</string>
+    <string name="search">Search User</string>
+    <string name="app_settings">Apps Settings</string>
+    <string name="turn_on_night_mode">Turn On Night Mode</string>
+    <string name="night_mode">Night Mode</string>
+    <string name="change_languages">Change Current Language</string>
+    <string name="server_no_resp_message_title">Server Is Not Responding !</string>
+    <string name="no_data_alert_message_body">The data cannot be found, Kindly Check Your Connections</string>
+    <string name="share_builder1">Hi! I want to show someone in github! it is</string>
+    <string name="share_builder2">Its real name is</string>
+    <string name="share_builder3"> Take a look! </string>
+    <string name="share_title">Choose Apps</string>
+    <string name="menu_fav">Favorite Menu</string>
+    <string name="Fav_user">Favorite User</string>
+    <string name="reminder">Turn On Reminder</string>
+    <string name="reminder_sw">Reminder</string>
+    <string name="notification_content">Check Some Github Users</string>
+    <string name="notification_on">Notification Turned On</string>
+    <string name="notification_off">Notification Turned Off</string>
+
+    <string name="place_holder_that_will_be_gone_after_user_do_searching" >helper_text_and_will_be_gone_after_user_do_searching</string>
+    <string name="place_holder_as_helper_for_internet_connections_problem">place_holder_as_helper_that_will_be_visible_if_there_s_problem_with_internet_connection_or_bad_response_from_server</string>
+
+    <string name="title_activity_user_detail">Scrolling Activity</string>
+    <string name="languages">Languages</string>
+
+    <string name="add">Added</string>
+    <string name="delete">Deleted</string>
+</resources>

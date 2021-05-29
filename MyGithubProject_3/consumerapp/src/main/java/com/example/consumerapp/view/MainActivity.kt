@@ -48,10 +48,8 @@ class MainActivity : AppCompatActivity() {
         vModel.setFavorite(this)
 
         vModel.getFavUser().observe(this, {
-            when {
-                it != null -> {
-                    adapter.setList(it)
-                }
+            if (it != null) {
+                adapter.setList(it)
             }
         })
 

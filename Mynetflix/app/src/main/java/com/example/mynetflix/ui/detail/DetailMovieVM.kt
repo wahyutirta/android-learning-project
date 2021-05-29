@@ -11,7 +11,7 @@ class DetailMovieVM : ViewModel(){
         this.movieId = movieId
     }
 
-    fun getMovie(): MovieModel {
+    fun getSelectedMovie(): MovieModel {
         lateinit var movie: MovieModel
         val models = DummyDataHelper.generateDataMovie()
         models

@@ -1,7 +1,7 @@
 package com.example.mynetflix.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class MovieModel (
@@ -13,6 +13,6 @@ class MovieModel (
     var genres: String,
     var originalLanguage: String,
     var runTime: String,
-    var imagePath: String,
+    var imagePath: Int,
     var filmDirector: String
 ) : Parcelable

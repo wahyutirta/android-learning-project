@@ -16,10 +16,7 @@ class MovieFragment : Fragment() {
 
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
         return fragmentMovieBinding.root
     }
@@ -28,10 +25,7 @@ class MovieFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         when {
             activity != null -> {
-                val viewModel = ViewModelProvider(
-                    this,
-                    ViewModelProvider.NewInstanceFactory()
-                )[MovieVM::class.java]
+                val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MovieVM::class.java]
                 val movies = viewModel.getMovie()
 
                 val movieAdapter = MovieAdapter()

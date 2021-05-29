@@ -19,7 +19,7 @@ object DummyDataHelper {
                 "Action, Science Fiction, Adventure",
                 "English",
                 "2 hr 2 min",
-                R.drawable.poster_alita.toString(),
+                R.drawable.poster_alita,
                 "Robert Rodriguez"
             )
         )
@@ -33,7 +33,7 @@ object DummyDataHelper {
                 "Action, Adventure, Fantasy",
                 "English",
                 "2h 23m",
-                R.drawable.poster_aquaman.toString(),
+                R.drawable.poster_aquaman,
                 "James Wan"
             )
         )
@@ -47,7 +47,7 @@ object DummyDataHelper {
                 "Music, Drama, History",
                 "English",
                 "2h 15m",
-                R.drawable.poster_bohemian.toString(),
+                R.drawable.poster_bohemian,
                 "Anthony McCarten"
             )
         )
@@ -61,7 +61,7 @@ object DummyDataHelper {
                 "Drama",
                 "English",
                 "2h 10m",
-                R.drawable.poster_creed.toString(),
+                R.drawable.poster_creed,
                 "Sylvester Stallone"
             )
         )
@@ -75,10 +75,95 @@ object DummyDataHelper {
                 "Adventure, Fantasy, Drama",
                 "English",
                 "2h 14m",
-                R.drawable.poster_creed.toString(),
-                "Sylvester Stallone"
+                R.drawable.poster_crimes,
+                "David Yates"
             )
         )
+        movie.add(
+            MovieModel(
+            "M6",
+            "How to Train Your Dragon: The Hidden World",
+            "09 January, 2019",
+            "Rating: 78%. \u200E4,535 Ratings",
+            "As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind.",
+            "Animation, Family, Adventure",
+            "English",
+            "1h 44m",
+            R.drawable.poster_how_to_train,
+            "Dean DeBlois"
+                )
+        )
+        movie.add(
+            MovieModel(
+                "M6",
+                "How to Train Your Dragon: The Hidden World",
+                "09 January, 2019",
+                "Rating: 78%. \u200E4,535 Ratings",
+                "As Hiccup fulfills his dream of creating a peaceful dragon utopia, Toothless’ discovery of an untamed, elusive mate draws the Night Fury away. When danger mounts at home and Hiccup’s reign as village chief is tested, both dragon and rider must make impossible decisions to save their kind.",
+                "Animation, Family, Adventure",
+                "English",
+                "1h 44m",
+                R.drawable.poster_how_to_train,
+                "Dean DeBlois"
+                )
+        )
+        movie.add(
+                MovieModel(
+                        "M7",
+                        "Avengers: Infinity War",
+                        "27 April, 2018",
+                        "Rating: 83%. \u200E21,772 Ratings",
+                        "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
+                        "Adventure, Action, Science Fiction",
+                        "English",
+                        "2h 29m",
+                        R.drawable.poster_infinity_war,
+                        "Joe Russo, Anthony Russo"
+                )
+        )
+        movie.add(
+                MovieModel(
+                        "M8",
+                        "Mary Queen of Scots",
+                        "21 December, 2018",
+                        "Rating: 66%. \u200E1,339 Ratings",
+                        "In 1561, Mary Stuart, widow of the King of France, returns to Scotland, reclaims her rightful throne and menaces the future of Queen Elizabeth I as ruler of England, because she has a legitimate claim to the English throne. Betrayals, rebellions, conspiracies and their own life choices imperil both Queens. They experience the bitter cost of power, until their tragic fate is finally fulfilled.",
+                        "Drama, History",
+                        "English",
+                        "2h 4m",
+                        R.drawable.poster_marry_queen,
+                        "Josie Rourke"
+                )
+        )
+        movie.add(
+                MovieModel(
+                        "M9",
+                        "Master Z: Ip Man Legacy",
+                        "26 December, 2018",
+                        "Rating: 66%. \u200E327 Ratings",
+                        "Following his defeat by Master Ip, Cheung Tin Chi tries to make a life with his young son in Hong Kong, waiting tables at a bar that caters to expats. But it's not long before the mix of foreigners, money, and triad leaders draw him once again to the fight.",
+                        "Actions",
+                        "Cantonese",
+                        "1h 47m",
+                        R.drawable.poster_master_z,
+                        "Yuen Woo-ping"
+                )
+        )
+        movie.add(
+                MovieModel(
+                        "M10",
+                        "Mortal Engines",
+                        "14 December, 2018",
+                        "Rating: 61%. \u200E3,371 Ratings",
+                        "Many thousands of years in the future, Earth’s cities roam the globe on huge wheels, devouring each other in a struggle for ever diminishing resources. On one of these massive traction cities, the old London, Tom Natsworthy has an unexpected encounter with a mysterious young woman from the wastelands who will change the course of his life forever.",
+                        "Adventure, Science Fiction",
+                        "English",
+                        "2h 9m",
+                        R.drawable.poster_mortal_engines,
+                        "Christian Rivers"
+                )
+        )
+
 
 
 
@@ -96,18 +181,161 @@ object DummyDataHelper {
                 "T1",
                 "Game of Thrones",
                 "April 17, 2011",
-                "Rating: 9.3/10 · \u200E1,796,962 votes",
-                "Game of Throne bisa dibilang sebagai tv series terbaik dalam satu dekade terakhir. Hal itu dirasa tidak berlebihan, karena tv series garapan David Bennioff dan D.B. Weiss sukses merebut perhatian jutaan orang di seluruh dunia. Terbukti serial tv ini sukses mendapatkan rating tertinggi di situs IMDB, yaitu 9,5.",
+                "Rating: 9.3/10 · \u200E1,808,911 votes",
+                "Seven noble families fight for control of the mythical land of Westeros. Friction between the houses leads to full-scale war. All while a very ancient evil awakens in the farthest north. Amidst the war, a neglected military order of misfits, the Night's Watch, is all that stands between the realms of men and icy horrors beyond.",
                 "Serial, Epic, Tragedy, Action, Fantasy television, Action fiction, Drama, Suspense, Medieval fantasy, Thriller, Adventure, Special Interest",
-                "Northern Ireland Dan Iceland",
+                "English",
                 "73 Episode",
-                "https://s4.bukalapak.com/uploads/content_attachment/9ef1d7fc30e8d7627da004c5/w-744/tv_series_terbaik_-1.jpg",
-                "blaa",
-                "lady gaga"
+                    "8 Seasons",
+                    "57 min",
+                    R.drawable.poster_god,
+                "David Benioff, D.B. Weiss"
             )
         )
-
-
+        tvShow.add(
+                TvShowModel(
+                        "T2",
+                        "Doom Patrol",
+                        "15 February, 2019",
+                        "Rating: 76%. \u200E827 Ratings",
+                        "The Doom Patrol’s members each suffered horrible accidents that gave them superhuman abilities — but also left them scarred and disfigured. Traumatized and downtrodden, the team found purpose through The Chief, who brought them together to investigate the weirdest phenomena in existence — and to protect Earth from what they find.",
+                        "Sci-Fi & Fantasy, Comedy, Drama",
+                        "English",
+                        "24 Episodes",
+                        "2 Seasons",
+                        "60 min",
+                        R.drawable.poster_doom_patrol,
+                        "Jeremy Carver"
+                )
+        )
+        tvShow.add(
+                TvShowModel(
+                        "T3",
+                        "Arrow",
+                        "10 October, 2012",
+                        "Rating: 66%. \u200E4,536 Ratings",
+                        "Spoiled billionaire playboy Oliver Queen is missing and presumed dead when his yacht is lost at sea. He returns five years later a changed man, determined to clean up the city as a hooded vigilante armed with a bow.",
+                        "Crime, Drama, Mystery, Action & Adventure",
+                        "English",
+                        "170 Episodes",
+                        "8 Seasons",
+                        "42 min",
+                        R.drawable.poster_arrow,
+                        "Greg Berlanti, Marc Guggenheim, Andrew Kreisberg"
+                )
+        )
+        tvShow.add(
+                TvShowModel(
+                        "T4",
+                        "Family Guy",
+                        "31 January, 1999",
+                        "Rating: 70%. \u200E2,763 Ratings",
+                        "Sick, twisted, politically incorrect and Freakin' Sweet animated series featuring the adventures of the dysfunctional Griffin family. Bumbling Peter and long-suffering Lois have three kids. Stewie (a brilliant but sadistic baby bent on killing his mother and taking over the world), Meg (the oldest, and is the most unpopular girl in town) and Chris (the middle kid, he's not very bright but has a passion for movies). The final member of the family is Brian - a talking dog and much more than a pet, he keeps Stewie in check whilst sipping Martinis and sorting through his own life issues.",
+                        "Animation, Comedy",
+                        "English",
+                        "369 Episodes",
+                        "19 Seasons",
+                        "22 min",
+                        R.drawable.poster_family_guy,
+                        "Seth MacFarlane"
+                )
+        )
+        tvShow.add(
+                TvShowModel(
+                        "T5",
+                        "Flash",
+                        "7 October, 2014",
+                        "Rating: 66%. \u200E4,536 Ratings",
+                        "After a particle accelerator causes a freak storm, CSI Investigator Barry Allen is struck by lightning and falls into a coma. Months later he awakens with the power of super speed, granting him the ability to move through Central City like an unseen guardian angel. Though initially excited by his newfound powers, Barry is shocked to discover he is not the only \"meta-human\" who was created in the wake of the accelerator explosion -- and not everyone is using their new powers for good. Barry partners with S.T.A.R. Labs and dedicates his life to protect the innocent. For now, only a few close friends and associates know that Barry is literally the fastest man alive, but it won't be long before the world learns what Barry Allen has become...The Flash.",
+                        "Drama, Sci-Fi & Fantasy",
+                        "English",
+                        "142 Episodes",
+                        "7 Seasons",
+                        "44 min",
+                        R.drawable.poster_flash,
+                        "Greg Berlanti, Geoff Johns, Andrew Kreisberg"
+                )
+        )
+        tvShow.add(
+                TvShowModel(
+                        "T6",
+                        "Gotham",
+                        "22 September, 2014",
+                        "Rating: 75%. \u200E2,296 Ratings",
+                        "Everyone knows the name Commissioner Gordon. He is one of the crime world's greatest foes, a man whose reputation is synonymous with law and order. But what is known of Gordon's story and his rise from rookie detective to Police Commissioner? What did it take to navigate the multiple layers of corruption that secretly ruled Gotham City, the spawning ground of the world's most iconic villains? And what circumstances created them – the larger-than-life personas who would become Catwoman, The Penguin, The Riddler, Two-Face and The Joker?",
+                        "Drama, Crime, Sci-Fi & Fantasy",
+                        "English",
+                        "100 Episodes",
+                        "5 Seasons",
+                        "43 min",
+                        R.drawable.poster_gotham,
+                        "Bruno Heller"
+                )
+        )
+        tvShow.add(
+                TvShowModel(
+                        "T7",
+                        "Marvel's Iron Fist",
+                        "17 March, 2017",
+                        "Rating: 66%. \u200E 1,604 Ratings",
+                        "Danny Rand resurfaces 15 years after being presumed dead. Now, with the power of the Iron Fist, he seeks to reclaim his past and fulfill his destiny.",
+                        "Action & Adventure, Drama, Sci-Fi & Fantasy",
+                        "English",
+                        "23 Episodes",
+                        "2 Seasons",
+                        "55 min",
+                        R.drawable.poster_iron_fist,
+                        "Scott Buck"
+                )
+        )
+        tvShow.add(
+                TvShowModel(
+                        "T8",
+                        "Supergirl",
+                        "26 October, 2015",
+                        "Rating: 73%. \u200E3,060 Ratings",
+                        "Twenty-four-year-old Kara Zor-El, who was taken in by the Danvers family when she was 13 after being sent away from Krypton, must learn to embrace her powers after previously hiding them. The Danvers teach her to be careful with her powers, until she has to reveal them during an unexpected disaster, setting her on her journey of heroism.",
+                        "Drama, Sci-Fi & Fantasy, Action & Adventure",
+                        "English",
+                        "113 Episodes",
+                        "6 Seasons",
+                        "42 min",
+                        R.drawable.poster_supergirl,
+                        "Greg Berlanti, Ali Adler, Andrew Kreisberg"
+                )
+        )
+        tvShow.add(
+                TvShowModel(
+                        "T9",
+                        "Riverdale",
+                        "26 January, 2017",
+                        "Rating: %. \u200E Ratings",
+                        "Set in the present, the series offers a bold, subversive take on Archie, Betty, Veronica and their friends, exploring the surreality of small-town life, the darkness and weirdness bubbling beneath Riverdale’s wholesome facade.",
+                        "Mystery, Drama, Crime",
+                        "English",
+                        "86 Episodes",
+                        "5 Seasons",
+                        "45 min",
+                        R.drawable.poster_riverdale,
+                        "Roberto Aguirre-Sacasa"
+                )
+        )
+        tvShow.add(
+                TvShowModel(
+                        "T10",
+                        "The Walking Dead",
+                        "31 October, 2010",
+                        "Rating: %. \u200E Ratings",
+                        "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way.",
+                        "Action & Adventure, Drama, Sci-Fi & Fantasy\n",
+                        "English",
+                        "153 Episodes",
+                        "10 Seasons",
+                        "42 min",
+                        R.drawable.poster_the_walking_dead,
+                        "Frank Darabont"
+                )
+        )
 
         return tvShow
     }

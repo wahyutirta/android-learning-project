@@ -15,11 +15,7 @@ class TvShowFragment : Fragment() {
 
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
         return fragmentTvShowBinding.root
     }
@@ -28,11 +24,7 @@ class TvShowFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         when {
             activity != null -> {
-                val viewModel = ViewModelProvider(
-                    this,
-                    ViewModelProvider.NewInstanceFactory()
-                )[TvShowVM::class.java]
-
+                val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[TvShowVM::class.java]
                 val tvShow = viewModel.getTvShow()
                 val tvShowAdapter = TvShowAdapter()
                 tvShowAdapter.setTvShow(tvShow)
@@ -46,5 +38,4 @@ class TvShowFragment : Fragment() {
             }
         }
     }
-
 }

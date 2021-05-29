@@ -22,15 +22,14 @@ class SplashActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         Glide.with(this)
-            .load(R.drawable.ic_splash_screen)
+            .load(R.drawable.ic_fish)
             .into(splashActivityBinding.imageSplash)
 
         Handler(Looper.getMainLooper()).postDelayed({
             val myIntent = Intent(this, HomeActivity::class.java)
             startActivity(myIntent)
-            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
             finish()
-        }, 3000)
+        }, 2000)
     }
 
 }

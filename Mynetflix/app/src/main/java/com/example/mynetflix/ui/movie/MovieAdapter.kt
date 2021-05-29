@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.example.mynetflix.R
 import com.example.mynetflix.databinding.ItemsMovieBinding
 import com.example.mynetflix.model.MovieModel
@@ -15,27 +14,25 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     private var listMovie = ArrayList<MovieModel>()
 
-    class MovieViewHolder(private val itemsMovieBinding: ItemsMovieBinding) :
-        RecyclerView.ViewHolder(itemsMovieBinding.root) {
+    class MovieViewHolder(private val itemsBinding: ItemsMovieBinding) :
+        RecyclerView.ViewHolder(itemsBinding.root) {
+
         fun bind(movie: MovieModel) {
-            with(itemsMovieBinding) {
-                movieName.text = movie.title
-                movieRelease.text = movie.releaseDate
-                movieRate.text = movie.movieRate
+            with(itemsBinding) {
                 Glide.with(itemView.context)
                     .load(movie.imagePath)
-                    .apply(
-                        RequestOptions.placeholderOf(R.drawable.ic_loader)
-                            .error(R.drawable.ic_error)
-                    )
-                    .into(imgPoster)
+                    .placeholder(R.drawable.ic_loader)
+                    .error(R.drawable.ic_error)
+                    .into(poster)
+                movieTitle.text = movie.title
+                movieReleaseDate.text = movie.releaseDate
+                movieRatings.text = movie.movieRate
 
                 itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailMovieActivity::class.java)
-                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.id)
+                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIESELECTED, movie.id)
                     itemView.context.startActivity(intent)
                 }
-
             }
         }
     }
@@ -50,10 +47,7 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
         }
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): MovieViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup,viewType: Int): MovieViewHolder{
         val itemsMovieBinding =
             ItemsMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(itemsMovieBinding)

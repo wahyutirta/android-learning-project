@@ -41,10 +41,6 @@
             android:permission="TODO"
             tools:ignore="ExportedReceiver" />
 
-        <service
-            android:name=".widgets.StackWidgetServices"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
-
         <activity android:name=".view.activity.FavoriteActivity" />
         <activity android:name=".view.activity.SettingsActivity" />
         <activity android:name=".view.activity.UserActivity" />

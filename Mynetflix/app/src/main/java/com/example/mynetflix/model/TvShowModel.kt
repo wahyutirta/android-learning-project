@@ -1,7 +1,7 @@
 package com.example.mynetflix.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class TvShowModel(
@@ -14,6 +14,7 @@ class TvShowModel(
     var originalLanguage: String,
     var numOfEpisodes: String,
     var numOfSeasons: String,
-    var imagePath: String,
-    var filmDirector: String
+    var runTimes: String,
+    var imagePath: Int,
+    var creators: String
 ) : Parcelable

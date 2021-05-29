@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 import com.example.mynetflix.R
 import com.example.mynetflix.databinding.ActivityDetailMovieBinding
 import com.example.mynetflix.databinding.ContentDetailMovieBinding
@@ -16,7 +15,7 @@ import com.example.mynetflix.model.MovieModel
 class DetailMovieActivity : AppCompatActivity() {
 
     companion object {
-        const val EXTRA_MOVIE = "extra_movie"
+        const val EXTRA_MOVIESELECTED = "extra_movieselected"
     }
 
     private lateinit var activityDetailMovieBinding: ActivityDetailMovieBinding
@@ -31,67 +30,57 @@ class DetailMovieActivity : AppCompatActivity() {
 
         setSupportActionBar(activityDetailMovieBinding.toolbar)
 
-        val viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.NewInstanceFactory()
-        )[DetailMovieVM::class.java]
-
+        val viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory())[DetailMovieVM::class.java]
         val extras = intent.extras
+        checkSelected(extras, viewModel)
 
+    }
 
+    private fun checkSelected(extras: Bundle?, viewModel: DetailMovieVM){
         when{
             null != extras -> {
-                val movieId = extras.getString(EXTRA_MOVIE)
+                val movieId = extras.getString(EXTRA_MOVIESELECTED)
                 when {
                     null != movieId -> {
                         viewModel.setSelectedMovie(movieId)
-                        populateMovie(viewModel.getMovie())
+                        populateMovie(viewModel.getSelectedMovie())
                     }
                 }
             }
         }
     }
+
+
     private fun populateMovie(movieModel: MovieModel) {
-        detailMovieBinding.movieName.text = movieModel.title
-        detailMovieBinding.movieReleaseDetail.text = movieModel.releaseDate
-        detailMovieBinding.movieRateDetail.text = movieModel.movieRate
-        detailMovieBinding.movieDescription.text = movieModel.description
-        detailMovieBinding.movieGenreDetail.text = movieModel.genres
-        detailMovieBinding.movieLocation.text = movieModel.shotingLocation
-        activityDetailMovieBinding.toolbarLayout.title = movieModel.title
 
         Glide.with(this)
-            .load(movieModel.imagePath)
-            .transform(RoundedCorners(20))
-            .apply(RequestOptions.placeholderOf(R.drawable.ic_loader).error(R.drawable.ic_error))
-            .into(activityDetailMovieBinding.imagePosterDetail)
+                .load(movieModel.imagePath)
+                .transform(RoundedCorners(25))
+                .placeholder(R.drawable.ic_loader)
+                .error(R.drawable.ic_error)
+                .into(activityDetailMovieBinding.imagePosterDetail)
 
-        activityDetailMovieBinding.fab.setOnClickListener {
+        detailMovieBinding.movieDetailName.text = movieModel.title
+        detailMovieBinding.movieDetailRelease.text = movieModel.releaseDate
+        detailMovieBinding.movieDetailRatings.text = movieModel.movieRate
+        detailMovieBinding.movieDetailDesc.text = movieModel.description
+        detailMovieBinding.movieDetailGenre.text = movieModel.genres
+        detailMovieBinding.movieDetailLanguage.text = movieModel.originalLanguage
+        detailMovieBinding.movieDetailRuntime.text = movieModel.runTime
+        detailMovieBinding.movieDetailDirectors.text = movieModel.filmDirector
+        activityDetailMovieBinding.toolbarLayout.title = movieModel.title
+        activityDetailMovieBinding.shareBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
-/*
-            val shareBody = StringBuilder(resources.getString(R.string.share_body1))
-                .append(detailMovieBinding.movieName.text, resources.getString(R.string.share_body2))
-                .append( detailMovieBinding.movieRateDetail.text, resources.getString(R.string.share_body3
-                ))
 
- */
-
-
-            val shareBody =
-                "${resources.getString(R.string.share_body1)} ${
-                    detailMovieBinding.movieName.text
-                }, ${resources.getString(R.string.share_body2)} ${detailMovieBinding.movieRateDetail.text}, ${
-                    resources.getString(
-                        R.string.share_body3
-                    )
-                }"
-
-
+            val shareScript =
+                "${resources.getString(R.string.share_1)} ${
+                    detailMovieBinding.movieDetailName.text
+                }, ${resources.getString(R.string.share_2)} ${detailMovieBinding.movieDetailRatings.text}"
 
 
             intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_SUBJECT, detailMovieBinding.movieName.text)
-            intent.putExtra(Intent.EXTRA_TEXT, shareBody)
+            intent.putExtra(Intent.EXTRA_SUBJECT, detailMovieBinding.movieDetailName.text)
+            intent.putExtra(Intent.EXTRA_TEXT, shareScript)
             startActivity(Intent.createChooser(intent, resources.getString(R.string.share_title)))
         }
 

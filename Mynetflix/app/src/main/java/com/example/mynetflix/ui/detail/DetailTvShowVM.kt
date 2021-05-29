@@ -12,7 +12,7 @@ class DetailTvShowVM : ViewModel() {
         this.tvShowId = tvShowId
     }
 
-    fun getTvShow(): TvShowModel {
+    fun getSelectedTvShow(): TvShowModel {
         lateinit var tvShow: TvShowModel
         val tvShowModels = DummyDataHelper.generateDataTvShow()
         tvShowModels
