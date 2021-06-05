@@ -19,71 +19,70 @@ class DetailTvShowActivity : AppCompatActivity() {
         const val EXTRA_TVSELECTED = "extra_tvselected"
     }
 
-    private lateinit var activityDetailTvShowBinding: ActivityDetailTvShowBinding
-    private lateinit var detailTvshowBinding: ContentDetailTvshowBinding
+    private lateinit var binding: ActivityDetailTvShowBinding
+    private lateinit var contentBinding: ContentDetailTvshowBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityDetailTvShowBinding = ActivityDetailTvShowBinding.inflate(layoutInflater)
-        setContentView(activityDetailTvShowBinding.root)
+        binding = ActivityDetailTvShowBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        detailTvshowBinding = activityDetailTvShowBinding.contentTvShow
+        contentBinding = binding.contentTvShow
 
-        setSupportActionBar(activityDetailTvShowBinding.toolbar)
-        val viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory())[DetailTvShowVM::class.java]
+        setSupportActionBar(binding.toolbar)
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailTvShowVM::class.java]
         val extras = intent.extras
         checkSelected(extras, viewModel)
 
     }
-    fun checkSelected(extras : Bundle?, viewModel: DetailTvShowVM){
+
+    fun checkSelected(extras: Bundle?, viewModel: DetailTvShowVM) {
         when {
             extras != null -> {
                 val tvShowId = extras.getString(EXTRA_TVSELECTED)
                 when {
                     tvShowId != null -> {
                         viewModel.setSelectedTvShow(tvShowId)
-                        populateTvShow(viewModel.getSelectedTvShow())
+                        populateTvShow(viewModel.getSelectedTvShow(), contentBinding, binding)
                     }
                 }
             }
         }
     }
 
-    private fun populateTvShow(tvShowModel: TvShowModel) {
+    private fun populateTvShow(tvShowModel: TvShowModel, contentBinding: ContentDetailTvshowBinding, binding: ActivityDetailTvShowBinding) {
 
+        binding.toolbarLayout.title = tvShowModel.title
+        bindingListener(binding)
         Glide.with(this)
                 .load(tvShowModel.imagePath)
-                .transform(RoundedCorners(20))
-                .apply(RequestOptions.placeholderOf(R.drawable.ic_loader).error(R.drawable.ic_error))
-                .into(activityDetailTvShowBinding.imagePosterDetailTv)
+                .transform(RoundedCorners(25))
+                .placeholder(R.drawable.ic_loader)
+                .error(R.drawable.ic_error)
+                .into(binding.imagePosterDetailTv)
+        contentBinding.tvShowTitle.text = tvShowModel.title
+        contentBinding.tvShowDetailRelease.text = tvShowModel.releaseDate
+        contentBinding.tvShowDetailRatings.text = tvShowModel.ratings
+        contentBinding.tvShowDetailDesc.text = tvShowModel.description
+        contentBinding.tvShowDetailGenre.text = tvShowModel.tvShowGenre
+        contentBinding.tvShowDetailLang.text = tvShowModel.originalLanguage
+        contentBinding.tvShowDetailNumepisodes.text = tvShowModel.numOfEpisodes
+        contentBinding.tvShowDetailNumseason.text = tvShowModel.numOfSeasons
+        contentBinding.tvShowDetailRuntime.text = tvShowModel.runTimes
+        contentBinding.tvShowDetailCreators.text = tvShowModel.creators
 
-        detailTvshowBinding.tvShowTitle.text = tvShowModel.title
-        detailTvshowBinding.tvShowDetailRelease.text = tvShowModel.releaseDate
-        detailTvshowBinding.tvShowDetailRatings.text = tvShowModel.ratings
-        detailTvshowBinding.tvShowDetailDesc.text = tvShowModel.description
-        detailTvshowBinding.tvShowDetailGenre.text = tvShowModel.tvShowGenre
-        detailTvshowBinding.tvShowDetailLang.text = tvShowModel.originalLanguage
-        detailTvshowBinding.tvShowDetailNumepisodes.text = tvShowModel.numOfEpisodes
-        detailTvshowBinding.tvShowDetailNumseason.text = tvShowModel.numOfSeasons
-        detailTvshowBinding.tvShowDetailRuntime.text = tvShowModel.runTimes
-        detailTvshowBinding.tvShowDetailCreators.text = tvShowModel.creators
-        activityDetailTvShowBinding.toolbarLayout.title = tvShowModel.title
 
-        Glide.with(this)
-            .load(tvShowModel.imagePath)
-            .transform(RoundedCorners(25))
-            .placeholder(R.drawable.ic_loader)
-            .error(R.drawable.ic_error)
-            .into(activityDetailTvShowBinding.imagePosterDetailTv)
+    }
 
-        activityDetailTvShowBinding.shareBtn.setOnClickListener {
+    private fun bindingListener(binding: ActivityDetailTvShowBinding) {
+        binding.shareBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             val shareScript =
-                "${resources.getString(R.string.share_1)} ${
-                    detailTvshowBinding.tvShowTitle.text
-                }, ${resources.getString(R.string.share_2)} ${detailTvshowBinding.tvShowDetailRatings.text}"
+                    "${resources.getString(R.string.share_1)} ${
+                        contentBinding.tvShowTitle.text
+                    }, ${resources.getString(R.string.share_2)} ${contentBinding.tvShowDetailRatings.text}"
             intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_SUBJECT, detailTvshowBinding.tvShowTitle.text)
+            intent.putExtra(Intent.EXTRA_SUBJECT, contentBinding.tvShowTitle.text)
             intent.putExtra(Intent.EXTRA_TEXT, shareScript)
             startActivity(Intent.createChooser(intent, resources.getString(R.string.share_title)))
         }

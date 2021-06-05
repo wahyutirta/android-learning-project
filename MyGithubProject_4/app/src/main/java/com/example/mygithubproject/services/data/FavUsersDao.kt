@@ -5,22 +5,24 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import com.example.mygithubproject.BuildConfig.TB_NAME
 
 @Dao
 interface FavUsersDao {
     @Insert
     suspend fun favoriteAdd(favoriteUsers: FavUsers)
 
-    @Query("SELECT * FROM tb_favUsers")
+    @Query("SELECT * FROM $TB_NAME")
     fun getFavoriteUser(): LiveData<List<FavUsers>>
 
-    @Query("SELECT count(*) FROM tb_favUsers WHERE tb_favUsers.login = :login OR tb_favUsers.id = :id")
+    @Query("SELECT count(*) FROM $TB_NAME WHERE $TB_NAME.login = :login OR $TB_NAME.id = :id")
     suspend fun checkUser(login: String, id: Int): Int
 
-    @Query("DELETE FROM tb_favUsers WHERE tb_favUsers.login = :login OR tb_favUsers.id = :id")
-    suspend fun deleteUserFav(login: String, id: Int): Int
 
-    @Query("SELECT * FROM tb_favUsers")
+    @Query("SELECT * FROM $TB_NAME")
     fun findAllUser(): Cursor
+
+    @Query("DELETE FROM $TB_NAME WHERE $TB_NAME.login = :login OR $TB_NAME.id = :id")
+    suspend fun deleteUserFav(login: String, id: Int): Int
 
 }

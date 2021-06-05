@@ -17,9 +17,6 @@
     </style>
 
     <!-- Splash Screen Theme. Tidak menggunakan layout untuk splash screen -->
-    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/splash_background</item>
-    </style>
 
     <style name="locIcon">
         <item name="android:src">@drawable/ic_loc</item>

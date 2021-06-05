@@ -33,7 +33,8 @@ class AlarmReceiver : BroadcastReceiver() {
         val message = intent.getStringExtra(EXTRA_MESSAGE)
 
         if (message != null) {
-            sendNotification(context)}
+            sendNotification(context)
+        }
     }
 
     private fun sendNotification(context: Context) {
@@ -42,12 +43,12 @@ class AlarmReceiver : BroadcastReceiver() {
         val notifManager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setContentIntent(pendingIntent)
-            .setSmallIcon(R.drawable.ic_notification)
-            .setContentTitle(context.resources.getString(R.string.app_name))
-            .setContentText(context.resources.getString(R.string.notification_content))
-            .setVibrate(longArrayOf(500, 500, 500, 500, 500))
-            .setAutoCancel(true)
+        builder.setContentIntent(pendingIntent)
+        builder.setSmallIcon(R.drawable.ic_notification)
+        builder.setContentTitle(context.resources.getString(R.string.app_name))
+        builder.setContentText(context.resources.getString(R.string.notification_content))
+        builder.setVibrate(longArrayOf(500, 500, 500, 500, 500))
+        builder.setAutoCancel(true)
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

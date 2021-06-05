@@ -19,7 +19,12 @@ class FollowersFragment : Fragment(R.layout.fragment_follow) {
     private var bindingFragment: FragmentFollowBinding? = null
     private val binding get() = bindingFragment!!
 
-    private fun setLoading(state: Boolean) {
+    override fun onDestroyView() {
+        super.onDestroyView()
+        bindingFragment = null
+    }
+
+    private fun onLoading(state: Boolean) {
         when (state) {
             true -> {
                 binding.progressBar.visibility = View.VISIBLE
@@ -39,12 +44,13 @@ class FollowersFragment : Fragment(R.layout.fragment_follow) {
         adapter.notifyDataSetChanged()
 
         binding.apply {
+            rvUser.adapter = adapter
             rvUser.setHasFixedSize(true)
             rvUser.layoutManager = LinearLayoutManager(activity)
-            rvUser.adapter = adapter
+
         }
 
-        setLoading(true)
+        onLoading(true)
         VMFollower = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
@@ -53,15 +59,9 @@ class FollowersFragment : Fragment(R.layout.fragment_follow) {
 
         VMFollower.getList().observe(viewLifecycleOwner) {
             adapter.setList(it)
-            setLoading(false)
 
         }
+        onLoading(false)
     }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        bindingFragment = null
-    }
-
 
 }

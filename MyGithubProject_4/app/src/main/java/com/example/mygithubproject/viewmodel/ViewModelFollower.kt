@@ -15,7 +15,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-
 class ViewModelFollower : ViewModel() {
     val listFollowers = MutableLiveData<ArrayList<UsersData>>()
 

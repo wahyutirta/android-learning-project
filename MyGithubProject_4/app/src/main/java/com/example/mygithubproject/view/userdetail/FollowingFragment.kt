@@ -19,6 +19,11 @@ class FollowingFragment : Fragment(R.layout.fragment_follow) {
     private var bindingFragment: FragmentFollowBinding? = null
     private val binding get() = bindingFragment!!
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        bindingFragment = null
+    }
+
     private fun setLoading(state: Boolean) {
         when (state) {
             true -> {
@@ -40,9 +45,10 @@ class FollowingFragment : Fragment(R.layout.fragment_follow) {
         adapter.notifyDataSetChanged()
 
         binding.apply {
+            rvUser.adapter = adapter
             rvUser.setHasFixedSize(true)
             rvUser.layoutManager = LinearLayoutManager(activity)
-            rvUser.adapter = adapter
+
         }
 
         setLoading(true)
@@ -53,13 +59,9 @@ class FollowingFragment : Fragment(R.layout.fragment_follow) {
 
         VMFolowing.getList().observe(viewLifecycleOwner) {
             adapter.setList(it)
-            setLoading(false)
-        }
-    }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        bindingFragment = null
+        }
+        setLoading(false)
     }
 
 }

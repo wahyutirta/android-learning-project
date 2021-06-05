@@ -7,12 +7,13 @@ import android.database.Cursor
 import android.net.Uri
 import com.example.mygithubproject.services.data.DBUser
 import com.example.mygithubproject.services.data.FavUsersDao
+import com.example.mygithubproject.BuildConfig.TB_NAME
 
 class FavoriteContentProvider : ContentProvider() {
 
     companion object {
         private const val AUTHORITY = "com.example.mygithubproject"
-        private const val TABLE_NAME = "tb_favUsers"
+        private const val TABLE_NAME = TB_NAME
         const val ID_FAVORITE = 1
         val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
@@ -46,17 +47,17 @@ class FavoriteContentProvider : ContentProvider() {
 
 
     override fun update(
-            uri: Uri,
-            values: ContentValues?,
-            selection: String?,
-            selectionArgs: Array<out String>?
+        uri: Uri,
+        values: ContentValues?,
+        selection: String?,
+        selectionArgs: Array<out String>?
     ): Int {
         return 0
     }
 
     override fun query(
-            uri: Uri, projection: Array<String>?, selection: String?,
-            selectionArgs: Array<String>?, sortOrder: String?
+        uri: Uri, projection: Array<String>?, selection: String?,
+        selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor? {
         val cursor: Cursor?
         when (uriMatcher.match(uri)) {

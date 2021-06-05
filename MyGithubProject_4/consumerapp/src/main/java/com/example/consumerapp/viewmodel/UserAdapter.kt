@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.consumerapp.R
@@ -14,12 +15,6 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     private val dataList = ArrayList<UsersData>()
     var onItemClickCallback: OnItemClickCallback? = null
-
-    fun setList(users: ArrayList<UsersData>) {
-        dataList.clear()
-        dataList.addAll(users)
-        notifyDataSetChanged()
-    }
 
 
     fun setOnItemClickCallBack(onItemClickCallback: OnItemClickCallback) {
@@ -45,23 +40,48 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        private val id: TextView = itemView.findViewById(R.id.id)
-        private val name: TextView = itemView.findViewById(R.id.username)
-        private val avatar: ImageView = itemView.findViewById(R.id.avatar)
-        private val textID = "Id"
+        lateinit var avatar: ImageView
+        lateinit var textID: String
+        lateinit var id: TextView
+        lateinit var name: TextView
+        lateinit var url: TextView
 
-        fun bind(user: UsersData) {
+        init {
+            avatar = itemView.findViewById(R.id.user_image)
+            textID = "Id"
+            id = itemView.findViewById(R.id.user_id)
+            name = itemView.findViewById(R.id.user_login)
+            url = itemView.findViewById(R.id.user_url)
 
-            id.text = StringBuilder(textID).append(" ${user.id}")
-            name.text = user.login
-            Glide.with(itemView)
-                .load(user.avatar_url)
-                .into(avatar)
-            itemView.setOnClickListener {
-                onItemClickCallback?.onItemClicked(user)
+            itemView.setOnClickListener { v: View ->
+                Toast.makeText(itemView.context, "user", Toast.LENGTH_SHORT).show()
             }
         }
 
+
+        fun bind(user: UsersData) {
+            id.text = StringBuilder(textID).append(" ${user.id}")
+            name.text = user.login
+            url.text = user.html_url
+            val message = StringBuilder(" ${user.login}").append(" tapped")
+            Glide.with(itemView)
+                .load(user.avatar_url)
+                .placeholder(R.drawable.ic_default)
+                .error(R.drawable.ic_connection_error)
+                .into(avatar)
+            itemView.setOnClickListener {
+                Toast.makeText(itemView.context, message, Toast.LENGTH_SHORT).show()
+                onItemClickCallback?.onItemClicked(user)
+
+            }
+
+        }
+    }
+
+    fun setList(users: ArrayList<UsersData>) {
+        dataList.clear()
+        dataList.addAll(users)
+        notifyDataSetChanged()
     }
 
 }

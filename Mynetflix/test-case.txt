@@ -1,0 +1,84 @@
+Detail Movie View Model Test
+-memastikan bahwa data detail movie yang dimuat tidak null
+-memastikan bahwa data detail movie yang dimuat oleh getSelected sudah sesuai dan tidak null
+
+Detail Tvshow View Model Test
+-memastikan bahwa data detail Tvshow yang dimuat tidak null
+-memastikan bahwa data detail Tvshow yang dimuat oleh getSelected sudah sesuai dan tidak null
+
+Movie View Model Test
+-View Model Dapat memuat data movie sehingga data tidak null
+-View model dapat memuat seluruh jumlah data yang ada yaitu sebanyak 11
+
+Tvshow View Model Test
+-View Model Dapat memuat data Tvshow sehingga data tidak null
+-View model dapat memuat seluruh jumlah data yang ada yaitu sebanyak 10
+
+instrumental HomeActivityTest
+menampilkan movie
+-recycler view yang menangani tampilan data movie tampil
+-jumlah recycler view yang tampil sebanyak jumlah movie yang dimuat, untuk itu dilakukan scrolling
+
+menampilkan tvshow
+-dapat berpindah ke fragment tv show dengan cara klik
+-recycler view yang menangani tampilan data tvshow tampil
+-jumlah recycler view yang tampil sebanyak jumlah tvshow yang dimuat, untuk itu dilakukan scrolling
+
+menampilkan detail movie
+(detail movie yang terlalu banyak mengharuskan diterapkannya 
+aksi swipe up agar beberapa detail yang tak terlihat agar naik dan muncul pada screen.
+code sudah berjalan dan seluruh test berhasil dijalankan pada device dan emulator)
+-melakukan aksi klik pada recycler view ke 1
+-memastikan image_poster_detail tampil
+-memastikan movieDetail_name tampil
+-memastikan movieDetail_name sesuai dengan movie yang dipilih
+-memastikan movieDetail_release tampil
+-memastikan movieDetail_release sesuai dengan movie yang dipilih
+-memastikan movieDetail_ratings tampil
+-memastikan movieDetail_ratings sesuai dengan movie yang dipilih
+-melakukan aksi swipe up
+-memastikan movieDetail_desc tampil
+-memastikan movieDetail_desc sesuai dengan movie yang dipilih
+-memastikan movieDetail_genre tampil
+-memastikan movieDetail_genre sesuai dengan movie yang dipilih
+-memastikan movieDetail_language tampil
+-memastikan movieDetail_language sesuai dengan movie yang dipilih
+-melakukan aksi swipe up
+-memastikan movieDetail_runtime tampil
+-memastikan movieDetail_runtime sesuai dengan movie yang dipilih
+-memastikan movieDetail_directors tampil
+-memastikan movieDetail_directors sesuai dengan movie yang dipilih
+
+menampilkan detail tvshow
+(detail tv show yang terlalu banyak mengharuskan diterapkannya 
+aksi swipe up agar beberapa detail yang tak terlihat agar naik dan muncul pada screen.
+code sudah berjalan dan seluruh test berhasil dijalankan pada device dan emulator)
+-dapat berpindah ke fragment tv show dengan cara klik
+-melakukan aksi klik pada recycler view ke 1
+-memastikan image_poster_detail tampil
+-memastikan tvShow_title tampil
+-memastikan tvShow_title sesuai dengan movie yang dipilih
+-melakukan swipe up
+-memastikan tvShowDetail_release tampil
+-memastikan tvShowDetail_release sesuai dengan movie yang dipilih
+-memastikan tvShow_title tampil
+-memastikan tvShow_title sesuai dengan movie yang dipilih
+-melakukan aksi swipe up
+-memastikan tvShowDetail_ratings tampil
+-memastikan tvShowDetail_ratings sesuai dengan movie yang dipilih
+-memastikan tvShowDetail_desc tampil
+-memastikan tvShowDetail_desc sesuai dengan movie yang dipilih
+-melakukan aksi swipe up
+-memastikan tvShowDetail_genre tampil
+-memastikan tvShowDetail_genre sesuai dengan movie yang dipilih
+-memastikan tvShowDetail_lang tampil
+-memastikan tvShowDetail_lang sesuai dengan movie yang dipilih
+-memastikan tvShowDetail_numepisodes tampil
+-memastikan tvShowDetail_numepisodes sesuai dengan movie yang dipilih
+-melakukan aksi swipe up
+-memastikan tvShowDetail_numseason tampil
+-memastikan tvShowDetail_numseason sesuai dengan movie yang dipilih
+-memastikan tvShowDetail_runtime tampil
+-memastikan tvShowDetail_runtime sesuai dengan movie yang dipilih
+-memastikan tvShowDetail_creators tampil
+-memastikan tvShowDetail_creators sesuai dengan movie yang dipilih

@@ -18,10 +18,15 @@ class DetailTvShowVMTest{
     }
 
     @Test
-    fun getTvShow() {
+    fun getTvShowNotNull(){
         viewModel.setSelectedTvShow(dummyData.id)
         val tvShowModel = viewModel.getSelectedTvShow()
         assertNotNull(tvShowModel)
+    }
+
+    @Test
+    fun getTvShow() {
+        val tvShowModel = viewModel.getSelectedTvShow()
         assertEquals(dummyData.id, tvShowModel.id)
         assertEquals(dummyData.title, tvShowModel.title)
         assertEquals(dummyData.releaseDate, tvShowModel.releaseDate)
@@ -34,11 +39,7 @@ class DetailTvShowVMTest{
         assertEquals(dummyData.runTimes, tvShowModel.runTimes)
         assertEquals(dummyData.imagePath, tvShowModel.imagePath)
         assertEquals(dummyData.creators, tvShowModel.creators)
+        assertNotNull(tvShowModel)
     }
 
-    @Test
-    fun getSelectedTvShow(){
-        val TvShowSelected = viewModel.getSelectedTvShow()
-        assertNotNull(TvShowSelected)
-    }
 }

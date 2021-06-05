@@ -3,6 +3,7 @@ package com.example.consumerapp.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.consumerapp.R
@@ -27,26 +28,28 @@ class MainActivity : AppCompatActivity() {
         adapter.notifyDataSetChanged()
 
         vModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
-
-        adapter.setOnItemClickCallBack(object : UserAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: UsersData) {
-                Intent(this@MainActivity, UserDetailActivity::class.java).also {
-                    it.putExtra(UserDetailActivity.EXTRA_USERNAME, data.login)
-                    it.putExtra(UserDetailActivity.EXTRA_ID, data.id)
-                    it.putExtra(UserDetailActivity.EXTRA_URL, data.avatar_url)
-                    startActivity(it)
-                }
-            }
-        })
-
         binding.apply {
             rvFavoriteUsers.setHasFixedSize(true)
             rvFavoriteUsers.layoutManager = LinearLayoutManager(this@MainActivity)
             rvFavoriteUsers.adapter = adapter
         }
+        adapterCallback(adapter)
 
         vModel.setFavorite(this)
 
+        favoriteObserver(vModel)
+
+    }
+
+    private fun adapterCallback(adapter: UserAdapter){
+        adapter.setOnItemClickCallBack(object : UserAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: UsersData) {
+                Toast.makeText(this@MainActivity, "${data.login} tapped", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun favoriteObserver(vModel: FavoriteViewModel){
         vModel.getFavUser().observe(this, {
             when {
                 it != null -> {
@@ -54,7 +57,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

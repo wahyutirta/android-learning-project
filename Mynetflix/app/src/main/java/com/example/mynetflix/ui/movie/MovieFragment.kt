@@ -7,18 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mynetflix.R
 import com.example.mynetflix.databinding.FragmentMovieBinding
 
 
 class MovieFragment : Fragment() {
-    private lateinit var fragmentMovieBinding: FragmentMovieBinding
+    private lateinit var binding: FragmentMovieBinding
 
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
-        return fragmentMovieBinding.root
+        binding = FragmentMovieBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -31,7 +30,7 @@ class MovieFragment : Fragment() {
                 val movieAdapter = MovieAdapter()
                 movieAdapter.setMovies(movies)
 
-                with(fragmentMovieBinding.rvMovie) {
+                with(binding.rvMovie) {
                     layoutManager = LinearLayoutManager(context)
                     setHasFixedSize(true)
                     adapter = movieAdapter

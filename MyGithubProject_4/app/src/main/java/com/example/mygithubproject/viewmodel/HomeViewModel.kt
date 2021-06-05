@@ -25,8 +25,8 @@ class HomeViewModel : ViewModel() {
             .getSearchUsers(query)
             .enqueue(object : Callback<UserResponses> {
                 override fun onResponse(
-                        call: Call<UserResponses>,
-                        responses: Response<UserResponses>
+                    call: Call<UserResponses>,
+                    responses: Response<UserResponses>
                 ) {
                     when (responses.isSuccessful) {
                         true -> {

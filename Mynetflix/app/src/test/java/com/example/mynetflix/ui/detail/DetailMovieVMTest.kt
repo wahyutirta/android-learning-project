@@ -17,10 +17,18 @@ class DetailMovieVMTest {
     }
 
     @Test
-    fun getMovie() {
+    fun getMovieNotNull() {
         viewModel.setSelectedMovie(dummyData.id)
         val movieModel = viewModel.getSelectedMovie()
         assertNotNull(movieModel)
+    }
+
+
+
+    @Test
+    fun getMovie() {
+        viewModel.setSelectedMovie(dummyData.id)
+        val movieModel = viewModel.getSelectedMovie()
         assertEquals(dummyData.id, movieModel.id)
         assertEquals(dummyData.title, movieModel.title)
         assertEquals(dummyData.releaseDate, movieModel.releaseDate)
@@ -30,11 +38,9 @@ class DetailMovieVMTest {
         assertEquals(dummyData.originalLanguage, movieModel.originalLanguage)
         assertEquals(dummyData.imagePath, movieModel.imagePath)
         assertEquals(dummyData.filmDirector, movieModel.filmDirector)
+        assertNotNull(movieModel)
     }
 
-    @Test
-    fun getSelectedMovie(){
-        val movieSelected = viewModel.getSelectedMovie()
-        assertNotNull(movieSelected)
-    }
+
+
 }

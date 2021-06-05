@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.mygithubproject.BuildConfig.TB_NAME
 @Database(
     entities = [FavUsers::class],
     version = 1
@@ -20,7 +21,7 @@ abstract class DBUser : RoomDatabase() {
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         DBUser::class.java,
-                        "db_userFav"
+                        "$TB_NAME"
                     ).fallbackToDestructiveMigration().build()
 
                 }

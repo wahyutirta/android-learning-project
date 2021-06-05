@@ -9,16 +9,19 @@ object MappingHelper {
         if (null != cursor) {
             while (cursor.moveToNext()) {
                 val id =
-                    cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.FavUserColumns.ID))
+                    cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.userColumns.ID))
                 val login =
-                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.FavUserColumns.USERNAME))
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.userColumns.USERNAME))
                 val avatar_url =
-                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.FavUserColumns.AVATAR_URL))
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.userColumns.AVATAR_URL))
+                val html_url =
+                    cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.userColumns.HTML_URL))
                 list.add(
                     UsersData(
                         login,
                         id,
-                        avatar_url
+                        avatar_url,
+                        html_url,
                     )
                 )
             }

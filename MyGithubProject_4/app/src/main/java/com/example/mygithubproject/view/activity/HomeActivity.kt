@@ -33,6 +33,8 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
         adapterCallback(adapter)
@@ -50,19 +52,18 @@ class HomeActivity : AppCompatActivity() {
         checkNightMode()
     }
 
-    private fun adapterCallback(adapter: UserAdapter){
+    private fun adapterCallback(adapter: UserAdapter) {
         adapter.setOnItemClickCallBack(object : UserAdapter.OnItemClickCallback {
             override fun onItemClicked(data: UsersData) {
                 Intent(this@HomeActivity, UserDetailActivity::class.java).also {
                     it.putExtra(UserDetailActivity.EXTRA_USERNAME, data.login)
-
                     startActivity(it)
                 }
             }
         })
     }
 
-    private fun flagObserver(viewModel: HomeViewModel){
+    private fun flagObserver(viewModel: HomeViewModel) {
         viewModel.flag.observe(this, {
             it?.let(fun(_: Boolean) {
                 if (it == false) {
@@ -72,22 +73,22 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
-    private fun searchQueryObserver(viewModel: HomeViewModel, adapter: UserAdapter){
+    private fun searchQueryObserver(viewModel: HomeViewModel, adapter: UserAdapter) {
         viewModel.takeSearchQuery().observe(this, fun(it: ArrayList<UsersData>) {
-            onLoading(false)
             adapter.setList(it)
+            onLoading(false)
             onRV(true)
         })
     }
 
-    private fun onError(state: Boolean){
+    private fun onError(state: Boolean) {
         when (state) {
             true -> {
-                whenDataError()
-                binding.progressBar.visibility = View.INVISIBLE
-                binding.onstartimage.visibility = View.INVISIBLE
-                binding.rvUsers.visibility = View.INVISIBLE
-                binding.onConnectionerror.visibility = View.VISIBLE
+                buildAlert()
+                onStartImage(false)
+                onLoading(false)
+                onRV(false)
+
             }
             else -> {
 
@@ -100,7 +101,7 @@ class HomeActivity : AppCompatActivity() {
         when (state) {
             true -> {
                 binding.onConnectionerror.visibility = View.INVISIBLE
-                binding.onstartimage.visibility = View.INVISIBLE
+                onStartImage(false)
                 binding.rvUsers.visibility = View.VISIBLE
 
             }
@@ -111,13 +112,24 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
-    private fun whenDataError() {
+    private fun onStartImage(state: Boolean) {
+        when (state) {
+            true -> {
+                binding.onstartimage.visibility = View.VISIBLE
+            }
+            else -> {
+                binding.onstartimage.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun buildAlert() {
         val builder = AlertDialog.Builder(this@HomeActivity)
         builder.setTitle(resources.getString(R.string.server_no_resp_message_title))
-        builder.setMessage(resources.getString(R.string.no_data_alert_message_body))
-        builder.setNegativeButton("OK") { dialog, _ ->
-            dialog.dismiss()
-        }
+            .setMessage(resources.getString(R.string.no_data_alert_message_body))
+            .setNegativeButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
         val alert = builder.create()
         alert.show()
     }
@@ -136,7 +148,7 @@ class HomeActivity : AppCompatActivity() {
     private fun checkNightMode() {
         sharedpref = SharedPrefNightMD(this)
 
-        when(sharedpref.loadNightMD()){
+        when (sharedpref.loadNightMD()) {
             true -> {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
             }
@@ -150,15 +162,16 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.options_menu, menu)
-
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         val searchView = menu.findItem(R.id.search).actionView as SearchView
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+
         searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
         searchView.queryHint = resources.getString(R.string.search)
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 onLoading(true)
+                onStartImage(false)
                 VMHome.loadSearchQuery(query)
                 return false
             }
@@ -174,24 +187,19 @@ class HomeActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.move_set -> {
-                val intent = Intent(this@HomeActivity, SettingsActivity::class.java)
-                startActivity(intent)
-                overridePendingTransition(
-                    android.R.anim.slide_in_left,
-                    android.R.anim.slide_out_right
-                )
-                true
-            }
             R.id.favorite_menu -> {
                 val intent = Intent(this@HomeActivity, FavoriteActivity::class.java)
                 startActivity(intent)
-                overridePendingTransition(
-                    android.R.anim.slide_in_left,
-                    android.R.anim.slide_out_right
-                )
+
                 true
             }
+            R.id.move_set -> {
+                val intent = Intent(this@HomeActivity, SettingsActivity::class.java)
+                startActivity(intent)
+
+                true
+            }
+
             else -> return true
         }
     }

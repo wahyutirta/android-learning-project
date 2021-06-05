@@ -1,20 +1,5 @@
 <resources>
     <string name="app_name">ConsumerApp</string>
     <string name="users_favorite">Users Favorite</string>
-    <string name="title_activity_user_detail">Detail User</string>
-
-    <string name="follower">Pengikut</string>
-    <string name="following">Mengikuti</string>
-    <string name="repo">Repository</string>
-    <string name="profile">Profile</string>
-    <string name="location">Lokasi</string>
-    <string name="not_recorded">Tidak Tercatat</string>
-    <string name="company">Organisasi</string>
-    <string name="profile_link">Link Github</string>
-    <string name="profile_hiperlink">Lihat Profil...</string>
-    <string name="user_realname">Nama User</string>
-    <string name="server_no_resp_message_title">Server Tidak Merespon!</string>
-    <string name="no_data_alert_message_body">Data Yang Anda Cari Tidak Dapat Di Temukan, Cek Koneksi Internet Anda!</string>
-    <string name="share_builder1">hai, Coba Cek User Github ini!</string>
 
 </resources>

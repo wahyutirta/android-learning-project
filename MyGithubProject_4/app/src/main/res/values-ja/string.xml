@@ -18,9 +18,9 @@
     <string name="server_no_resp_message_title">サーバーがサーバー障害に応答しない</string>
     <string name="change_languages">言語を変えてください</string>
     <string name="no_data_alert_message_body">探しているデータが見つかりませんでした。接続を確認してください</string>
-    <string name="share_builder1">このgithubユーザーを見てください</string>
-    <string name="share_builder2">アカウントの所有者は</string>
-    <string name="share_builder3">幸せな学習</string>
+    <string name="share_builder1">こんにちは！ 見せたい</string>
+    <string name="share_builder2">githubで</string>
+
     <string name="share_title">どこで共有したいですか</string>
     <string name="menu_fav">お気に入りのメニュー</string>
     <string name="Fav_user">ユーザーのお気に入り</string>

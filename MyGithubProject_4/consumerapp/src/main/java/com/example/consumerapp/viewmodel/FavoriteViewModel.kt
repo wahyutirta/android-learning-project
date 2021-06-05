@@ -15,7 +15,7 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
 
     fun setFavorite(context: Context) {
         val cursor = context.contentResolver.query(
-            DatabaseContract.FavUserColumns.CONTENT_URI,
+            DatabaseContract.userColumns.CONTENT_URI,
             null,
             null,
             null,

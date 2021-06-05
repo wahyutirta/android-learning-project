@@ -11,11 +11,11 @@ import com.example.mygithubproject.services.data.FavUsers
 import com.example.mygithubproject.services.data.UsersData
 import com.example.mygithubproject.view.userdetail.UserDetailActivity
 import com.example.mygithubproject.viewmodel.UserAdapter
-import com.example.mygithubproject.viewmodel.ViewModelUserFavorite
+import com.example.mygithubproject.viewmodel.FavoriteViewModel
 
 class FavoriteActivity : AppCompatActivity() {
 
-    private lateinit var VMUserFavorite: ViewModelUserFavorite
+    private lateinit var viewModel: FavoriteViewModel
     private lateinit var adapter: UserAdapter
     private lateinit var binding: ActivityFavoriteBinding
 
@@ -29,26 +29,21 @@ class FavoriteActivity : AppCompatActivity() {
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
 
-        VMUserFavorite = ViewModelProvider(this).get(ViewModelUserFavorite::class.java)
-
-        adapter.setOnItemClickCallBack(object : UserAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: UsersData) {
-                Intent(this@FavoriteActivity, UserDetailActivity::class.java).also {
-                    it.putExtra(UserDetailActivity.EXTRA_USERNAME, data.login)
-
-                    startActivity(it)
-                }
-            }
-        })
-
+        adapterCallBack(adapter)
 
         binding.apply {
             rvFavUsers.setHasFixedSize(true)
             rvFavUsers.layoutManager = LinearLayoutManager(this@FavoriteActivity)
             rvFavUsers.adapter = adapter
         }
+        viewModel = ViewModelProvider(this).get(FavoriteViewModel::class.java)
 
-        VMUserFavorite.getFavUsers()?.observe(this, {
+        favoriteObserver(viewModel)
+
+    }
+
+    private fun favoriteObserver(viewModel: FavoriteViewModel) {
+        viewModel.getFavUsers()?.observe(this, {
             when {
                 it != null -> {
                     val list = mapList(it)
@@ -56,7 +51,17 @@ class FavoriteActivity : AppCompatActivity() {
                 }
             }
         })
+    }
 
+    private fun adapterCallBack(adapter: UserAdapter) {
+        adapter.setOnItemClickCallBack(object : UserAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: UsersData) {
+                Intent(this@FavoriteActivity, UserDetailActivity::class.java).also {
+                    it.putExtra(UserDetailActivity.EXTRA_USERNAME, data.login)
+                    startActivity(it)
+                }
+            }
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -71,14 +76,13 @@ class FavoriteActivity : AppCompatActivity() {
                 user.login,
                 user.id,
                 user.avatarUrl,
-                user.html_url,
+                user.htmlUrl,
 
-            )
+                )
             listUsers.add(mapped)
         }
         return listUsers
     }
-
 
 
 }

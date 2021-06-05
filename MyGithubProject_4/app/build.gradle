@@ -13,6 +13,8 @@ android {
     defaultConfig {
         applicationId "com.example.mygithubproject"
         buildConfigField("String", "GIT_API_TOKEN", '"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"')
+        buildConfigField("String", "TB_NAME", '"tb_UserFavorite"')
+        buildConfigField("String", "DB_NAME", '"db_UserFavorite"')
         minSdkVersion 23
         targetSdkVersion 30
         versionCode 1

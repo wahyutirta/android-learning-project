@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Mynetflix</string>
+    <string name="title_activity_detail_tv_show">ScrollingActivity</string>
+    <string name="movie">Movie</string>
+    <string name="tv_Show">Tv Show</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="movie_tittle">Movie Title</string>
+    <string name="movie_release">Movie Release Date</string>
+    <string name="movieRate">Movie Ratings</string>
+    <string name="movie_runtime">Movie Run-Time</string>
+    <string name="movie_directors">Movie Directors</string>
+
+    <string name="movie_desc">Movie Description</string>
+    <string name="movie_genre">Movie Genres</string>
+    <string name="movie_lang">Movie Original Language</string>
+    <string name="title_activity_detail_movie">Scrolling Detail Movie</string>
+
+    <string name="tvShow_tittle">tvShow Tittle</string>
+    <string name="tvShow_release">tvShow Release Date</string>
+    <string name="tvShow_ratings">tvShow Ratings</string>
+    <string name="tvShow_deskripsi">Deskripsi Tv Show</string>
+    <string name="tvShow_genre">Genre Tv Show</string>
+    <string name="tvShow_lang">Original Language</string>
+    <string name="tvShow_numEpisode">Number of Episodes</string>
+    <string name="tvShow_numseason">Number of Seasons</string>
+    <string name="tvShow_runtime">Episode Runtime</string>
+    <string name="tvShow_creators">Show Creators</string>
+
+    <string name="floating_action_share">Floating share button</string>
+    <string name="movie_poster_layout_detail">Gambar Movie Untuk Layout Detail</string>
+    <string name="share_1">Coba Cek Film yang berjudul</string>
+    <string name="share_2">dengan ratings dari users</string>
+    <string name="share_title">Pilih Target Share</string>
+    <string name="foto_untuk_movie_detail">Foto untuk movie detail</string>
+</resources>

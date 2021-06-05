@@ -29,6 +29,31 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
         Dao = userDB?.favoriteUsersDao()
     }
 
+
+    fun takeDetail(): LiveData<ModelUserDetailsResponse> {
+        return user
+    }
+
+    fun addUser(username: String, id: Int, avatar_url: String, html_url: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val user = FavUsers(
+                username,
+                id,
+                avatar_url,
+                html_url
+            )
+            Dao?.favoriteAdd(user)
+        }
+    }
+
+    suspend fun checkUser(login: String, id: Int) = Dao?.checkUser(login, id)
+
+    fun removeUser(username: String, id: Int) {
+        CoroutineScope(Dispatchers.IO).launch {
+            Dao?.deleteUserFav(username, id)
+        }
+    }
+
     fun loadDetail(username: String) {
         ObjectRetrofitClient.apiInstance
             .getUserDetail(username)
@@ -50,30 +75,6 @@ class DetailViewModel(application: Application) : AndroidViewModel(application) 
                     status.value = false
                 }
             })
-    }
-
-    fun takeDetail(): LiveData<ModelUserDetailsResponse> {
-        return user
-    }
-
-    fun addUser(username: String, id: Int, avatar_url: String, html_url: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val user = FavUsers(
-                username,
-                id,
-                avatar_url,
-            html_url
-            )
-            Dao?.favoriteAdd(user)
-        }
-    }
-
-    suspend fun checkUser(login: String, id: Int) = Dao?.checkUser(login, id)
-
-    fun removeUser(username: String, id: Int) {
-        CoroutineScope(Dispatchers.IO).launch {
-            Dao?.deleteUserFav(username, id)
-        }
     }
 
 }

@@ -21,7 +21,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class UserDetailActivity : AppCompatActivity() {
-
     companion object {
         const val EXTRA_USERNAME = "extra_username"
     }
@@ -29,6 +28,66 @@ class UserDetailActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailViewModel
     private lateinit var binding: ActivityUserDetailBinding
     private var isFavorite: Boolean = false
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityUserDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val username = intent.getStringExtra(EXTRA_USERNAME)
+        val bundle = Bundle()
+        bundle.putString(EXTRA_USERNAME, username)
+
+        viewModel = ViewModelProvider(
+            this
+        ).get(DetailViewModel::class.java)
+
+        if (null != username) {
+            onLoading(true)
+            viewModel.loadDetail(username)
+        }
+        statusObserve(viewModel)
+        detailObserve(viewModel, binding)
+
+        val tabs = findViewById<TabLayout>(R.id.tabs)
+        val viewPager = findViewById<ViewPager>(R.id.viewPager)
+
+        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager, bundle)
+        binding.apply {
+            viewPager.adapter = sectionPagerAdapter
+            tabs.setupWithViewPager(viewPager)
+            tabs.isHorizontalScrollBarEnabled = true
+        }
+        listener(binding)
+
+    }
+
+    private fun listener(binding: ActivityUserDetailBinding) {
+        binding.showprofile.setOnClickListener {
+            val url = binding.profileLink.text.toString()
+            val message = StringBuilder("Open ").append(" ", url)
+            Toast.makeText(this@UserDetailActivity, message, Toast.LENGTH_SHORT).show()
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        binding.fabShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            Toast.makeText(this@UserDetailActivity, "share user", Toast.LENGTH_SHORT).show()
+            val shareBody =
+                "${resources.getString(R.string.share_builder1)} ${binding.username.text}${
+                    resources.getString(
+                        R.string.share_builder2
+                    )
+                } ${binding.profileLink.text}"
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, shareBody)
+            intent.putExtra(Intent.EXTRA_SUBJECT, findViewById<TextView>(R.id.username).text)
+            startActivity(Intent.createChooser(intent, resources.getString(R.string.share_title)))
+        }
+    }
 
     private fun onLoading(state: Boolean) {
         when (state) {
@@ -41,27 +100,40 @@ class UserDetailActivity : AppCompatActivity() {
         }
     }
 
-    private fun alertError(binding: ActivityUserDetailBinding) {
-        binding.detailLayout.visibility = View.INVISIBLE
+    private fun bindingDetail(binding: ActivityUserDetailBinding, state: Boolean) {
+
+        if (state != true) {
+            binding.detailLayout.visibility = View.INVISIBLE
+            binding.viewPager.visibility = View.INVISIBLE
+            binding.tabs.visibility = View.INVISIBLE
+        }
+
+
+    }
+
+    private fun onError(binding: ActivityUserDetailBinding) {
+        bindingDetail(binding, false)
         binding.onErrorData.visibility = View.VISIBLE
-        binding.tabs.visibility = View.INVISIBLE
-        binding.viewPager.visibility = View.INVISIBLE
+        buildAlert()
+    }
+
+    private fun buildAlert() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(resources.getString(R.string.server_no_resp_message_title))
-        builder.setMessage(resources.getString(R.string.no_data_alert_message_body))
-        builder.setNegativeButton("OK") { dialog, _ -> // Do nothing
-            dialog.dismiss()
-        }
+            .setMessage(resources.getString(R.string.no_data_alert_message_body))
+            .setNegativeButton("OK") { dialog, _ -> // Do nothing
+                dialog.dismiss()
+            }
         val alert = builder.create()
         alert.show()
     }
 
-    private fun statusObserve(viewModel: DetailViewModel){
+    private fun statusObserve(viewModel: DetailViewModel) {
         viewModel.status.observe(this, fun(status: Boolean?) {
             status?.let {
                 when (status) {
                     false -> {
-                        alertError(binding)
+                        onError(binding)
                         onLoading(false)
 
                     }
@@ -70,70 +142,7 @@ class UserDetailActivity : AppCompatActivity() {
         })
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityUserDetailBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val userNameExtra = intent.getStringExtra(EXTRA_USERNAME)
-
-        val bundle = Bundle()
-        bundle.putString(EXTRA_USERNAME, userNameExtra)
-
-        viewModel = ViewModelProvider(
-            this
-        ).get(DetailViewModel::class.java)
-
-        when {
-            null != userNameExtra -> {
-                onLoading(true)
-                viewModel.loadDetail(userNameExtra)
-            }
-        }
-
-
-        val tabs = findViewById<TabLayout>(R.id.tabs)
-        val viewPager = findViewById<ViewPager>(R.id.viewPager)
-
-        statusObserve(viewModel)
-
-        detailObserve(viewModel, binding)
-
-        val sectionPagerAdapter = SectionPagerAdapter(this, supportFragmentManager, bundle)
-        binding.apply {
-            viewPager.adapter = sectionPagerAdapter
-            tabs.setupWithViewPager(viewPager)
-            tabs.isHorizontalScrollBarEnabled = true
-        }
-
-
-        binding.showprofile.setOnClickListener {
-            val url = binding.profileLink.text.toString()
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
-            startActivity(intent)
-        }
-
-        binding.fabShare.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SEND)
-            val shareBody =
-                "${resources.getString(R.string.share_builder1)} ${
-                    binding.profileLink.text
-                }, ${resources.getString(R.string.share_builder2)} ${binding.username.text}, ${
-                    resources.getString(
-                        R.string.share_builder3
-                    )
-                }"
-            intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_SUBJECT, findViewById<TextView>(R.id.username).text)
-            intent.putExtra(Intent.EXTRA_TEXT, shareBody)
-            startActivity(Intent.createChooser(intent, resources.getString(R.string.share_title)))
-        }
-    }
-
-
-
-
-    private fun detailObserve(viewModel: DetailViewModel, binding: ActivityUserDetailBinding){
+    private fun detailObserve(viewModel: DetailViewModel, binding: ActivityUserDetailBinding) {
         viewModel.takeDetail().observe(this, {
 
             when {
@@ -179,18 +188,26 @@ class UserDetailActivity : AppCompatActivity() {
                         val avatar = if (it.avatar_url != null) it.avatar_url.toString() else "null"
                         val html = if (it.html_url != null) it.html_url.toString() else "null"
 
-                        favoriteHandler(login ,id, binding)
+                        favoriteHandler(login, id, binding)
                         binding.toggleFavorite.setOnClickListener {
 
                             isFavorite = binding.toggleFavorite.isChecked
                             if (isFavorite) {
                                 viewModel.addUser(login, id, avatar, html)
-                                val message = StringBuilder("${login} ").append(resources.getString(R.string.add))
-                                Toast.makeText(this@UserDetailActivity, message, Toast.LENGTH_SHORT).show()
+                                val message = StringBuilder(login).append(
+                                    " ",
+                                    resources.getString(R.string.add)
+                                )
+                                Toast.makeText(this@UserDetailActivity, message, Toast.LENGTH_SHORT)
+                                    .show()
                             } else {
                                 viewModel.removeUser(login, id)
-                                val message = StringBuilder("${login} ").append(resources.getString(R.string.delete))
-                                Toast.makeText(this@UserDetailActivity, message, Toast.LENGTH_SHORT).show()
+                                val message = StringBuilder(login).append(
+                                    " ",
+                                    resources.getString(R.string.delete)
+                                )
+                                Toast.makeText(this@UserDetailActivity, message, Toast.LENGTH_SHORT)
+                                    .show()
                             }
                             binding.toggleFavorite.isChecked = isFavorite
                         }
@@ -200,21 +217,22 @@ class UserDetailActivity : AppCompatActivity() {
             }
         })
     }
-    private fun favoriteHandler(login: String, id: Int, binding:ActivityUserDetailBinding ){
+
+    private fun favoriteHandler(login: String, id: Int, binding: ActivityUserDetailBinding) {
         CoroutineScope(Dispatchers.IO).launch {
 
             val check = viewModel.checkUser(login, id)
             withContext(Dispatchers.Main) {
-                if (null != check) {
-                    if (check > 0) {
-                        binding.toggleFavorite.isChecked = true
-                        isFavorite = true
-                    } else {
-                        binding.toggleFavorite.isChecked = false
-                        isFavorite = false
-                    }
-                    binding.toggleFavorite.isChecked = isFavorite
+
+                if (check != null && check > 0) {
+                    binding.toggleFavorite.isChecked = true
+                    isFavorite = true
+                } else {
+                    binding.toggleFavorite.isChecked = false
+                    isFavorite = false
                 }
+                binding.toggleFavorite.isChecked = isFavorite
+
             }
         }
 

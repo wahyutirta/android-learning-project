@@ -8,4 +8,5 @@ data class UsersData(
     var login: String? = "",
     var id: Int = 0,
     var avatar_url: String? = "",
-): Parcelable
+    var html_url: String? =""
+) : Parcelable

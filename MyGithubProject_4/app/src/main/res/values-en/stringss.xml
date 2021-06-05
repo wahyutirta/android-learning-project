@@ -18,9 +18,9 @@
     <string name="change_languages">Change Current Language</string>
     <string name="server_no_resp_message_title">Server Is Not Responding !</string>
     <string name="no_data_alert_message_body">The data cannot be found, Kindly Check Your Connections</string>
-    <string name="share_builder1">Hi! I want to show someone in github! it is</string>
-    <string name="share_builder2">Its real name is</string>
-    <string name="share_builder3"> Take a look! </string>
+    <string name="share_builder1">Hi! I want to show </string>
+    <string name="share_builder2">on github</string>
+
     <string name="share_title">Choose Apps</string>
     <string name="menu_fav">Favorite Menu</string>
     <string name="Fav_user">Favorite User</string>

@@ -18,32 +18,32 @@ class DetailMovieActivity : AppCompatActivity() {
         const val EXTRA_MOVIESELECTED = "extra_movieselected"
     }
 
-    private lateinit var activityDetailMovieBinding: ActivityDetailMovieBinding
-    private lateinit var detailMovieBinding: ContentDetailMovieBinding
+    private lateinit var binding: ActivityDetailMovieBinding
+    private lateinit var contentBinding: ContentDetailMovieBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activityDetailMovieBinding = ActivityDetailMovieBinding.inflate(layoutInflater)
-        setContentView(activityDetailMovieBinding.root)
-        detailMovieBinding = activityDetailMovieBinding.movieDetail
+        binding = ActivityDetailMovieBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        contentBinding = binding.movieDetail
 
-        setSupportActionBar(activityDetailMovieBinding.toolbar)
+        setSupportActionBar(binding.toolbar)
 
-        val viewModel = ViewModelProvider(this,ViewModelProvider.NewInstanceFactory())[DetailMovieVM::class.java]
+        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailMovieVM::class.java]
         val extras = intent.extras
         checkSelected(extras, viewModel)
 
     }
 
-    private fun checkSelected(extras: Bundle?, viewModel: DetailMovieVM){
-        when{
+    private fun checkSelected(extras: Bundle?, viewModel: DetailMovieVM) {
+        when {
             null != extras -> {
                 val movieId = extras.getString(EXTRA_MOVIESELECTED)
                 when {
                     null != movieId -> {
                         viewModel.setSelectedMovie(movieId)
-                        populateMovie(viewModel.getSelectedMovie())
+                        populateMovie(viewModel.getSelectedMovie(), binding, contentBinding)
                     }
                 }
             }
@@ -51,38 +51,43 @@ class DetailMovieActivity : AppCompatActivity() {
     }
 
 
-    private fun populateMovie(movieModel: MovieModel) {
+    private fun populateMovie(movieModel: MovieModel, binding: ActivityDetailMovieBinding, contentBinding: ContentDetailMovieBinding) {
 
         Glide.with(this)
                 .load(movieModel.imagePath)
                 .transform(RoundedCorners(25))
                 .placeholder(R.drawable.ic_loader)
                 .error(R.drawable.ic_error)
-                .into(activityDetailMovieBinding.imagePosterDetail)
+                .into(binding.imagePosterDetail)
+        binding.toolbarLayout.title = movieModel.title
+        bindingListener(binding)
+        contentBinding.movieDetailName.text = movieModel.title
+        contentBinding.movieDetailRelease.text = movieModel.releaseDate
+        contentBinding.movieDetailRatings.text = movieModel.movieRate
+        contentBinding.movieDetailDesc.text = movieModel.description
+        contentBinding.movieDetailGenre.text = movieModel.genres
+        contentBinding.movieDetailLanguage.text = movieModel.originalLanguage
+        contentBinding.movieDetailRuntime.text = movieModel.runTime
+        contentBinding.movieDetailDirectors.text = movieModel.filmDirector
 
-        detailMovieBinding.movieDetailName.text = movieModel.title
-        detailMovieBinding.movieDetailRelease.text = movieModel.releaseDate
-        detailMovieBinding.movieDetailRatings.text = movieModel.movieRate
-        detailMovieBinding.movieDetailDesc.text = movieModel.description
-        detailMovieBinding.movieDetailGenre.text = movieModel.genres
-        detailMovieBinding.movieDetailLanguage.text = movieModel.originalLanguage
-        detailMovieBinding.movieDetailRuntime.text = movieModel.runTime
-        detailMovieBinding.movieDetailDirectors.text = movieModel.filmDirector
-        activityDetailMovieBinding.toolbarLayout.title = movieModel.title
-        activityDetailMovieBinding.shareBtn.setOnClickListener {
+
+    }
+
+    private fun bindingListener(binding: ActivityDetailMovieBinding) {
+        binding.shareBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
 
             val shareScript =
-                "${resources.getString(R.string.share_1)} ${
-                    detailMovieBinding.movieDetailName.text
-                }, ${resources.getString(R.string.share_2)} ${detailMovieBinding.movieDetailRatings.text}"
+                    "${resources.getString(R.string.share_1)} ${
+                        contentBinding.movieDetailName.text
+                    }, ${resources.getString(R.string.share_2)} ${contentBinding.movieDetailRatings.text}"
 
 
             intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_SUBJECT, detailMovieBinding.movieDetailName.text)
+            intent.putExtra(Intent.EXTRA_SUBJECT, contentBinding.movieDetailName.text)
             intent.putExtra(Intent.EXTRA_TEXT, shareScript)
             startActivity(Intent.createChooser(intent, resources.getString(R.string.share_title)))
         }
-
     }
+
 }

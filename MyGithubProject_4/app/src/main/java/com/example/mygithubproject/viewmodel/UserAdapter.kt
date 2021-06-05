@@ -25,13 +25,15 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     }
 
     override fun onCreateViewHolder(viewgroup: ViewGroup, position: Int): ViewHolder {
-        val view = LayoutInflater.from(viewgroup.context).inflate(R.layout.item_user, viewgroup, false)
+        val view =
+            LayoutInflater.from(viewgroup.context).inflate(R.layout.item_user, viewgroup, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(viewholder: ViewHolder, position: Int) {
         viewholder.bind(dataList[position])
     }
+
     fun setList(users: ArrayList<UsersData>) {
         dataList.clear()
         dataList.addAll(users)

@@ -18,7 +18,8 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.hide()
 
-        Glide.with(this).load(R.drawable.ic_github_logo).apply(RequestOptions().override(120, 120)).into(binding.splashBG)
+        Glide.with(this).load(R.drawable.ic_github_logo).apply(RequestOptions().override(120, 120))
+            .into(binding.splashBG)
 
         Handler(Looper.getMainLooper()).postDelayed({
             val myIntent = Intent(this, HomeActivity::class.java)

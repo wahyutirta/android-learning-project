@@ -18,9 +18,9 @@
     <string name="server_no_resp_message_title">Server Tidak Merespon!</string>
     <string name="change_languages">Ubah Bahasa</string>
     <string name="no_data_alert_message_body">Data Yang Anda Cari Tidak Dapat Di Temukan, Cek Koneksi Internet Anda!</string>
-    <string name="share_builder1">hai, Coba Cek User Github ini!</string>
-    <string name="share_builder2">pemilik akun nya adalah</string>
-    <string name="share_builder3">Selamat Belajar.</string>
+    <string name="share_builder1">hai, Coba Cek </string>
+    <string name="share_builder2"> di github</string>
+
     <string name="share_title">Share Kemana nih?</string>
     <string name="menu_fav">Menu Favorit</string>
     <string name="Fav_user">User Favorit</string>

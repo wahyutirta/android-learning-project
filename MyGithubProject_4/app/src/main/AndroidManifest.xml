@@ -22,8 +22,7 @@
         <activity
             android:name=".view.userdetail.UserDetailActivity"
             android:label="@string/title_activity_user_detail"
-            android:theme="@style/Theme.MyGithubProject.NoActionBar"/>
-
+            android:theme="@style/Theme.MyGithubProject.NoActionBar" />
 
 
         <provider
@@ -45,8 +44,7 @@
         <activity android:name=".view.activity.FavoriteActivity" />
         <activity android:name=".view.activity.SettingsActivity" />
         <activity android:name=".view.activity.HomeActivity" />
-        <activity
-            android:name=".view.activity.SplashActivity">
+        <activity android:name=".view.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -45,6 +45,9 @@ class HomeActivityTest {
     var activityRule = ActivityScenarioRule(HomeActivity::class.java)
 
 
+    /*
+    test untuk memastikan fragment movie muncul dan bisa discrol
+     */
     @Test
     fun loadmovie() {
         onView(withId(R.id.rv_movie)).check(matches(isDisplayed()))
@@ -55,7 +58,9 @@ class HomeActivityTest {
         )
     }
 
-
+    /*
+        test untuk memastikan fragment tv show muncul dan bisa discrol
+    */
     @Test
     fun loadtvshhow() {
         onView(withText("TV SHOW")).perform(ViewActions.click())
@@ -67,7 +72,9 @@ class HomeActivityTest {
         )
     }
 
-
+    /*
+            test untuk memastikan apakah detail movie terlihat seluruhnya, untuk itu disisipkan kode untuk melakukan swipe up
+        */
     @Test
     fun loadDetailMovie() {
         onView(withId(R.id.rv_movie)).perform(
@@ -86,6 +93,10 @@ class HomeActivityTest {
         onView(withId(R.id.movieDetail_ratings)).check(matches(isDisplayed()))
         onView(withId(R.id.movieDetail_ratings)).check(matches(withText(testMovie[1].movieRate)))
 
+        for (i in 0..3) {
+            onView(withId(R.id.movieDetail_ratings)).perform(swipeUp())
+        }
+
         onView(withId(R.id.movieDetail_desc)).check(matches(isDisplayed()))
         onView(withId(R.id.movieDetail_desc)).check(matches(withText(testMovie[1].description)))
 
@@ -94,7 +105,9 @@ class HomeActivityTest {
 
         onView(withId(R.id.movieDetail_language)).check(matches(isDisplayed()))
         onView(withId(R.id.movieDetail_language)).check(matches(withText(testMovie[1].originalLanguage)))
-
+        for (i in 0..1) {
+            onView(withId(R.id.movieDetail_language)).perform(swipeUp())
+        }
         onView(withId(R.id.movieDetail_runtime)).check(matches(isDisplayed()))
         onView(withId(R.id.movieDetail_runtime)).check(matches(withText(testMovie[1].runTime)))
 
@@ -103,7 +116,10 @@ class HomeActivityTest {
 
     }
 
-
+    /*
+                test untuk memastikan apakah detail tv show terlihat seluruhnya,
+                untuk itu disisipkan kode untuk melakukan swipe up karena detail yang banyak
+            */
     @Test
     fun loadDetailTvShow() {
         onView(withText("TV SHOW")).perform(ViewActions.click())
@@ -111,19 +127,21 @@ class HomeActivityTest {
         )
         onView(withId(R.id.image_poster_detail_tv)).check(matches(isDisplayed()))
 
-
-
         onView(withId(R.id.tvShow_title)).check(matches(isDisplayed()))
         onView(withId(R.id.tvShow_title)).check(matches(withText(testTvShow[1].title)))
 
+        for (i in 0..2) {
+            onView(withId(R.id.tvShow_title)).perform(swipeUp())
+        }
         onView(withId(R.id.tvShowDetail_release)).check(matches(isDisplayed()))
         onView(withId(R.id.tvShowDetail_release)).check(matches(withText(testTvShow[1].releaseDate)))
 
         onView(withId(R.id.tvShow_title)).check(matches(isDisplayed()))
         onView(withId(R.id.tvShow_title)).check(matches(withText(testTvShow[1].title)))
 
-        onView(withId(R.id.tvShowDetail_release)).check(matches(isDisplayed()))
-        onView(withId(R.id.tvShowDetail_release)).check(matches(withText(testTvShow[1].releaseDate)))
+        for (i in 0..2) {
+            onView(withId(R.id.tvShow_title)).perform(swipeUp())
+        }
 
         onView(withId(R.id.tvShowDetail_ratings)).check(matches(isDisplayed()))
         onView(withId(R.id.tvShowDetail_ratings)).check(matches(withText(testTvShow[1].ratings)))
@@ -131,6 +149,9 @@ class HomeActivityTest {
         onView(withId(R.id.tvShowDetail_desc)).check(matches(isDisplayed()))
         onView(withId(R.id.tvShowDetail_desc)).check(matches(withText(testTvShow[1].description)))
 
+        for (i in 0..2) {
+            onView(withId(R.id.tvShowDetail_desc)).perform(swipeUp())
+        }
         onView(withId(R.id.tvShowDetail_genre)).check(matches(isDisplayed()))
         onView(withId(R.id.tvShowDetail_genre)).check(matches(withText(testTvShow[1].tvShowGenre)))
 
@@ -139,8 +160,8 @@ class HomeActivityTest {
 
         onView(withId(R.id.tvShowDetail_numepisodes)).check(matches(isDisplayed()))
         onView(withId(R.id.tvShowDetail_numepisodes)).check(matches(withText(testTvShow[1].numOfEpisodes)))
-        //swipe up untuk membuat detail yang lain terlihat
-        for (i in 0..10) {
+
+        for (i in 0..2) {
             onView(withId(R.id.text_tvshow_numepisodes)).perform(swipeUp())
         }
         onView(withId(R.id.tvShowDetail_numseason)).check(matches(isDisplayed()))
