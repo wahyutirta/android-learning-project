@@ -61,16 +61,7 @@ class HomeActivityTest {
     /*
         test untuk memastikan fragment tv show muncul dan bisa discrol
     */
-    @Test
-    fun loadtvshhow() {
-        onView(withText("TV SHOW")).perform(ViewActions.click())
-        onView(withId(R.id.rv_tvshow)).check(matches(isDisplayed()))
-        onView(withId(R.id.rv_tvshow)).perform(
-                RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(
-                        testTvShow.size
-                )
-        )
-    }
+
 
     /*
             test untuk memastikan apakah detail movie terlihat seluruhnya, untuk itu disisipkan kode untuk melakukan swipe up

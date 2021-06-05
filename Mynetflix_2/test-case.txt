@@ -1,28 +1,43 @@
+Bukti Hasil test
+https://drive.google.com/drive/folders/1jdSdYJ_ek37PzpcjkseOhuVnornQiKW8?usp=sharing
+
 Detail Movie View Model Test
+membuat mock object dari kelas DataRepository dan Observer<MovieModel>
 -memastikan bahwa data detail movie yang dimuat tidak null
 -memastikan bahwa data detail movie yang dimuat oleh getSelected sudah sesuai dan tidak null
 
 Detail Tvshow View Model Test
+membuat mock object dari kelas DataRepository dan Observer<TvShowModel>
 -memastikan bahwa data detail Tvshow yang dimuat tidak null
 -memastikan bahwa data detail Tvshow yang dimuat oleh getSelected sudah sesuai dan tidak null
 
 Movie View Model Test
+membuat mock object dari kelas DataRepository dan Observer<List<MovieModel>>
 -View Model Dapat memuat data movie sehingga data tidak null
 -View model dapat memuat seluruh jumlah data yang ada yaitu sebanyak 11
 
 Tvshow View Model Test
+membuat mock object dari kelas DataRepository dan Observer<List<MovieModel>>
 -View Model Dapat memuat data Tvshow sehingga data tidak null
 -View model dapat memuat seluruh jumlah data yang ada yaitu sebanyak 10
 
 instrumental HomeActivityTest
+setup
+-@Before menambahkan HomeActivity ke ActivityScenario
+-mendaftarkan atau menregister EspressoIdlingResource pada Test
+
+Teardown
+-@After Di jalankan sesudah test selesai dijalankan
+-men-unregister atau menghapus EspressoIdlingResource pada Test
+
 menampilkan movie
 -recycler view yang menangani tampilan data movie tampil
--jumlah recycler view yang tampil sebanyak jumlah movie yang dimuat, untuk itu dilakukan scrolling
+-jumlah recycler view yang tampil sebanyak jumlah movie yang dimuat, untuk itu dilakukan scrolling hingga posisi rv data terakhir
 
 menampilkan tvshow
 -dapat berpindah ke fragment tv show dengan cara klik
 -recycler view yang menangani tampilan data tvshow tampil
--jumlah recycler view yang tampil sebanyak jumlah tvshow yang dimuat, untuk itu dilakukan scrolling
+-jumlah recycler view yang tampil sebanyak jumlah tvshow yang dimuat, untuk itu dilakukan scrolling hingga posisi rv data terakhir
 
 menampilkan detail movie
 (detail movie yang terlalu banyak mengharuskan diterapkannya 
