@@ -22,6 +22,7 @@ class DetailTvShowActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailTvShowBinding
     private lateinit var contentBinding: ContentDetailTvshowBinding
+    private lateinit var viewModel: DetailTvShowVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +32,7 @@ class DetailTvShowActivity : AppCompatActivity() {
         contentBinding = binding.contentTvShow
 
         setSupportActionBar(binding.toolbar)
-        val viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[DetailTvShowVM::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[DetailTvShowVM::class.java]
         val extras = intent.extras
         checkSelected(extras, viewModel)
 
@@ -44,12 +45,15 @@ class DetailTvShowActivity : AppCompatActivity() {
                 onProgress(true)
 
                 viewModel.setSelectedTvShow(tvShowId)
-                viewModel.getTvShow().observe(this, { tvShow ->
-                    onProgress(false)
-                    populateTvShow(tvShow, contentBinding, binding)
-                })
+                observe(viewModel)
             }
         }
+    }
+    private fun observe(viewModel: DetailTvShowVM){
+        viewModel.getTvShow().observe(this, { tvShow ->
+            onProgress(false)
+            populateTvShow(tvShow, contentBinding, binding)
+        })
     }
 
     private fun onProgress(state: Boolean){

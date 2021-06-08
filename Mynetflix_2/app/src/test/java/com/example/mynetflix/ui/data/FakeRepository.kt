@@ -35,11 +35,11 @@ class FakeRepository (private val remoteDataSource: RemoteDataSource):
     var tvShowDetailResult = MutableLiveData<TvShowModel>()
     lateinit var tvShow: TvShowModel
 
-    override fun getAllMovies(): LiveData<List<MovieModel>> {
+    override fun getMovies(): LiveData<List<MovieModel>> {
 
 
-        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllMovieReceived(movieResponse: List<MovieResponse>) {
+        remoteDataSource.getMovies(object : RemoteDataSource.LoadMoviesCallback {
+            override fun onMovieReceived(movieResponse: List<MovieResponse>) {
 
                 for (response in movieResponse) {
                     val movie = MovieModel(
@@ -65,10 +65,10 @@ class FakeRepository (private val remoteDataSource: RemoteDataSource):
     }
 
 
-    override fun getAllTvShow(): LiveData<List<TvShowModel>> {
+    override fun getTvShow(): LiveData<List<TvShowModel>> {
 
-        remoteDataSource.getAllTvShow(object : RemoteDataSource.LoadTvShowCallback {
-            override fun onAllTvShowReceived(tvShowResponse: List<TvShowResponse>) {
+        remoteDataSource.getTvShow(object : RemoteDataSource.LoadTvShowCallback {
+            override fun onTvShowReceived(tvShowResponse: List<TvShowResponse>) {
 
                 for (response in tvShowResponse) {
                     val tvShow = TvShowModel(
@@ -97,8 +97,8 @@ class FakeRepository (private val remoteDataSource: RemoteDataSource):
 
     override fun getMoviesDetail(movieId: String): LiveData<MovieModel> {
 
-        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllMovieReceived(movieResponse: List<MovieResponse>) {
+        remoteDataSource.getMovies(object : RemoteDataSource.LoadMoviesCallback {
+            override fun onMovieReceived(movieResponse: List<MovieResponse>) {
 
                 for (response in movieResponse) {
                     if (response.id == movieId) {
@@ -127,8 +127,8 @@ class FakeRepository (private val remoteDataSource: RemoteDataSource):
     override fun getTvShowDetail(tvShowId: String): LiveData<TvShowModel> {
 
 
-        remoteDataSource.getAllTvShow(object : RemoteDataSource.LoadTvShowCallback {
-            override fun onAllTvShowReceived(tvShowResponse: List<TvShowResponse>) {
+        remoteDataSource.getTvShow(object : RemoteDataSource.LoadTvShowCallback {
+            override fun onTvShowReceived(tvShowResponse: List<TvShowResponse>) {
 
                 for (response in tvShowResponse) {
                     if (response.id == tvShowId) {

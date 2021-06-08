@@ -40,9 +40,9 @@ class TvShowVMTest {
     @Test
     fun getTvShowNotNull() {
 
-        Mockito.`when`(dataRepository.getAllTvShow()).thenReturn(tvShow)
+        Mockito.`when`(dataRepository.getTvShow()).thenReturn(tvShow)
         val tvShowModels = viewModel.getTvShow().value
-        Mockito.verify(dataRepository).getAllTvShow()
+        Mockito.verify(dataRepository).getTvShow()
         assertNotNull(tvShowModels)
 
 
@@ -53,9 +53,9 @@ class TvShowVMTest {
     @Test
     fun getTvShow() {
 
-        Mockito.`when`(dataRepository.getAllTvShow()).thenReturn(tvShow)
+        Mockito.`when`(dataRepository.getTvShow()).thenReturn(tvShow)
         val tvShowModels = viewModel.getTvShow().value
-        Mockito.verify(dataRepository).getAllTvShow()
+        Mockito.verify(dataRepository).getTvShow()
         assertEquals(10, tvShowModels?.size)
 
         viewModel.getTvShow().observeForever(observer)

@@ -22,23 +22,23 @@ class DataRepository private constructor(private val remoteDataSource: RemoteDat
             }
     }
 
-    var movieList = ArrayList<MovieModel>()
-    var movieResult = MutableLiveData<List<MovieModel>>()
+    var mList = ArrayList<MovieModel>()
+    var mResult = MutableLiveData<List<MovieModel>>()
 
-    var tvShowResult = MutableLiveData<List<TvShowModel>>()
-    var tvShowList = ArrayList<TvShowModel>()
-
-    var movieDetailResult = MutableLiveData<MovieModel>()
+    var mDetailResult = MutableLiveData<MovieModel>()
     lateinit var movie: MovieModel
 
-    var tvShowDetailResult = MutableLiveData<TvShowModel>()
+    var tResult = MutableLiveData<List<TvShowModel>>()
+    var tList = ArrayList<TvShowModel>()
+
+    var tDetailResult = MutableLiveData<TvShowModel>()
     lateinit var tvShow: TvShowModel
 
-    override fun getAllMovies(): LiveData<List<MovieModel>> {
+    override fun getMovies(): LiveData<List<MovieModel>> {
 
 
-        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllMovieReceived(movieResponse: List<MovieResponse>) {
+        remoteDataSource.getMovies(object : RemoteDataSource.LoadMoviesCallback {
+            override fun onMovieReceived(movieResponse: List<MovieResponse>) {
 
                 for (response in movieResponse) {
                     val movie = MovieModel(
@@ -53,51 +53,20 @@ class DataRepository private constructor(private val remoteDataSource: RemoteDat
                         response.imagePath,
                         response.filmDirector,
                     )
-                    movieList.add(movie)
+                    mList.add(movie)
                 }
-                movieResult.postValue(movieList)
+                mResult.postValue(mList)
             }
 
         })
 
-        return movieResult
-    }
-
-
-    override fun getAllTvShow(): LiveData<List<TvShowModel>> {
-
-        remoteDataSource.getAllTvShow(object : RemoteDataSource.LoadTvShowCallback {
-            override fun onAllTvShowReceived(tvShowResponse: List<TvShowResponse>) {
-
-                for (response in tvShowResponse) {
-                    val tvShow = TvShowModel(
-                        response.id,
-                        response.title,
-                        response.releaseDate,
-                        response.ratings,
-                        response.description,
-                        response.tvShowGenre,
-                        response.originalLanguage,
-                        response.numOfEpisodes,
-                        response.numOfSeasons,
-                        response.runTimes,
-                        response.imagePath,
-                        response.creators,
-                    )
-                    tvShowList.add(tvShow)
-                }
-                tvShowResult.postValue(tvShowList)
-            }
-
-        })
-
-        return tvShowResult
+        return mResult
     }
 
     override fun getMoviesDetail(movieId: String): LiveData<MovieModel> {
 
-        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallback {
-            override fun onAllMovieReceived(movieResponse: List<MovieResponse>) {
+        remoteDataSource.getMovies(object : RemoteDataSource.LoadMoviesCallback {
+            override fun onMovieReceived(movieResponse: List<MovieResponse>) {
 
                 for (response in movieResponse) {
                     if (response.id == movieId) {
@@ -115,19 +84,51 @@ class DataRepository private constructor(private val remoteDataSource: RemoteDat
                         )
                     }
                 }
-                movieDetailResult.postValue(movie)
+                mDetailResult.postValue(movie)
             }
 
         })
 
-        return movieDetailResult
+        return mDetailResult
     }
+
+
+    override fun getTvShow(): LiveData<List<TvShowModel>> {
+
+        remoteDataSource.getTvShow(object : RemoteDataSource.LoadTvShowCallback {
+            override fun onTvShowReceived(tvShowResponse: List<TvShowResponse>) {
+
+                for (response in tvShowResponse) {
+                    val tvShow = TvShowModel(
+                        response.id,
+                        response.title,
+                        response.releaseDate,
+                        response.ratings,
+                        response.description,
+                        response.tvShowGenre,
+                        response.originalLanguage,
+                        response.numOfEpisodes,
+                        response.numOfSeasons,
+                        response.runTimes,
+                        response.imagePath,
+                        response.creators,
+                    )
+                    tList.add(tvShow)
+                }
+                tResult.postValue(tList)
+            }
+
+        })
+
+        return tResult
+    }
+
 
     override fun getTvShowDetail(tvShowId: String): LiveData<TvShowModel> {
 
 
-        remoteDataSource.getAllTvShow(object : RemoteDataSource.LoadTvShowCallback {
-            override fun onAllTvShowReceived(tvShowResponse: List<TvShowResponse>) {
+        remoteDataSource.getTvShow(object : RemoteDataSource.LoadTvShowCallback {
+            override fun onTvShowReceived(tvShowResponse: List<TvShowResponse>) {
 
                 for (response in tvShowResponse) {
                     if (response.id == tvShowId) {
@@ -147,12 +148,12 @@ class DataRepository private constructor(private val remoteDataSource: RemoteDat
                         )
                     }
                 }
-                tvShowDetailResult.postValue(tvShow)
+                tDetailResult.postValue(tvShow)
             }
 
         })
 
-        return tvShowDetailResult
+        return tDetailResult
     }
 
 }

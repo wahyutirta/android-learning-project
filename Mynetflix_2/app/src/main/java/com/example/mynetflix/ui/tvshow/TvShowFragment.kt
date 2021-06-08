@@ -10,12 +10,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.example.mynetflix.databinding.FragmentTvShowBinding
 import com.example.mynetflix.factory.ViewModelFactory
+import com.example.mynetflix.ui.movie.MovieAdapter
 import com.example.mynetflix.ui.movie.MovieVM
 
 
 class TvShowFragment : Fragment() {
 
     private lateinit var binding: FragmentTvShowBinding
+    private lateinit var viewModel: TvShowVM
+    private lateinit var tvShowAdapter: TvShowAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,19 +32,14 @@ class TvShowFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val viewModel = ViewModelProvider(
+            viewModel = ViewModelProvider(
                 this,
                 ViewModelFactory.getInstance(requireActivity())
             )[TvShowVM::class.java]
 
-            val tvShowAdapter = TvShowAdapter()
+            tvShowAdapter = TvShowAdapter()
             onProgress(true)
-            viewModel.getTvShow().observe(this, { tvShow ->
-
-                tvShowAdapter.setTvShow(tvShow)
-                tvShowAdapter.notifyDataSetChanged()
-                onProgress(false)
-            })
+            observe(tvShowAdapter)
 
             with(binding.rvTvshow) {
                 layoutManager = LinearLayoutManager(context)
@@ -50,6 +48,14 @@ class TvShowFragment : Fragment() {
             }
 
         }
+    }
+    private fun observe(tvShowAdapter: TvShowAdapter){
+        viewModel.getTvShow().observe(this, { tvShow ->
+
+            tvShowAdapter.setTvShow(tvShow)
+            tvShowAdapter.notifyDataSetChanged()
+            onProgress(false)
+        })
     }
 
     private fun onProgress(state: Boolean) {

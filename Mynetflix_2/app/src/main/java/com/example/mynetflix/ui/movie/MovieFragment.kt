@@ -13,7 +13,8 @@ import com.example.mynetflix.factory.ViewModelFactory
 
 class MovieFragment : Fragment() {
     private lateinit var binding: FragmentMovieBinding
-
+    private lateinit var viewModel: MovieVM
+    private lateinit var movieAdapter: MovieAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -25,21 +26,16 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
-            val viewModel = ViewModelProvider(
+            viewModel = ViewModelProvider(
                 this,
                 ViewModelFactory.getInstance(requireActivity())
             )[MovieVM::class.java]
 
-            val movieAdapter = MovieAdapter()
+            movieAdapter = MovieAdapter()
 
 
             onProgress(true)
-            viewModel.getMovie().observe(this, { movies ->
-
-                movieAdapter.setMovies(movies)
-                movieAdapter.notifyDataSetChanged()
-                onProgress(false)
-            })
+            observe(movieAdapter)
 
             with(binding.rvMovie) {
                 layoutManager = LinearLayoutManager(context)
@@ -48,6 +44,16 @@ class MovieFragment : Fragment() {
             }
         }
     }
+
+    private fun observe(movieAdapter: MovieAdapter){
+        viewModel.getMovie().observe(this, { movies ->
+
+            movieAdapter.setMovies(movies)
+            movieAdapter.notifyDataSetChanged()
+            onProgress(false)
+        })
+    }
+
 
     private fun onProgress(state: Boolean) {
         when (state) {

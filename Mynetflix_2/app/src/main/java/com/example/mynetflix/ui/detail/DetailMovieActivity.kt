@@ -22,6 +22,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailMovieBinding
     private lateinit var contentBinding: ContentDetailMovieBinding
+    private lateinit var viewModel: DetailMovieVM
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +33,7 @@ class DetailMovieActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[DetailMovieVM::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[DetailMovieVM::class.java]
         val extras = intent.extras
         checkSelected(extras, viewModel)
 
@@ -44,12 +45,16 @@ class DetailMovieActivity : AppCompatActivity() {
             if (null != movieId) {
                 onProgress(true)
                 viewModel.setSelectedMovie(movieId)
-                viewModel.getMovie().observe(this, { movie ->
-                    onProgress(false)
-                    populateMovie(movie, binding, contentBinding)
-                })
+                observe(viewModel)
             }
         }
+    }
+
+    private fun observe(viewModel: DetailMovieVM){
+        viewModel.getMovie().observe(this, { movie ->
+            onProgress(false)
+            populateMovie(movie, binding, contentBinding)
+        })
     }
 
     private fun onProgress(state: Boolean){

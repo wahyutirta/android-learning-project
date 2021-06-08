@@ -40,9 +40,9 @@ class MovieVMTest{
     @Test
     fun getMovieNotNull() {
 
-        Mockito.`when`(dataRepository.getAllMovies()).thenReturn(movies)
+        Mockito.`when`(dataRepository.getMovies()).thenReturn(movies)
         val movieModels = viewModel.getMovie().value
-        Mockito.verify(dataRepository).getAllMovies()
+        Mockito.verify(dataRepository).getMovies()
         assertNotNull(movieModels)
 
         viewModel.getMovie().observeForever(observer)
@@ -52,9 +52,9 @@ class MovieVMTest{
     @Test
     fun getMovie() {
 
-        Mockito.`when`(dataRepository.getAllMovies()).thenReturn(movies)
+        Mockito.`when`(dataRepository.getMovies()).thenReturn(movies)
         val movieModels = viewModel.getMovie().value
-        Mockito.verify(dataRepository).getAllMovies()
+        Mockito.verify(dataRepository).getMovies()
         assertNotNull(movieModels)
         assertEquals(11, movieModels?.size)
 
