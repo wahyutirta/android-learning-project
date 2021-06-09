@@ -33,4 +33,10 @@
     <string name="share_title">Pilih Target Share</string>
     <string name="foto_untuk_movie_detail">Foto untuk movie detail</string>
     <string name="floating_action_button_love">floating button live untuk like</string>
+    <string name="fail_message">Sepertinya Terjadi Kesalahan</string>
+    <string name="love">Loved</string>
+    <string name="unlove">Unloved</string>
+    <string name="title_home">home</string>
+    <string name="Favorite">favorite</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

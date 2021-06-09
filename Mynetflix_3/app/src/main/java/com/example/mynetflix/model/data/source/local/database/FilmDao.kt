@@ -13,7 +13,7 @@ import com.example.mynetflix.model.data.TvShowModel
 interface FilmDao {
 
     @Insert(onConflict = REPLACE)
-    fun insert(movie: MovieModel): Long
+    fun insertMovie(movie: MovieModel): Long
 
     @Query("DELETE FROM $TB_MOVIE WHERE id = :id")
     fun deleteMovieById(id: String)

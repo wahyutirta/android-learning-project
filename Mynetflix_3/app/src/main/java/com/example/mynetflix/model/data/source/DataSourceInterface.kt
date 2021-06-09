@@ -17,8 +17,6 @@ interface DataSourceInterface {
 
     fun getTvShowDetail(tvShowId: String): LiveData<Resource<TvShowModel>>
 
-    fun setFavoriteMovie(movie: MovieModel)
-
     fun getAllMovie(): LiveData<PagedList<MovieModel>>
 
     fun getAllTvShows(): LiveData<PagedList<TvShowModel>>
@@ -34,7 +32,5 @@ interface DataSourceInterface {
     fun getDetailTvShowById(tvShowId: String): LiveData<TvShowModel>
 
     fun getDetailMovieById(movieId: String): LiveData<MovieModel>
-
-
 
 }

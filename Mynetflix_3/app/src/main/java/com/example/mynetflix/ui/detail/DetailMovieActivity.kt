@@ -11,10 +11,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.mynetflix.R
 import com.example.mynetflix.databinding.ActivityDetailMovieBinding
+import com.example.mynetflix.databinding.ActivityDetailTvShowBinding
 import com.example.mynetflix.databinding.ContentDetailMovieBinding
 import com.example.mynetflix.factory.ViewModelFactory
 import com.example.mynetflix.model.data.MovieModel
+import com.example.mynetflix.model.data.TvShowModel
 import com.example.mynetflix.vo.Status
+import java.lang.StringBuilder
 
 
 class DetailMovieActivity : AppCompatActivity() {
@@ -26,6 +29,7 @@ class DetailMovieActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailMovieBinding
     private lateinit var contentBinding: ContentDetailMovieBinding
     private lateinit var viewModel: DetailMovieVM
+    private var state: Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,54 +42,11 @@ class DetailMovieActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[DetailMovieVM::class.java]
         val extras = intent.extras
-        checkSelected(extras, viewModel)
-        if (null != extras) {
-            val movieId = extras.getString(EXTRA_MOVIESELECTED)
-            if (null != movieId) {
-                viewModel.setSelectedMovie(movieId)
+        checkSelected(extras, viewModel, binding)
 
-
-                viewModel.movieData.observe(this, { movie ->
-
-                    if (movie != null) {
-                        when (movie.status) {
-                            Status.LOADING -> {
-                                binding.progressBar.visibility = View.VISIBLE
-                                binding.shareBtn.visibility = View.INVISIBLE
-                                binding.loveBtn.visibility = View.INVISIBLE
-                                binding.contentMovie.visibility =
-                                    View.INVISIBLE
-                            }
-                            Status.SUCCESS -> if (movie.data != null) {
-                                binding.progressBar.visibility = View.GONE
-                                binding.contentMovie.visibility = View.VISIBLE
-                                binding.shareBtn.visibility = View.VISIBLE
-                                binding.loveBtn.visibility = View.VISIBLE
-                                val state = movie.data.favorite
-                                setBookmarkState(state)
-                                populateMovie(movie.data, binding, contentBinding)
-
-                            }
-                            Status.ERROR -> {
-                                binding.progressBar.visibility = View.GONE
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Terjadi kesalahan",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                    }
-                    //add to favorite
-                    binding.loveBtn.setOnClickListener {
-                        viewModel.setFavorite()
-                    }
-                })
-            }
-        }
     }
 
-    private fun setBookmarkState(state: Boolean) {
+    private fun setBookmarkState(state: Boolean, binding: ActivityDetailMovieBinding) {
         if (state) {
             binding.loveBtn.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -103,29 +64,63 @@ class DetailMovieActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkSelected(extras: Bundle?, viewModel: DetailMovieVM) {
-
+    private fun checkSelected(extras: Bundle?, viewModel: DetailMovieVM, binding: ActivityDetailMovieBinding) {
+        if (null != extras) {
+            val movieId = extras.getString(EXTRA_MOVIESELECTED)
+            if (null != movieId) {
+                observe(movieId, viewModel, binding)
+            }
+        }
     }
 
-    private fun observe(viewModel: DetailMovieVM){
+    private fun observe(movieId: String, viewModel: DetailMovieVM, binding: ActivityDetailMovieBinding){
+        viewModel.setSelectedMovie(movieId)
 
+        viewModel.movieData.observe(this, { movie ->
+
+            if (movie != null) {
+                when (movie.status) {
+                    Status.LOADING -> {
+                        onProgress(true, binding)
+                    }
+                    Status.SUCCESS -> if (movie.data != null) {
+                        onProgress(false, binding)
+                        populateMovie(movie.data, binding, contentBinding)
+                    }
+                    Status.ERROR -> {
+                        binding.progressBar.visibility = View.GONE
+                        val message = StringBuilder(R.string.fail_message)
+                        Toast.makeText(
+                            applicationContext,
+                            message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+
+        })
     }
 
-    private fun onProgress(state: Boolean){
+    private fun onProgress(state: Boolean, binding: ActivityDetailMovieBinding){
         when (state){
             true -> {
-                binding.progressBar.visibility = View.VISIBLE
+                binding.loveBtn.visibility = View.INVISIBLE
+                binding.shareBtn.visibility = View.INVISIBLE
                 binding.contentMovie.visibility = View.INVISIBLE
+                binding.progressBar.visibility = View.VISIBLE
             }
             false -> {
                 binding.progressBar.visibility = View.GONE
                 binding.contentMovie.visibility = View.VISIBLE
+                binding.shareBtn.visibility = View.VISIBLE
+                binding.loveBtn.visibility = View.VISIBLE
             }
         }
     }
 
 
-    private fun populateMovie(movieModel: MovieModel, binding: ActivityDetailMovieBinding, contentBinding: ContentDetailMovieBinding) {
+    private fun populateMovie( movieModel: MovieModel, binding: ActivityDetailMovieBinding, contentBinding: ContentDetailMovieBinding) {
 
         Glide.with(this)
                 //.load(resources.getIdentifier(img, "drawable", packageName))
@@ -144,11 +139,13 @@ class DetailMovieActivity : AppCompatActivity() {
         contentBinding.movieDetailLanguage.text = movieModel.originalLanguage
         contentBinding.movieDetailRuntime.text = movieModel.runTime
         contentBinding.movieDetailDirectors.text = movieModel.filmDirector
-        bindingListener(binding)
+        state = movieModel.favorite
+        setBookmarkState(state, binding)
+        bindingListener(movieModel, binding)
 
     }
 
-    private fun bindingListener(binding: ActivityDetailMovieBinding) {
+    private fun bindingListener(movieModel: MovieModel, binding: ActivityDetailMovieBinding) {
         binding.shareBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
 
@@ -162,6 +159,15 @@ class DetailMovieActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_SUBJECT, contentBinding.movieDetailName.text)
             intent.putExtra(Intent.EXTRA_TEXT, shareScript)
             startActivity(Intent.createChooser(intent, resources.getString(R.string.share_title)))
+        }
+        binding.loveBtn.setOnClickListener {
+            val message = StringBuilder(movieModel.title).append(" ", if (movieModel.favorite) resources.getString(R.string.unlove) else resources.getString(R.string.love))
+            Toast.makeText(
+                applicationContext,
+                message,
+                Toast.LENGTH_SHORT
+            ).show()
+            viewModel.favoriteHandler()
         }
     }
 

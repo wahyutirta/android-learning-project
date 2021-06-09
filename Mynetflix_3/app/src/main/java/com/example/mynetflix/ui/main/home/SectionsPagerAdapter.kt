@@ -1,4 +1,4 @@
-package com.example.mynetflix.ui.main
+package com.example.mynetflix.ui.main.home
 
 import android.content.Context
 import androidx.annotation.StringRes

@@ -25,27 +25,13 @@ class DetailTvShowVM(private val dataRepository: DataRepository) : ViewModel() {
         dataRepository.getDetailTvShowById(movieId)
 
     fun setTvShowFav() {
-        val tvResource = tvData.value
-        if (tvResource != null) {
-            val detailTvShow = tvResource.data
-
-            if (detailTvShow != null) {
-                val newState = !detailTvShow.favorite
-                dataRepository.setTvShowFavorite(detailTvShow, newState)
-            }
+        if (tvData.value?.data != null) {
+            val resourceTv = tvData.value
+            val status = resourceTv?.data?.favorite!!
+            val detailTvShow = resourceTv?.data!!
+            dataRepository.setTvShowFavorite(detailTvShow, !status)
         }
     }
 
-    fun unFavoriteTvShow() {
-        val tvResource = tvData.value
-        if (tvResource != null) {
-            val detailTvShow = tvResource.data
-
-            if (detailTvShow != null) {
-                val newState = detailTvShow.favorite
-                dataRepository.setTvShowFavorite(detailTvShow, newState)
-            }
-        }
-    }
 
 }

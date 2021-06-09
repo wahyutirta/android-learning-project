@@ -8,9 +8,12 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mynetflix.R
 import com.example.mynetflix.databinding.FragmentMovieBinding
 import com.example.mynetflix.factory.ViewModelFactory
+import com.example.mynetflix.ui.tvshow.TvShowVM
 import com.example.mynetflix.vo.Status
+import java.lang.StringBuilder
 
 
 class MovieFragment : Fragment() {
@@ -35,22 +38,8 @@ class MovieFragment : Fragment() {
 
             movieAdapter = MovieAdapter()
 
+            observe(viewModel, movieAdapter)
 
-            viewModel.getMovie().observe(viewLifecycleOwner, { movies ->
-                if (movies != null) {
-                    when (movies.status) {
-                        Status.LOADING -> binding.progressBarMovie.visibility = View.VISIBLE
-                        Status.SUCCESS -> {
-                            binding.progressBarMovie.visibility = View.GONE
-                            movieAdapter.submitList(movies.data)
-                        }
-                        Status.ERROR -> {
-                            binding.progressBarMovie.visibility = View.GONE
-                            Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            })
 
             with(binding.rvMovie) {
                 layoutManager = LinearLayoutManager(context)
@@ -60,8 +49,21 @@ class MovieFragment : Fragment() {
         }
     }
 
-    private fun observe(movieAdapter: MovieAdapter){
-        
+    private fun observe(viewModel: MovieVM, movieAdapter: MovieAdapter) {
+        viewModel.getMovie().observe(viewLifecycleOwner, { movies ->
+            if (movies != null) when (movies.status) {
+                Status.LOADING -> onProgress(true)
+                Status.SUCCESS -> {
+                    onProgress(false)
+                    movieAdapter.submitList(movies.data)
+                }
+                Status.ERROR -> {
+                    onProgress(false)
+                    val message = StringBuilder(R.string.fail_message)
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
 

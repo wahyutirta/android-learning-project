@@ -7,6 +7,9 @@ import com.example.mynetflix.di.Injection
 import com.example.mynetflix.model.data.source.DataRepository
 import com.example.mynetflix.ui.detail.DetailMovieVM
 import com.example.mynetflix.ui.detail.DetailTvShowVM
+import com.example.mynetflix.ui.main.favorite.favmovie.FavMovieFragment
+import com.example.mynetflix.ui.main.favorite.favmovie.FavMovieFragmentVM
+import com.example.mynetflix.ui.main.favorite.favtvshow.FavTvShowFragmentVM
 import com.example.mynetflix.ui.movie.MovieVM
 import com.example.mynetflix.ui.tvshow.TvShowVM
 
@@ -32,6 +35,8 @@ class ViewModelFactory(private val mFilmRepository: DataRepository) :
             modelClass.isAssignableFrom(DetailTvShowVM::class.java) -> DetailTvShowVM(mFilmRepository) as T
             modelClass.isAssignableFrom(MovieVM::class.java) -> MovieVM(mFilmRepository) as T
             modelClass.isAssignableFrom(TvShowVM::class.java) -> TvShowVM(mFilmRepository) as T
+            modelClass.isAssignableFrom(FavMovieFragmentVM::class.java) -> FavMovieFragmentVM(mFilmRepository) as T
+            modelClass.isAssignableFrom(FavTvShowFragmentVM::class.java) -> FavTvShowFragmentVM(mFilmRepository) as T
 
             else -> throw Throwable("Unknown ViewModel Class: " + modelClass.name)
         }

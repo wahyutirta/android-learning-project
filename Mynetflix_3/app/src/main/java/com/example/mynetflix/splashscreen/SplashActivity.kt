@@ -8,7 +8,7 @@ import android.os.Looper
 import com.bumptech.glide.Glide
 import com.example.mynetflix.R
 import com.example.mynetflix.databinding.ActivitySplashBinding
-import com.example.mynetflix.ui.main.HomeActivity
+import com.example.mynetflix.ui.main.home.MenuActivity
 
 class SplashActivity : AppCompatActivity() {
 
@@ -26,7 +26,7 @@ class SplashActivity : AppCompatActivity() {
             .into(splashActivityBinding.imageSplash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val myIntent = Intent(this, HomeActivity::class.java)
+            val myIntent = Intent(this, MenuActivity::class.java)
             startActivity(myIntent)
             finish()
         }, 2000)

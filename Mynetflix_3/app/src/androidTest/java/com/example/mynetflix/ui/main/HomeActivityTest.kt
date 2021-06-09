@@ -13,6 +13,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.mynetflix.R
 import com.example.mynetflix.model.data.DummyDataHelper
 import com.example.mynetflix.model.utils.EspressoIdlingResource
+import com.example.mynetflix.ui.main.home.HomeActivity
 import org.junit.After
 import org.junit.Before
 import org.junit.Test

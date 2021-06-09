@@ -1,6 +1,7 @@
 package com.example.mynetflix.ui.detail
 
 import android.content.Intent
+import android.content.LocusId
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -15,6 +16,7 @@ import com.example.mynetflix.databinding.ContentDetailTvshowBinding
 import com.example.mynetflix.factory.ViewModelFactory
 import com.example.mynetflix.model.data.TvShowModel
 import com.example.mynetflix.vo.Status
+import java.lang.StringBuilder
 
 
 class DetailTvShowActivity : AppCompatActivity() {
@@ -26,6 +28,7 @@ class DetailTvShowActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailTvShowBinding
     private lateinit var contentBinding: ContentDetailTvshowBinding
     private lateinit var viewModel: DetailTvShowVM
+    private var state: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,59 +40,48 @@ class DetailTvShowActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[DetailTvShowVM::class.java]
         val extras = intent.extras
-        checkSelected(extras, viewModel)
+        checkSelected(extras, viewModel, binding)
+
+
+    }
+
+    fun checkSelected(extras: Bundle?, viewModel: DetailTvShowVM, binding: ActivityDetailTvShowBinding) {
         if (null != extras) {
             val tvShowId = extras.getString(EXTRA_TVSELECTED)
             if (null != tvShowId) {
-                viewModel.setSelectedTvShow(tvShowId)
-
-                viewModel.tvData.observe(this, { tvShow ->
-                    if (tvShow != null) {
-                        when (tvShow.status) {
-                            Status.LOADING -> {
-                                binding.progressBar.visibility = View.VISIBLE
-                                binding.loveBtn.visibility = View.INVISIBLE
-                                binding.shareBtn.visibility = View.INVISIBLE
-                                binding.contentTv.visibility = View.INVISIBLE
-                            }
-                            Status.SUCCESS -> if (tvShow.data != null) {
-                                binding.progressBar.visibility = View.GONE
-                                binding.contentTv.visibility = View.VISIBLE
-                                binding.shareBtn.visibility = View.VISIBLE
-                                binding.loveBtn.visibility = View.VISIBLE
-                                val state = tvShow.data.favorite
-                                setBookmarkState(state)
-
-                                populateTvShow(tvShow.data, binding, contentBinding)
-                            }
-                            Status.ERROR -> {
-                                binding.progressBar.visibility = View.GONE
-                                Toast.makeText(
-                                    applicationContext,
-                                    "Terjadi kesalahan",
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            }
-                        }
-                    }
-                    binding.loveBtn.setOnClickListener {
-                        viewModel.setTvShowFav()
-                    }
-
-                })
+                observe(tvShowId, viewModel, binding)
             }
         }
+    }
+    private fun observe(tvShowId: String, viewModel: DetailTvShowVM, binding: ActivityDetailTvShowBinding){
+        viewModel.setSelectedTvShow(tvShowId)
 
+        viewModel.tvData.observe(this, { tvShow ->
+            if (tvShow != null) {
+                when (tvShow.status) {
+                    Status.LOADING -> {
+                        onProgress(true, binding)
+                    }
+                    Status.SUCCESS -> if (tvShow.data != null) {
+                        onProgress(false, binding)
+                        populateTvShow(tvShow.data, binding, contentBinding)
+                    }
+                    Status.ERROR -> {
+                        binding.progressBar.visibility = View.GONE
+                        val message = StringBuilder(R.string.fail_message)
+                        Toast.makeText(
+                            applicationContext,
+                            message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+
+        })
     }
 
-    fun checkSelected(extras: Bundle?, viewModel: DetailTvShowVM) {
-        
-    }
-    private fun observe(viewModel: DetailTvShowVM){
-        
-    }
-
-    private fun setBookmarkState(state: Boolean) {
+    private fun setBookmarkState(state: Boolean, binding: ActivityDetailTvShowBinding) {
         if (state) {
             binding.loveBtn.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -107,15 +99,19 @@ class DetailTvShowActivity : AppCompatActivity() {
         }
     }
 
-    private fun onProgress(state: Boolean){
+    private fun onProgress(state: Boolean, binding: ActivityDetailTvShowBinding){
         when (state){
             true -> {
-                binding.progressBar.visibility = View.VISIBLE
+                binding.loveBtn.visibility = View.INVISIBLE
+                binding.shareBtn.visibility = View.INVISIBLE
                 binding.contentTv.visibility = View.INVISIBLE
+                binding.progressBar.visibility = View.VISIBLE
             }
             false -> {
                 binding.progressBar.visibility = View.GONE
                 binding.contentTv.visibility = View.VISIBLE
+                binding.shareBtn.visibility = View.VISIBLE
+                binding.loveBtn.visibility = View.VISIBLE
             }
         }
     }
@@ -141,11 +137,13 @@ class DetailTvShowActivity : AppCompatActivity() {
         contentBinding.tvShowDetailNumseason.text = tvShowModel.numOfSeasons
         contentBinding.tvShowDetailRuntime.text = tvShowModel.runTimes
         contentBinding.tvShowDetailCreators.text = tvShowModel.creators
-        bindingListener(binding)
+        state = tvShowModel.favorite
+        setBookmarkState(state, binding)
+        bindingListener(tvShowModel, binding)
 
     }
 
-    private fun bindingListener(binding: ActivityDetailTvShowBinding) {
+    private fun bindingListener(tvShowModel: TvShowModel, binding: ActivityDetailTvShowBinding) {
         binding.shareBtn.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             val shareScript =
@@ -156,6 +154,15 @@ class DetailTvShowActivity : AppCompatActivity() {
             intent.putExtra(Intent.EXTRA_SUBJECT, contentBinding.tvShowTitle.text)
             intent.putExtra(Intent.EXTRA_TEXT, shareScript)
             startActivity(Intent.createChooser(intent, resources.getString(R.string.share_title)))
+        }
+        binding.loveBtn.setOnClickListener {
+            val message = StringBuilder(tvShowModel.title).append(" ", if (tvShowModel.favorite) resources.getString(R.string.unlove) else resources.getString(R.string.love))
+            Toast.makeText(
+                applicationContext,
+                message,
+                Toast.LENGTH_SHORT
+            ).show()
+            viewModel.setTvShowFav()
         }
 
     }

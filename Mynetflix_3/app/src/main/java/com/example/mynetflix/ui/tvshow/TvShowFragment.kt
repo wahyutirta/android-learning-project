@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.mynetflix.R
 
 import com.example.mynetflix.databinding.FragmentTvShowBinding
 import com.example.mynetflix.factory.ViewModelFactory
 import com.example.mynetflix.ui.movie.MovieAdapter
 import com.example.mynetflix.ui.movie.MovieVM
 import com.example.mynetflix.vo.Status
+import java.lang.StringBuilder
 
 
 class TvShowFragment : Fragment() {
@@ -40,24 +42,9 @@ class TvShowFragment : Fragment() {
             )[TvShowVM::class.java]
 
             tvShowAdapter = TvShowAdapter()
-            onProgress(true)
-            observe(tvShowAdapter)
-            viewModel.getTvShow().observe(viewLifecycleOwner, { tvShow ->
-                if (tvShow != null) {
-                    when(tvShow.status) {
-                        Status.LOADING -> binding.progressBarTvshow.visibility = View.VISIBLE
-                        Status.SUCCESS -> {
-                            binding.progressBarTvshow.visibility = View.GONE
-                            tvShowAdapter.submitList(tvShow.data)
-                            tvShowAdapter.notifyDataSetChanged()
-                        }
-                        Status.ERROR -> {
-                            binding.progressBarTvshow.visibility = View.GONE
-                            Toast.makeText(context, "Terjadi kesalahan", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                }
-            })
+
+            observe(viewModel, tvShowAdapter, binding)
+
 
             with(binding.rvTvshow) {
                 layoutManager = LinearLayoutManager(context)
@@ -67,11 +54,26 @@ class TvShowFragment : Fragment() {
 
         }
     }
-    private fun observe(tvShowAdapter: TvShowAdapter){
-        
+
+    private fun observe(viewModel: TvShowVM, tvShowAdapter: TvShowAdapter, binding: FragmentTvShowBinding) {
+        viewModel.getTvShow().observe(viewLifecycleOwner, { tvShow ->
+            if (tvShow != null) when (tvShow.status) {
+                Status.LOADING -> onProgress(true, binding)
+                Status.SUCCESS -> {
+                    onProgress(false, binding)
+                    tvShowAdapter.submitList(tvShow.data)
+                    tvShowAdapter.notifyDataSetChanged()
+                }
+                Status.ERROR -> {
+                    onProgress(false, binding)
+                    val message = StringBuilder(R.string.fail_message)
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        })
     }
 
-    private fun onProgress(state: Boolean) {
+    private fun onProgress(state: Boolean, binding: FragmentTvShowBinding) {
         when (state) {
             true -> {
                 binding.progressBarTvshow.visibility = View.VISIBLE
