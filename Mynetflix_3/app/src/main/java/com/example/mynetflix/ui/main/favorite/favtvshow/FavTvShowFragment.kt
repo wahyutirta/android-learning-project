@@ -30,7 +30,7 @@ class FavTvShowFragment : Fragment() {
         viewModel =
             androidx.lifecycle.ViewModelProvider(
                 this,
-                ViewModelFactory.getInstance(requireActivity())
+                ViewModelFactory.getTvShowInstance(requireActivity())
             )[FavTvShowFragmentVM::class.java]
 
         tvShowAdapter = TvShowAdapter()

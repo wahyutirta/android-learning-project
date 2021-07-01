@@ -5,29 +5,29 @@ import androidx.paging.DataSource
 import com.example.mynetflix.model.data.MovieModel
 
 
-class MovieLocalDataSource private constructor(private val mFilmDao: FilmDao) {
+class MovieLocalDataSource private constructor(private val managerMovieDao: MovieDao) {
 
     companion object {
         private var INSTANCE: MovieLocalDataSource? = null
 
-        fun getInstance(filmDao: FilmDao): MovieLocalDataSource =
-            INSTANCE ?: MovieLocalDataSource(filmDao).apply {
+        fun getInstance(movieDao: MovieDao): MovieLocalDataSource =
+            INSTANCE ?: MovieLocalDataSource(movieDao).apply {
                 INSTANCE = this
             }
     }
 
-    fun setMovieFavorite(movie: MovieModel, NewState: Boolean) {
-        movie.favorite = NewState
-        mFilmDao.updateMovie(movie)
-    }
-
-    fun getAllMovie(): DataSource.Factory<Int, MovieModel> = mFilmDao.getAllMovie()
-
-    fun getFavoriteMovie(): DataSource.Factory<Int, MovieModel> = mFilmDao.getFavoriteMovie()
+    fun getAllMovie(): DataSource.Factory<Int, MovieModel> = managerMovieDao.getAllMovie()
 
     fun getDetailMovieById(movieId: String): LiveData<MovieModel> =
-        mFilmDao.getDetailWithMovieId(movieId)
+        managerMovieDao.getDetailWithMovieId(movieId)
 
-    fun insertMoviesList(movies: List<MovieModel>) = mFilmDao.insertMovies(movies)
+    fun insertMoviesList(movies: List<MovieModel>) = managerMovieDao.insertMovies(movies)
+
+    fun setMovieFavorite(movie: MovieModel, NewState: Boolean) {
+        movie.favorite = NewState
+        managerMovieDao.updateMovie(movie)
+    }
+
+    fun getFavoriteMovie(): DataSource.Factory<Int, MovieModel> = managerMovieDao.getFavoriteMovie()
 
 }

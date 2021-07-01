@@ -5,7 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.mynetflix.model.data.DummyDataHelper
 import com.example.mynetflix.model.data.MovieModel
-import com.example.mynetflix.model.data.source.DataRepository
+import com.example.mynetflix.model.data.source.remote.repository.MovieRepository
+import com.example.mynetflix.vo.Resource
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -16,59 +19,69 @@ import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
-class DetailMovieVMTest {
+class DetailMovieVMTest{
+
     private lateinit var viewModel: DetailMovieVM
-    private val movieId = DummyDataHelper.generateDataMovie()[0].id
-    private val dataHelper = DummyDataHelper.generateDataMovie()[0]
-    var movie = MutableLiveData<MovieModel>()
+    private var dataHelper = DummyDataHelper.generateDataMovie()[0]
+    private var movieId = dataHelper.id
+    private var movieData = MutableLiveData<MovieModel>()
+    private var movieModelNullable : MovieModel? = null
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var dataRepository: DataRepository
+    private lateinit var movieRepository: MovieRepository
 
     @Mock
-    private lateinit var movieObserver: Observer<MovieModel>
+    private lateinit var movieObserver: Observer<Resource<MovieModel>>
+
 
     @Before
-    fun setUp() {
-        viewModel = DetailMovieVM(dataRepository)
+    fun setupMovie() {
+        viewModel = DetailMovieVM(movieRepository)
         viewModel.setSelectedMovie(movieId)
-        movie.value = dataHelper
     }
+
 
     @Test
-    fun getMovieNotNull() {
+    fun detailAndFavoriteHandlerMovie() {
+        val movieExpectedData = MutableLiveData<Resource<MovieModel>>()
+        val dummyDetailMovie = Resource.success(DummyDataHelper.getDetailMovie())
 
-        Mockito.`when`(dataRepository.getMoviesDetail(movieId)).thenReturn(movie)
-        var movieModel = viewModel.getMovie().value as MovieModel
-        Mockito.verify(dataRepository).getMoviesDetail(movieId)
-        assertNotNull(movieModel)
-        viewModel.getMovie().observeForever(movieObserver)
-        Mockito.verify(movieObserver).onChanged(dataHelper)
+        movieExpectedData.value = dummyDetailMovie
+
+        Mockito.`when`(movieRepository.getMoviesDetail(movieId)).thenReturn(movieExpectedData)
+
+        //observe perubahan pada movieData
+        viewModel.movieData.observeForever(movieObserver)
+        //cek apakah data terload atau berubah
+        verify(movieObserver).onChanged(movieExpectedData.value)
+        verifyNoMoreInteractions(movieObserver)
+        val expectedMovie = movieExpectedData.value
+        val loadedValue = movieRepository.getMoviesDetail(movieId).value
+
+        assertEquals(loadedValue, viewModel.movieData.value)
+        assertEquals(expectedMovie, viewModel.movieData.value)
+        assertEquals(expectedMovie, loadedValue)
+
+        //set favorite
+        viewModel.favoriteHandler()
+        verify(movieObserver).onChanged(movieExpectedData.value)
+        verifyNoMoreInteractions(movieObserver)
+
+        assertEquals(loadedValue, viewModel.movieData.value)
+        assertEquals(expectedMovie, viewModel.movieData.value)
+        assertEquals(expectedMovie, loadedValue)
+
+        //set unfavorite
+        viewModel.favoriteHandler()
+        verify(movieObserver).onChanged(movieExpectedData.value)
+        verifyNoMoreInteractions(movieObserver)
+
+        assertEquals(loadedValue, viewModel.movieData.value)
+        assertEquals(expectedMovie, viewModel.movieData.value)
+        assertEquals(expectedMovie, loadedValue)
     }
-
-    @Test
-    fun getMovie() {
-
-        Mockito.`when`(dataRepository.getMoviesDetail(movieId)).thenReturn(movie)
-        var movieModel = viewModel.getMovie().value as MovieModel
-        Mockito.verify(dataRepository).getMoviesDetail(movieId)
-
-        assertEquals(dataHelper.id, movieModel.id)
-        assertEquals(dataHelper.title, movieModel.title)
-        assertEquals(dataHelper.releaseDate, movieModel.releaseDate)
-        assertEquals(dataHelper.movieRate, movieModel.movieRate)
-        assertEquals(dataHelper.description, movieModel.description)
-        assertEquals(dataHelper.genres, movieModel.genres)
-        assertEquals(dataHelper.originalLanguage, movieModel.originalLanguage)
-        assertEquals(dataHelper.imagePath, movieModel.imagePath)
-        assertEquals(dataHelper.filmDirector, movieModel.filmDirector)
-
-        viewModel.getMovie().observeForever(movieObserver)
-        Mockito.verify(movieObserver).onChanged(dataHelper)
-    }
-
 
 }

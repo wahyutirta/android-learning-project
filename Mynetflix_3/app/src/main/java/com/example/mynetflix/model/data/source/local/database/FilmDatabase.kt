@@ -12,7 +12,8 @@ import com.example.mynetflix.model.data.TvShowModel
 @Database(entities = [MovieModel::class, TvShowModel::class], version = 1, exportSchema = false)
 abstract class FilmDatabase : RoomDatabase() {
 
-    abstract fun filmDao(): FilmDao
+    abstract fun movieDao(): MovieDao
+    abstract fun tvShowDao(): TvShowDao
 
     companion object {
         @Volatile

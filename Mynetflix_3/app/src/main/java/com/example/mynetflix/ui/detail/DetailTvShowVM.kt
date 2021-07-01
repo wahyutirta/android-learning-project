@@ -5,31 +5,29 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.mynetflix.model.data.TvShowModel
-import com.example.mynetflix.model.data.source.DataRepository
+import com.example.mynetflix.model.data.source.remote.repository.TvShowRepository
+
 import com.example.mynetflix.vo.Resource
 
-class DetailTvShowVM(private val dataRepository: DataRepository) : ViewModel() {
+class DetailTvShowVM(private val tvShowRepository: TvShowRepository) : ViewModel() {
 
-    val tvShowId = MutableLiveData<String>()
+    val id = MutableLiveData<String>()
 
     fun setSelectedTvShow(tvShowId: String) {
-        this.tvShowId.value = tvShowId
+        this.id.value = tvShowId
     }
 
     var tvData: LiveData<Resource<TvShowModel>> =
-        Transformations.switchMap(tvShowId) { mTvShowId ->
-            dataRepository.getTvShowDetail(mTvShowId)
+        Transformations.switchMap(id) { mTvShowId ->
+            tvShowRepository.getTvShowDetail(mTvShowId)
         }
 
-    fun getTvShowForTest(movieId: String): LiveData<TvShowModel> =
-        dataRepository.getDetailTvShowById(movieId)
-
-    fun setTvShowFav() {
+    fun favoriteHandler() {
         if (tvData.value?.data != null) {
             val resourceTv = tvData.value
             val status = resourceTv?.data?.favorite!!
             val detailTvShow = resourceTv?.data!!
-            dataRepository.setTvShowFavorite(detailTvShow, !status)
+            tvShowRepository.setTvShowFavoriteState(detailTvShow, !status)
         }
     }
 

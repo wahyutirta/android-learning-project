@@ -5,7 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.mynetflix.model.data.DummyDataHelper
 import com.example.mynetflix.model.data.TvShowModel
-import com.example.mynetflix.model.data.source.DataRepository
+import com.example.mynetflix.model.data.source.remote.repository.TvShowRepository
+import com.example.mynetflix.vo.Resource
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyNoMoreInteractions
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -19,61 +22,66 @@ import org.mockito.junit.MockitoJUnitRunner
 class DetailTvShowVMTest {
 
     private lateinit var viewModel: DetailTvShowVM
-    private val dataHelper = DummyDataHelper.generateDataTvShow()[0]
-    private val tvShowId = DummyDataHelper.generateDataTvShow()[0].id
-    var tvShow = MutableLiveData<TvShowModel>()
+    private var dataHelper = DummyDataHelper.generateDataTvShow()[0]
+    private var tvShowId = dataHelper.id
+    private var tvShowDummy = MutableLiveData<TvShowModel>()
+    private var tvShowModelNullable : TvShowModel? = null
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
-    private lateinit var filmRepository: DataRepository
+    private lateinit var tvShowRepository: TvShowRepository
 
     @Mock
-    private lateinit var tvShowObserver: Observer<TvShowModel>
+    private lateinit var tvShowObserver: Observer<Resource<TvShowModel>>
 
     @Before
-    fun setUp() {
-        viewModel = DetailTvShowVM(filmRepository)
+    fun setUpTvShow() {
+        viewModel = DetailTvShowVM(tvShowRepository)
         viewModel.setSelectedTvShow(tvShowId)
-        tvShow.value = dataHelper
     }
 
-    @Test
-    fun getTvShowNotNull() {
-
-
-        Mockito.`when`(filmRepository.getTvShowDetail(tvShowId)).thenReturn(tvShow)
-        var tvShowModel = viewModel.getTvShow().value as TvShowModel
-        Mockito.verify(filmRepository).getTvShowDetail(tvShowId)
-
-        assertNotNull(tvShowModel)
-        viewModel.getTvShow().observeForever(tvShowObserver)
-        Mockito.verify(tvShowObserver).onChanged(dataHelper)
-    }
 
     @Test
-    fun getTvShow() {
+    fun detailAndFavoriteHandlerTvShow() {
+        val tvShowExpectedData = MutableLiveData<Resource<TvShowModel>>()
+        val dummyDetailTvShow = Resource.success(DummyDataHelper.getDetailTvShow())
 
+        tvShowExpectedData.value = dummyDetailTvShow
 
-        Mockito.`when`(filmRepository.getTvShowDetail(tvShowId)).thenReturn(tvShow)
-        var tvShowModel = viewModel.getTvShow().value as TvShowModel
-        Mockito.verify(filmRepository).getTvShowDetail(tvShowId)
+        Mockito.`when`(tvShowRepository.getTvShowDetail(tvShowId)).thenReturn(tvShowExpectedData)
+        //observe perubahan pada tvData
+        viewModel.tvData.observeForever(tvShowObserver)
+        //cek apakah data terload atau berubah
+        verify(tvShowObserver).onChanged(tvShowExpectedData.value)
+        verifyNoMoreInteractions(tvShowObserver)
+        val expectedTvShow = tvShowExpectedData.value
+        val loadedValue = tvShowRepository.getTvShowDetail(tvShowId).value
 
-        assertEquals(dataHelper.id, tvShowModel.id)
-        assertEquals(dataHelper.title, tvShowModel.title)
-        assertEquals(dataHelper.releaseDate, tvShowModel.releaseDate)
-        assertEquals(dataHelper.ratings, tvShowModel.ratings)
-        assertEquals(dataHelper.description, tvShowModel.description)
-        assertEquals(dataHelper.tvShowGenre, tvShowModel.tvShowGenre)
-        assertEquals(dataHelper.originalLanguage, tvShowModel.originalLanguage)
-        assertEquals(dataHelper.numOfEpisodes, tvShowModel.numOfEpisodes)
-        assertEquals(dataHelper.numOfSeasons, tvShowModel.numOfSeasons)
-        assertEquals(dataHelper.runTimes, tvShowModel.runTimes)
-        assertEquals(dataHelper.imagePath, tvShowModel.imagePath)
-        assertEquals(dataHelper.creators, tvShowModel.creators)
+        assertEquals(loadedValue , viewModel.tvData.value)
+        assertEquals(expectedTvShow, viewModel.tvData.value)
+        assertEquals(expectedTvShow, loadedValue)
 
-        viewModel.getTvShow().observeForever(tvShowObserver)
-        Mockito.verify(tvShowObserver).onChanged(dataHelper)
+        //set favorite
+        viewModel.favoriteHandler()
+        verify(tvShowObserver).onChanged(tvShowExpectedData.value)
+        verifyNoMoreInteractions(tvShowObserver)
+
+        assertEquals(expectedTvShow, viewModel.tvData.value)
+
+        assertEquals(loadedValue , viewModel.tvData.value)
+        assertEquals(expectedTvShow, viewModel.tvData.value)
+        assertEquals(expectedTvShow, loadedValue)
+
+        //set unfavorite
+        viewModel.favoriteHandler()
+        verify(tvShowObserver).onChanged(tvShowExpectedData.value)
+        verifyNoMoreInteractions(tvShowObserver)
+
+        assertEquals(loadedValue , viewModel.tvData.value)
+        assertEquals(expectedTvShow, viewModel.tvData.value)
+        assertEquals(expectedTvShow, loadedValue)
+
     }
 }

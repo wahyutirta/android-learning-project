@@ -19,7 +19,7 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
 
         result.addSource(dbSource) { data ->
             result.removeSource(dbSource)
-            if (shouldFetch(data)) {
+            if (isFetch(data)) {
                 fetchFromNetwork(dbSource)
             } else {
                 result.addSource(dbSource) { newData ->
@@ -29,11 +29,11 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
         }
     }
 
+    protected abstract fun isFetch(data: ResultType?): Boolean
+
     private fun onFetchFailed() {}
 
     protected abstract fun loadFromDB(): LiveData<ResultType>
-
-    protected abstract fun shouldFetch(data: ResultType?): Boolean
 
     protected abstract fun createCall(): LiveData<ApiResponse<RequestType>>
 

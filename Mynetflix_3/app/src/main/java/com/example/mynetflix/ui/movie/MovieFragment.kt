@@ -33,7 +33,7 @@ class MovieFragment : Fragment() {
         if (activity != null) {
             viewModel = ViewModelProvider(
                 this,
-                ViewModelFactory.getInstance(requireActivity())
+                ViewModelFactory.getMovieInstance(requireActivity())
             )[MovieVM::class.java]
 
             movieAdapter = MovieAdapter()
@@ -52,10 +52,14 @@ class MovieFragment : Fragment() {
     private fun observe(viewModel: MovieVM, movieAdapter: MovieAdapter) {
         viewModel.getMovie().observe(viewLifecycleOwner, { movies ->
             if (movies != null) when (movies.status) {
-                Status.LOADING -> onProgress(true)
+                Status.LOADING -> {
+                    onProgress(true)
+                    Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
+                }
                 Status.SUCCESS -> {
                     onProgress(false)
                     movieAdapter.submitList(movies.data)
+                    movieAdapter.notifyDataSetChanged()
                 }
                 Status.ERROR -> {
                     onProgress(false)

@@ -495,6 +495,7 @@ object DummyDataHelper {
 
         return movie
     }
+
     fun generateRemoteDataTvShow(): List<TvShowResponse> {
 
         val tvShow = ArrayList<TvShowResponse>()
@@ -660,6 +661,41 @@ object DummyDataHelper {
         )
 
         return tvShow
+    }
+
+    fun getDetailTvShow(): TvShowModel {
+        return TvShowModel(
+            "T10",
+            "The Walking Dead",
+            "31 October, 2010",
+            "Rating: %. \u200E Ratings",
+            "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way.",
+            "Action & Adventure, Drama, Sci-Fi & Fantasy\n",
+            "English",
+            "153 Episodes",
+            "10 Seasons",
+            "42 min",
+            "https://m.media-amazon.com/images/M/MV5BMTc5ZmM0OTQtNDY4MS00ZjMyLTgwYzgtOGY0Y2VlMWFmNDU0XkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_.jpg",
+            "Frank Darabont",
+            false,
+
+            )
+    }
+
+    fun getDetailMovie(): MovieModel {
+        return MovieModel(
+            "M10",
+            "Mortal Engines",
+            "14 December, 2018",
+            "Rating: 61%. \u200E3,371 Ratings",
+            "Many thousands of years in the future, Earth’s cities roam the globe on huge wheels, devouring each other in a struggle for ever diminishing resources. On one of these massive traction cities, the old London, Tom Natsworthy has an unexpected encounter with a mysterious young woman from the wastelands who will change the course of his life forever.",
+            "Adventure, Science Fiction",
+            "English",
+            "2h 9m",
+            "https://m.media-amazon.com/images/M/MV5BNzY1MDA2OTQ0N15BMl5BanBnXkFtZTgwMTkzNjU2NTM@._V1_.jpg",
+            "Christian Rivers",
+            false,
+        )
     }
 
 

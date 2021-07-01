@@ -11,11 +11,9 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.example.mynetflix.R
 import com.example.mynetflix.databinding.ActivityDetailMovieBinding
-import com.example.mynetflix.databinding.ActivityDetailTvShowBinding
 import com.example.mynetflix.databinding.ContentDetailMovieBinding
 import com.example.mynetflix.factory.ViewModelFactory
 import com.example.mynetflix.model.data.MovieModel
-import com.example.mynetflix.model.data.TvShowModel
 import com.example.mynetflix.vo.Status
 import java.lang.StringBuilder
 
@@ -40,13 +38,13 @@ class DetailMovieActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[DetailMovieVM::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory.getMovieInstance(this))[DetailMovieVM::class.java]
         val extras = intent.extras
         checkSelected(extras, viewModel, binding)
 
     }
 
-    private fun setBookmarkState(state: Boolean, binding: ActivityDetailMovieBinding) {
+    private fun setLoveState(state: Boolean, binding: ActivityDetailMovieBinding) {
         if (state) {
             binding.loveBtn.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -140,7 +138,7 @@ class DetailMovieActivity : AppCompatActivity() {
         contentBinding.movieDetailRuntime.text = movieModel.runTime
         contentBinding.movieDetailDirectors.text = movieModel.filmDirector
         state = movieModel.favorite
-        setBookmarkState(state, binding)
+        setLoveState(state, binding)
         bindingListener(movieModel, binding)
 
     }

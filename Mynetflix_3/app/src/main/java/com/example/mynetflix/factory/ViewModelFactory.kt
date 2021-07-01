@@ -4,25 +4,33 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.mynetflix.di.Injection
-import com.example.mynetflix.model.data.source.DataRepository
+
+import com.example.mynetflix.model.data.source.remote.repository.MovieRepository
+import com.example.mynetflix.model.data.source.remote.repository.TvShowRepository
 import com.example.mynetflix.ui.detail.DetailMovieVM
 import com.example.mynetflix.ui.detail.DetailTvShowVM
-import com.example.mynetflix.ui.main.favorite.favmovie.FavMovieFragment
 import com.example.mynetflix.ui.main.favorite.favmovie.FavMovieFragmentVM
 import com.example.mynetflix.ui.main.favorite.favtvshow.FavTvShowFragmentVM
 import com.example.mynetflix.ui.movie.MovieVM
 import com.example.mynetflix.ui.tvshow.TvShowVM
 
-class ViewModelFactory(private val mFilmRepository: DataRepository) :
+class ViewModelFactory(private var mMovieRepository: MovieRepository, private var mTvShowRepository: TvShowRepository) :
     ViewModelProvider.NewInstanceFactory() {
 
     companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
 
-        fun getInstance(context: Context): ViewModelFactory =
+        fun getMovieInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository(context)).apply {
+                instance ?: ViewModelFactory(Injection.provideMovieRepository(context), Injection.provideTvShowRepository(context)).apply {
+                    instance = this
+                }
+            }
+
+        fun getTvShowInstance(context: Context): ViewModelFactory =
+            instance ?: synchronized(this) {
+                instance ?: ViewModelFactory(Injection.provideMovieRepository(context), Injection.provideTvShowRepository(context)).apply {
                     instance = this
                 }
             }
@@ -30,13 +38,15 @@ class ViewModelFactory(private val mFilmRepository: DataRepository) :
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
+
         return when {
-            modelClass.isAssignableFrom(DetailMovieVM::class.java) -> DetailMovieVM(mFilmRepository) as T
-            modelClass.isAssignableFrom(DetailTvShowVM::class.java) -> DetailTvShowVM(mFilmRepository) as T
-            modelClass.isAssignableFrom(MovieVM::class.java) -> MovieVM(mFilmRepository) as T
-            modelClass.isAssignableFrom(TvShowVM::class.java) -> TvShowVM(mFilmRepository) as T
-            modelClass.isAssignableFrom(FavMovieFragmentVM::class.java) -> FavMovieFragmentVM(mFilmRepository) as T
-            modelClass.isAssignableFrom(FavTvShowFragmentVM::class.java) -> FavTvShowFragmentVM(mFilmRepository) as T
+
+            modelClass.isAssignableFrom(DetailMovieVM::class.java) -> DetailMovieVM(mMovieRepository) as T
+            modelClass.isAssignableFrom(DetailTvShowVM::class.java) -> DetailTvShowVM(mTvShowRepository) as T
+            modelClass.isAssignableFrom(MovieVM::class.java) -> MovieVM(mMovieRepository) as T
+            modelClass.isAssignableFrom(TvShowVM::class.java) -> TvShowVM(mTvShowRepository) as T
+            modelClass.isAssignableFrom(FavMovieFragmentVM::class.java) -> FavMovieFragmentVM(mMovieRepository) as T
+            modelClass.isAssignableFrom(FavTvShowFragmentVM::class.java) -> FavTvShowFragmentVM(mTvShowRepository) as T
 
             else -> throw Throwable("Unknown ViewModel Class: " + modelClass.name)
         }

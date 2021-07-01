@@ -38,7 +38,7 @@ class TvShowFragment : Fragment() {
         if (activity != null) {
             viewModel = ViewModelProvider(
                 this,
-                ViewModelFactory.getInstance(requireActivity())
+                ViewModelFactory.getTvShowInstance(requireActivity())
             )[TvShowVM::class.java]
 
             tvShowAdapter = TvShowAdapter()
@@ -58,7 +58,10 @@ class TvShowFragment : Fragment() {
     private fun observe(viewModel: TvShowVM, tvShowAdapter: TvShowAdapter, binding: FragmentTvShowBinding) {
         viewModel.getTvShow().observe(viewLifecycleOwner, { tvShow ->
             if (tvShow != null) when (tvShow.status) {
-                Status.LOADING -> onProgress(true, binding)
+                Status.LOADING -> {
+                    onProgress(true, binding)
+                    Toast.makeText(context, "Loading...", Toast.LENGTH_SHORT).show()
+                }
                 Status.SUCCESS -> {
                     onProgress(false, binding)
                     tvShowAdapter.submitList(tvShow.data)

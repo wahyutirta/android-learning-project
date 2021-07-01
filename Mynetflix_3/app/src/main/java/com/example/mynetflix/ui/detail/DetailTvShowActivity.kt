@@ -1,7 +1,6 @@
 package com.example.mynetflix.ui.detail
 
 import android.content.Intent
-import android.content.LocusId
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -38,7 +37,7 @@ class DetailTvShowActivity : AppCompatActivity() {
         contentBinding = binding.contentTvShow
 
         setSupportActionBar(binding.toolbar)
-        viewModel = ViewModelProvider(this, ViewModelFactory.getInstance(this))[DetailTvShowVM::class.java]
+        viewModel = ViewModelProvider(this, ViewModelFactory.getTvShowInstance(this))[DetailTvShowVM::class.java]
         val extras = intent.extras
         checkSelected(extras, viewModel, binding)
 
@@ -81,7 +80,7 @@ class DetailTvShowActivity : AppCompatActivity() {
         })
     }
 
-    private fun setBookmarkState(state: Boolean, binding: ActivityDetailTvShowBinding) {
+    private fun setLoveState(state: Boolean, binding: ActivityDetailTvShowBinding) {
         if (state) {
             binding.loveBtn.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -138,7 +137,7 @@ class DetailTvShowActivity : AppCompatActivity() {
         contentBinding.tvShowDetailRuntime.text = tvShowModel.runTimes
         contentBinding.tvShowDetailCreators.text = tvShowModel.creators
         state = tvShowModel.favorite
-        setBookmarkState(state, binding)
+        setLoveState(state, binding)
         bindingListener(tvShowModel, binding)
 
     }
@@ -162,7 +161,7 @@ class DetailTvShowActivity : AppCompatActivity() {
                 message,
                 Toast.LENGTH_SHORT
             ).show()
-            viewModel.setTvShowFav()
+            viewModel.favoriteHandler()
         }
 
     }

@@ -35,7 +35,7 @@ class FavMovieFragment : Fragment() {
         viewModel =
             ViewModelProvider(
                 this,
-                ViewModelFactory.getInstance(requireActivity())
+                ViewModelFactory.getMovieInstance(requireActivity())
             )[FavMovieFragmentVM::class.java]
 
         movieAdapter = MovieAdapter()

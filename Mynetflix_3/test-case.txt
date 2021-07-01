@@ -1,15 +1,23 @@
-Bukti Hasil test
-https://drive.google.com/drive/folders/1jdSdYJ_ek37PzpcjkseOhuVnornQiKW8?usp=sharing
+movie and tv repository test(terpisah)
+movie dan tvshow repository dapat menyajikan seluruh data movie dan tvshow serta data yang disajikan tidak null
+movie dan tvshow repository dapat menyajikan detail data berdasarkan id yang di panggil dan detail data tidak null
+movie dan tvshow repository dapat menyajikan seluruh data favorite movie dan tvshow serta data tidak null
+movie dan tvshow repository dapat memlakukan proses favorite maupun unfavorite dari model data dan status favorite yang dikirimkan
+
 
 Detail Movie View Model Test
 membuat mock object dari kelas DataRepository dan Observer<MovieModel>
--memastikan bahwa data detail movie yang dimuat tidak null
--memastikan bahwa data detail movie yang dimuat oleh getSelected sudah sesuai dan tidak null
+-memastikan movieData memuat data yang sesuai dengan cara membandingkannya dengan data dari resource sucess
+-memastikan getmoviedetail memuat data yang sesuai dengan cara membandingkannya dengan data dari resource sucess
+-melakukan obvervasi dan pencocokan untuk setiap perubahan variable movieData yang terkandung di dalam detailViewModel dengan membandingkannya pada live data terpisah
+-memastikan bahwa favorite handler dapat menambah dan mempengaruhi attribut favorite dataMovie di dalam detailviewmodel baik set favorite maupun unfavorite dengan cara membandingkannya dengan live data
 
 Detail Tvshow View Model Test
 membuat mock object dari kelas DataRepository dan Observer<TvShowModel>
--memastikan bahwa data detail Tvshow yang dimuat tidak null
--memastikan bahwa data detail Tvshow yang dimuat oleh getSelected sudah sesuai dan tidak null
+-memastikan tvshowData memuat data yang sesuai dengan cara membandingkannya dengan data dari resource sucess
+-memastikan gettvshowdetail memuat data yang sesuai dengan cara membandingkannya dengan data dari resource sucess
+-melakukan obvervasi dan pencocokan untuk setiap perubahan variable movieData yang terkandung di dalam detailViewModel dengan membandingkannya pada live data terpisah
+-memastikan bahwa favorite handler dapat menambah dan mempengaruhi attribut favorite dataMovie di dalam detailviewmodel baik set favorite maupun unfavorite dengan cara membandingkannya dengan live data
 
 Movie View Model Test
 membuat mock object dari kelas DataRepository dan Observer<List<MovieModel>>
@@ -20,6 +28,14 @@ Tvshow View Model Test
 membuat mock object dari kelas DataRepository dan Observer<List<MovieModel>>
 -View Model Dapat memuat data Tvshow sehingga data tidak null
 -View model dapat memuat seluruh jumlah data yang ada yaitu sebanyak 10
+
+favorite tvshow fragment
+-cek apakah data tvshow tidak null
+-cek apakah seluruh data tvshow favorite berhasil dimuat
+
+favorite movie fragment
+-cek apakah data movie tidak null
+-cek apakah seluruh data movie favorite berhasil dimuat
 
 instrumental HomeActivityTest
 setup
@@ -44,6 +60,7 @@ menampilkan detail movie
 aksi swipe up agar beberapa detail yang tak terlihat agar naik dan muncul pada screen.
 code sudah berjalan dan seluruh test berhasil dijalankan pada device dan emulator)
 -melakukan aksi klik pada recycler view ke 1
+-menguji tombol love untuk kondisi loved and unloved, maka button diklik dua kali
 -memastikan image_poster_detail tampil
 -memastikan movieDetail_name tampil
 -memastikan movieDetail_name sesuai dengan movie yang dipilih
@@ -70,6 +87,7 @@ aksi swipe up agar beberapa detail yang tak terlihat agar naik dan muncul pada s
 code sudah berjalan dan seluruh test berhasil dijalankan pada device dan emulator)
 -dapat berpindah ke fragment tv show dengan cara klik
 -melakukan aksi klik pada recycler view ke 1
+-menguji tombol love untuk kondisi loved and unloved, maka button diklik dua kali
 -memastikan image_poster_detail tampil
 -memastikan tvShow_title tampil
 -memastikan tvShow_title sesuai dengan movie yang dipilih
@@ -97,3 +115,16 @@ code sudah berjalan dan seluruh test berhasil dijalankan pada device dan emulato
 -memastikan tvShowDetail_runtime sesuai dengan movie yang dipilih
 -memastikan tvShowDetail_creators tampil
 -memastikan tvShowDetail_creators sesuai dengan movie yang dipilih
+
+daftar favorite movie dan tvshow
+melakukan perpindahan ke fragment daftar favorit dengan klik bottom_navigation
+-berpindah ke fragment movie dengan cara klik movie
+-cek apakah recycle view movie tampil
+-cek apakah recycle view movie dapat di klik. untuk itu klik rv posisi 0 atau atas
+-berpindah ke fragment tvshow dengan cara klik movie
+-cek apakah recycle view tvshow tampil
+-cek apakah recycle view tvshow dapat di klik. untuk itu klik rv posisi 0 atau atas
+
+
+
+-

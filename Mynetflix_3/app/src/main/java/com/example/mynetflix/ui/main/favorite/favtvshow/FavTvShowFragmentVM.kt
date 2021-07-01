@@ -4,11 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagedList
 import com.example.mynetflix.model.data.TvShowModel
-import com.example.mynetflix.model.data.source.DataRepository
 
-class FavTvShowFragmentVM (private val dataRepository: DataRepository) : ViewModel() {
+import com.example.mynetflix.model.data.source.remote.repository.TvShowRepository
+
+class FavTvShowFragmentVM (private val tvShowRepository: TvShowRepository) : ViewModel() {
 
     fun getFavTvShow(): LiveData<PagedList<TvShowModel>> {
-        return dataRepository.getFavoriteTvShow()
+        return tvShowRepository.getFavoriteTvShow()
     }
 }
